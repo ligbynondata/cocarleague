@@ -293,6 +293,12 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 @media (max-width: 600px) {
   .player-row { grid-template-columns: 1fr; }
   .metrics { grid-template-columns: 1fr; }
+  .standings-table th { font-size: 8px; padding: 6px 4px; letter-spacing: 0; }
+  .standings-table td { font-size: 11px; padding: 7px 4px; }
+  .standings-table td:nth-child(2) { font-size: 12px; }
+  .fraction { font-size: 10px; }
+  .pos-badge { width: 20px; height: 20px; font-size: 9px; }
+  .card-header { padding: 12px 14px 10px; }
 }
 @media (min-width: 601px) {
   .player-row { grid-template-columns: 1fr 180px 1fr; }
@@ -405,7 +411,7 @@ function renderLiga() {
      <div style="width:3px;height:24px;background:var(--border);margin:0 4px;"></div>
       <select onchange="currentLiga=this.value;renderLiga()" style="background:#fff;border:1.5px solid var(--border);font-size:12px;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;outline:none;color:var(--text);">
         <option value="Cocar26A" ${currentLiga==='Cocar26A'?'selected':''}>Cocar 26A ${isLive?'· Live':''}</option>
-        <option value="Cocar25" ${currentLiga==='Cocar25'?'selected':''}>Cocar 25 · Historial</option>
+        <option value="Cocar25" ${currentLiga==='Cocar25'?'selected':''}>Cocar 25</option>
       </select>
     </div>
 
