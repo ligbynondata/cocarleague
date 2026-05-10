@@ -288,6 +288,157 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 .loading { text-align: center; color: var(--muted); padding: 60px 0; font-size: 13px; }
 .foot { text-align: center; color: #070707; font-size: 10px; padding: 18px 0 6px; }
 
+/* ── RANK PAGE ── */
+.rank-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.rank-table th {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  padding: 10px 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.rank-table td {
+  padding: 11px 10px;
+  font-size: 13px;
+  color: #555;
+  border-bottom: 1px solid var(--light);
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 400;
+}
+
+.rank-table tr:last-child td {
+  border-bottom: none;
+}
+
+.rank-table tr:hover td {
+  background: var(--light);
+}
+
+.rank-table th:nth-child(1),
+.rank-table td:nth-child(1) {
+  width: 7%;
+}
+
+.rank-table th:nth-child(2),
+.rank-table td:nth-child(2) {
+  width: 20%;
+  text-align: left;
+}
+
+.rank-table th:nth-child(3),
+.rank-table td:nth-child(3) {
+  width: 7%;
+}
+
+.rank-table th:nth-child(4),
+.rank-table td:nth-child(4) {
+  width: 12%;
+}
+
+.rank-table th:nth-child(5),
+.rank-table td:nth-child(5) {
+  width: 10%;
+}
+
+.rank-table th:nth-child(6),
+.rank-table td:nth-child(6) {
+  width: 9%;
+}
+
+.rank-table th:nth-child(7),
+.rank-table td:nth-child(7) {
+  width: 19%;
+}
+
+.rank-table th:nth-child(8),
+.rank-table td:nth-child(8) {
+  width: 16%;
+}
+
+.rank-pos {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.rank-pos.top1 {
+  background: var(--gold);
+  color: #fff;
+  border-color: var(--gold);
+}
+
+.rank-pos.top2 {
+  background: #e8e8e8;
+  color: #555;
+}
+
+.rank-pos.top3 {
+  background: #f0d9b5;
+  color: #7a5c00;
+}
+
+.rank-player {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.rank-score {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.div-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.rank-compact {
+  font-size: 12px;
+  color: #555;
+  white-space: nowrap;
+}
+
+.rank-record {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
 /* Coming soon */
 .coming-soon { text-align: center; padding: 80px 0; color: var(--muted); font-size: 14px; }
 
@@ -343,7 +494,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 const SHEET_ID = '1bTdib3kxhcTXVJlqGuySkcZPpb3NPu7ZFHhV45B_1EI';
 const API = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-let allStandings = [], allFixtures = [], allMatches = [], players = [], h2hSummary = [];
+let allStandings = [], allFixtures = [], allMatches = [], players = [], h2hSummary = [], rankRows = [];
 let currentDiv = 'A', currentLiga = 'Cocar26A';
 let activePage = 'liga';
 
@@ -381,7 +532,8 @@ function showPage(page) {
   });
   activePage = page;
   if (page==='liga') renderLiga();
-  if (page==='h2h') renderH2H();
+if (page==='h2h') renderH2H();
+if (page==='rank') renderRank();
 }
 
 // ── LIGA PAGE ──
@@ -649,22 +801,113 @@ function renderH2H() {
   setTimeout(()=>{ bar('bmA','bmB',mA,mB); bar('bsA','bsB',sA,sB2); bar('bgA','bgB',gA,gB); },50);
 }
 
+// ── RANK PAGE ──
+function renderRank() {
+  const rows = [...rankRows].sort((a,b) => (a.rank_position||999) - (b.rank_position||999));
+
+  function fmtPoints(v) {
+    const n = Number(v || 0);
+    return Math.round(n).toLocaleString('es-CL');
+  }
+
+  function divHistory(r) {
+    const parts = [];
+    if (Number(r.count_div_a || 0) > 0) parts.push(`A${r.count_div_a}`);
+    if (Number(r.count_div_b || 0) > 0) parts.push(`B${r.count_div_b}`);
+    if (Number(r.count_div_c || 0) > 0) parts.push(`C${r.count_div_c}`);
+    if (Number(r.count_div_d || 0) > 0) parts.push(`D${r.count_div_d}`);
+    return parts.length ? parts.join(' · ') : '—';
+  }
+
+  document.getElementById('page-rank').innerHTML = `
+    <div class="page-header">
+      <div>
+        <div class="page-title">LIG Rank</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">
+          Ranking U14 · Últimos 14 partidos ponderados por división
+        </div>
+      </div>
+    </div>
+
+    <div class="rank-card">
+      <div class="card-header">
+        <span class="card-title">Ranking Last 14</span>
+        <span class="card-meta">${rows.length} jugadores</span>
+      </div>
+
+      <table class="rank-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Jugador</th>
+            <th>Div</th>
+            <th>Puntos</th>
+            <th>PJ Rank</th>
+            <th>V-D</th>
+            <th>Forma</th>
+            <th>Peso Div.</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.length===0 ? `
+            <tr>
+              <td colspan="8" style="text-align:center;padding:24px;color:var(--muted);">
+                Sin datos de ranking
+              </td>
+            </tr>
+          ` : rows.map(r => {
+            const pos = Number(r.rank_position || 0);
+            let posClass = '';
+            if (pos === 1) posClass = 'top1';
+            else if (pos === 2) posClass = 'top2';
+            else if (pos === 3) posClass = 'top3';
+
+            const wins = Number(r.g2 || 0) + Number(r.g3 || 0);
+            const losses = Number(r.p3 || 0) + Number(r.p2 || 0);
+
+            const pjRank = `${r.matches_counted || 0}/${r.matches_played || 0}`;
+            const record = `${wins}-${losses}`;
+            const forma = `G2:${r.g2 || 0} · G3:${r.g3 || 0} · P3:${r.p3 || 0} · P2:${r.p2 || 0}`;
+            const pesoDiv = divHistory(r);
+
+            return `
+              <tr>
+                <td><span class="rank-pos ${posClass}">${pos}</span></td>
+                <td><span class="rank-player">${r.player || '—'}</span></td>
+                <td><span class="div-chip">${r.division_actual || '—'}</span></td>
+                <td><span class="rank-score">${fmtPoints(r.score_last14)}</span></td>
+                <td>${pjRank}</td>
+                <td><span class="rank-record">${record}</span></td>
+                <td><span class="rank-compact">${forma}</span></td>
+                <td><span class="rank-compact">${pesoDiv}</span></td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="foot">© 2026 LIG · Powered by NonData&amp;Co</div>
+  `;
+}
 // ── INIT ──
 async function init() {
   try {
-    const [standings, fixtures, matches, playerRows, summaryRows] = await Promise.all([
-      fetchSheet('division_standings'),
-      fetchSheet('division_fixtures'),
-      fetchSheet('app_h2h_matches'),
-      fetchSheet('app_players'),
-      fetchSheet('app_h2h_summary')
-    ]);
+    const [standings, fixtures, matches, playerRows, summaryRows, rankingRows] = await Promise.all([
+  fetchSheet('division_standings'),
+  fetchSheet('division_fixtures'),
+  fetchSheet('app_h2h_matches'),
+  fetchSheet('app_players'),
+  fetchSheet('app_h2h_summary'),
+  fetchSheet('ranking_last14')
+]);
     allStandings = standings;
-    allFixtures = fixtures;
-    allMatches = matches;
-    players = playerRows;
-    h2hSummary = summaryRows;
-    renderLiga();
+allFixtures = fixtures;
+allMatches = matches;
+players = playerRows;
+h2hSummary = summaryRows;
+rankRows = rankingRows;
+renderLiga();
   } catch(err) {
     document.getElementById('page-liga').innerHTML = `<div class="loading">Error al cargar datos.<br><small>${err.message}</small></div>`;
   }
