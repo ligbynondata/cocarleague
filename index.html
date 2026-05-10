@@ -333,43 +333,28 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 .rank-table th:nth-child(1),
 .rank-table td:nth-child(1) {
-  width: 7%;
+  width: 10%;
 }
 
 .rank-table th:nth-child(2),
 .rank-table td:nth-child(2) {
-  width: 20%;
+  width: 38%;
   text-align: left;
 }
 
 .rank-table th:nth-child(3),
 .rank-table td:nth-child(3) {
-  width: 7%;
+  width: 18%;
 }
 
 .rank-table th:nth-child(4),
 .rank-table td:nth-child(4) {
-  width: 12%;
+  width: 17%;
 }
 
 .rank-table th:nth-child(5),
 .rank-table td:nth-child(5) {
-  width: 10%;
-}
-
-.rank-table th:nth-child(6),
-.rank-table td:nth-child(6) {
-  width: 9%;
-}
-
-.rank-table th:nth-child(7),
-.rank-table td:nth-child(7) {
-  width: 19%;
-}
-
-.rank-table th:nth-child(8),
-.rank-table td:nth-child(8) {
-  width: 16%;
+  width: 17%;
 }
 
 .rank-pos {
@@ -403,9 +388,37 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .rank-player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 13px;
   font-weight: 600;
   color: var(--text);
+}
+
+.rank-player-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+.rank-player-initials {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--gold);
+  flex-shrink: 0;
 }
 
 .rank-score {
@@ -810,13 +823,19 @@ function renderRank() {
     return Math.round(n).toLocaleString('es-CL');
   }
 
-  function divHistory(r) {
-    const parts = [];
-    if (Number(r.count_div_a || 0) > 0) parts.push(`A${r.count_div_a}`);
-    if (Number(r.count_div_b || 0) > 0) parts.push(`B${r.count_div_b}`);
-    if (Number(r.count_div_c || 0) > 0) parts.push(`C${r.count_div_c}`);
-    if (Number(r.count_div_d || 0) > 0) parts.push(`D${r.count_div_d}`);
-    return parts.length ? parts.join(' · ') : '—';
+  function playerPhotoHTML(playerName) {
+    const p = players.find(x => x.player_name === playerName || x.player === playerName) || {};
+    const url = p.photo_url || '';
+
+    if (url && String(url).startsWith('http')) {
+      return `
+        <img class="rank-player-avatar" src="${url}" alt="${playerName}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
+        <span class="rank-player-initials" style="display:none;">${ini(playerName)}</span>
+      `;
+    }
+
+    return `<span class="rank-player-initials">${ini(playerName)}</span>`;
   }
 
   document.getElementById('page-rank').innerHTML = `
@@ -840,18 +859,15 @@ function renderRank() {
           <tr>
             <th>#</th>
             <th>Jugador</th>
-            <th>Div</th>
             <th>Puntos</th>
             <th>PJ Rank</th>
             <th>V-D</th>
-            <th>Forma</th>
-            <th>Peso Div.</th>
           </tr>
         </thead>
         <tbody>
           ${rows.length===0 ? `
             <tr>
-              <td colspan="8" style="text-align:center;padding:24px;color:var(--muted);">
+              <td colspan="5" style="text-align:center;padding:24px;color:var(--muted);">
                 Sin datos de ranking
               </td>
             </tr>
@@ -867,19 +883,19 @@ function renderRank() {
 
             const pjRank = `${r.matches_counted || 0}/${r.matches_played || 0}`;
             const record = `${wins}-${losses}`;
-            const forma = `G2:${r.g2 || 0} · G3:${r.g3 || 0} · P3:${r.p3 || 0} · P2:${r.p2 || 0}`;
-            const pesoDiv = divHistory(r);
 
             return `
               <tr>
                 <td><span class="rank-pos ${posClass}">${pos}</span></td>
-                <td><span class="rank-player">${r.player || '—'}</span></td>
-                <td><span class="div-chip">${r.division_actual || '—'}</span></td>
+                <td>
+                  <span class="rank-player">
+                    ${playerPhotoHTML(r.player || '')}
+                    <span>${r.player || '—'}</span>
+                  </span>
+                </td>
                 <td><span class="rank-score">${fmtPoints(r.score_last14)}</span></td>
                 <td>${pjRank}</td>
                 <td><span class="rank-record">${record}</span></td>
-                <td><span class="rank-compact">${forma}</span></td>
-                <td><span class="rank-compact">${pesoDiv}</span></td>
               </tr>
             `;
           }).join('')}
