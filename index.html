@@ -26,7 +26,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   background: var(--white);
   border-bottom: 1px solid var(--border);
   padding: 12px 32px;
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 4px;
 }
 .brand-logo {
   width: 36px; height: 36px; background: var(--gold);
@@ -161,7 +161,14 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 .pos-1 { background: var(--gold); color: #fff; }
 .pos-2 { background: #e8e8e8; color: #555; }
 .pos-3 { background: #f0d9b5; color: #7a5c00; }
-.pos-other { color: var(--muted); font-size: 11px; }
+.pos-other {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
 .pos-asc-dark { background: #16a34a; color: #fff; }
 .pos-asc { background: #4ade80; color: #14532d; }
 .pos-rel { background: #ef4444; color: #fff; }
@@ -187,10 +194,10 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 .fecha-label { font-size: 13px; font-weight: 600; color: var(--text); }
 .fecha-status {
-  margin-left: auto; font-size: 14px; font-weight: 600;
+  margin-left: auto; font-size: 12px; font-weight: 600;
   color: var(--green); display: flex; align-items: center; gap: 4px;
 }
-.fecha-status.pending { color: var(--muted); }
+.fecha-status.pending { color: #dc6b6b; }
 
 .match-row {
   background: var(--white); border: 1px solid var(--border);
@@ -279,7 +286,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 .no-data { text-align: center; color: var(--muted); padding: 40px 0; font-size: 13px; }
 .loading { text-align: center; color: var(--muted); padding: 60px 0; font-size: 13px; }
-.foot { text-align: center; color: #bbb; font-size: 10px; padding: 18px 0 6px; }
+.foot { text-align: center; color: #070707; font-size: 10px; padding: 18px 0 6px; }
 
 /* Coming soon */
 .coming-soon { text-align: center; padding: 80px 0; color: var(--muted); font-size: 14px; }
@@ -309,26 +316,27 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 <body>
 
 <div class="header">
-  <div class="brand-logo">LIG</div>
-  <div class="brand-name" style="display:flex;align-items:center;gap:6px;">
-    <span style="font-weight:700;">LIG</span>
-    <span style="font-weight:400;">by</span>
-    <img src="assets/logo-nondata.png.png" alt="Nondata" style="height:60px;width:auto;display:block;">
+  <img src="assets/logo-lig.png" alt="LIG" style="height:75px;width:auto;display:block;">
+  <div class="brand-name" style="display:flex;align-items:center;gap:3px;transform:translateY(6px);">
+    <span style="font-weight:400;font-size:13px;">by</span>
+    <img src="assets/logo-nondata.png.png" alt="Nondata" style="height:50px;width:auto;display:block;transform:translateY(1px);">
   </div>
 </div>
 
 <nav class="nav">
   <button class="nav-btn active" onclick="showPage('liga')">Liga</button>
   <button class="nav-btn" onclick="showPage('h2h')">H2H</button>
-  <button class="nav-btn" onclick="showPage('jugadores')">Jugadores</button>
-  <button class="nav-btn" onclick="showPage('rank')">Rank</button>
+  <button class="nav-btn" onclick="showPage('stats')">LIG Stats</button>
+  <button class="nav-btn" onclick="showPage('rank')">LIG Rank</button>
+  <button class="nav-btn" onclick="showPage('jugadores')">LIG Players</button>
 </nav>
 
 <div class="main">
   <div id="page-liga"><div class="loading">Cargando...</div></div>
   <div id="page-h2h" style="display:none"><div class="loading">Cargando...</div></div>
-  <div id="page-jugadores" style="display:none"><div class="coming-soon">Próximamente</div></div>
+  <div id="page-stats" style="display:none"><div class="coming-soon">Próximamente</div></div>
   <div id="page-rank" style="display:none"><div class="coming-soon">Próximamente</div></div>
+  <div id="page-jugadores" style="display:none"><div class="coming-soon">Próximamente</div></div>
 </div>
 
 <script>
@@ -365,11 +373,11 @@ function avHTMLB(url, name) { return avHTML(url, name, 'var(--black)'); }
 
 // ── SHOW PAGE ──
 function showPage(page) {
-  ['liga','h2h','jugadores','rank'].forEach(p => {
+  ['liga','h2h','stats','rank','jugadores'].forEach(p => {
     document.getElementById('page-'+p).style.display = p===page ? '' : 'none';
   });
   document.querySelectorAll('.nav-btn').forEach((btn,i) => {
-    btn.classList.toggle('active', ['liga','h2h','jugadores','rank'][i]===page);
+    btn.classList.toggle('active', ['liga','h2h','stats','rank','jugadores'][i]===page);
   });
   activePage = page;
   if (page==='liga') renderLiga();
@@ -467,7 +475,7 @@ function renderLiga() {
                 return `<tr>
                   <td>${posEl}</td>
                   <td style="font-weight:600;color:var(--text);text-align:left;font-size:13px;">${r.player||'—'}</td>
-                  <td style="font-size:15px;font-weight:800;color:var(--text)">${r.pts||0}</td>
+                  <td style="font-size:14px;font-weight:800;color:var(--text)">${r.pts||0}</td>
                  <td style="font-size:12px;font-weight:400">${diffEl}</td>
                   <td>${r.pj||0}</td>
                   <td>${r.pg||0}</td>
@@ -521,7 +529,7 @@ function renderLiga() {
         </div>
       </div>
     </div>
-    <div class="foot">LIG, una app desarrollada por Nondata&amp;co</div>
+    <div class="foot">© 2026 LIG · Powered by NonData&Co</div>
   `;
 }
 
@@ -629,7 +637,7 @@ function renderH2H() {
         }).join('')}</tbody>
       </table>`}
     </div>
-    <div class="foot">CoCar League · Datos actualizados desde Google Sheets</div>
+    <div class="foot">© 2026 LIG · Powered by NonData&Co</div>
   `;
 
   // Restore selects
