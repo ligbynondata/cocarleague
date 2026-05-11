@@ -288,144 +288,181 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 .loading { text-align: center; color: var(--muted); padding: 60px 0; font-size: 13px; }
 .foot { text-align: center; color: #070707; font-size: 10px; padding: 18px 0 6px; }
 
-/* ── RANK PAGE ── */
+//* ── RANK PAGE ── */
 .rank-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.rank-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.rank-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px 2.4fr 1fr 0.9fr 0.9fr 0.9fr;
+  align-items: center;
   background: var(--white);
-  border: 1px solid var(--border);
+  border: 1px solid #e8e3d8;
   border-radius: 14px;
+  min-height: 76px;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+  transition: background .2s ease, box-shadow .2s ease, transform .15s ease;
+}
+.rank-mobile-stats {
+  display: contents;
 }
 
-.rank-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
+.rank-row:hover {
+  background: #fcfbf8;
+  box-shadow: 0 5px 16px rgba(0,0,0,0.05);
+  transform: translateY(-1px);
 }
 
-.rank-table th {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--muted);
-  letter-spacing: .4px;
-  text-transform: uppercase;
-  padding: 10px 10px;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
+.rank-row.top-1 {
+  border-left: 5px solid #d4af37;
 }
 
-.rank-table td {
-  padding: 11px 10px;
-  font-size: 13px;
-  color: #555;
-  border-bottom: 1px solid var(--light);
-  text-align: center;
-  vertical-align: middle;
-  font-weight: 400;
+.rank-row.top-2 {
+  border-left: 5px solid #c7c7c7;
 }
 
-.rank-table tr:last-child td {
-  border-bottom: none;
+.rank-row.top-3 {
+  border-left: 5px solid #c99152;
 }
 
-.rank-table tr:hover td {
-  background: var(--light);
+.rank-cell {
+  min-height: 86px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.rank-table th:nth-child(1),
-.rank-table td:nth-child(1) {
-  width: 10%;
+.rank-cell + .rank-cell {
+  border-left: 1px solid rgba(0,0,0,0.055);
 }
 
-.rank-table th:nth-child(2),
-.rank-table td:nth-child(2) {
-  width: 38%;
-  text-align: left;
-}
-
-.rank-table th:nth-child(3),
-.rank-table td:nth-child(3) {
-  width: 18%;
-}
-
-.rank-table th:nth-child(4),
-.rank-table td:nth-child(4) {
-  width: 17%;
-}
-
-.rank-table th:nth-child(5),
-.rank-table td:nth-child(5) {
-  width: 12%;
-}
-.rank-table th:nth-child(6),
-.rank-table td:nth-child(6) {
-  width: 12%;
+.rank-cell.player {
+  justify-content: flex-start;
 }
 
 .rank-pos {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  background: var(--bg);
+  font-size: 14px;
+  font-weight: 850;
+  background: #f1efe9;
   color: var(--text);
-  border: 1px solid var(--border);
+  border: 1px solid #e3ded4;
 }
 
 .rank-pos.top1 {
-  background: var(--gold);
+  background: #d4af37;
   color: #fff;
-  border-color: var(--gold);
+  border-color: #d4af37;
 }
 
 .rank-pos.top2 {
-  background: #e8e8e8;
-  color: #555;
+  background: #dedede;
+  color: #222;
+  border-color: #d1d1d1;
 }
 
 .rank-pos.top3 {
-  background: #f0d9b5;
-  color: #7a5c00;
+  background: #c99152;
+  color: #fff;
+  border-color: #c99152;
 }
 
 .rank-player {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #eee7d8;
+  background: #faf8f3;
+  border-radius: 12px;
 }
 
 .rank-player-avatar {
-  width: 42px;
-  height: 42px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--border);
+  border: 1px solid #ddd7ca;
   background: var(--bg);
   flex-shrink: 0;
 }
 
 .rank-player-initials {
-  width: 42px;
-  height: 42px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: var(--bg);
-  border: 2px solid var(--border);
+  border: 1px solid #ddd7ca;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 850;
   color: var(--gold);
   flex-shrink: 0;
 }
 
+.rank-player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.rank-player-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .rank-score {
+  font-size: 17px;
+  font-weight: 850;
+  color: var(--text);
+  line-height: 1;
+}
+
+.rank-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 10px;
+  font-weight: 750;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .35px;
+}
+
+.rank-metric {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rank-metric-value {
   font-size: 14px;
   font-weight: 800;
   color: var(--text);
@@ -435,31 +472,146 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: fit-content;
   min-width: 28px;
-  padding: 3px 8px;
-  border-radius: 999px;
+  padding: 4px 9px;
+  border-radius: 7px;
   font-size: 11px;
-  font-weight: 700;
-  background: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--border);
+  font-weight: 800;
+  background: var(--gold);
+  color: #fff;
+  border: 1px solid var(--gold);
 }
 
-.rank-compact {
+.div-chip.no-division {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.rank-racha-w {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 27px;
+  padding: 0 10px;
+  border-radius: 999px;
   font-size: 12px;
-  color: #555;
-  white-space: nowrap;
+  font-weight: 850;
+  background: #dcfce7;
+  color: #166534;
 }
 
-.rank-record {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text);
+.rank-racha-l {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 27px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 850;
+  background: #fee2e2;
+  color: #991b1b;
 }
-.rank-racha-w { display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:#dcfce7;color:#166534; }
-.rank-racha-l { display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:#fee2e2;color:#991b1b; }
-.rank-div-sub { font-size:11px;color:var(--muted);margin-top:1px; }
-.rank-top3 td { background:var(--light); }
+
+.rank-empty {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 760px) {
+  .rank-list {
+    gap: 14px;
+  }
+
+  .rank-row {
+    display: block;
+    min-height: auto;
+    border-radius: 16px;
+  }
+
+  .rank-row:hover {
+    transform: none;
+  }
+
+  .rank-cell {
+    min-height: auto;
+    padding: 0;
+    border-left: none !important;
+  }
+
+  .rank-cell.position {
+    position: absolute;
+    top: 18px;
+    left: 16px;
+    z-index: 2;
+  }
+
+  .rank-cell.player {
+    padding: 16px 16px 14px 72px;
+  }
+
+  .rank-player {
+    border: none;
+    background: transparent;
+    padding: 0;
+    gap: 13px;
+  }
+
+  .rank-player-avatar,
+  .rank-player-initials {
+    width: 64px;
+    height: 64px;
+  }
+
+  .rank-player-name {
+    font-size: 22px;
+    font-weight: 850;
+  }
+
+  .div-chip {
+    font-size: 13px;
+    padding: 5px 11px;
+  }
+
+  .rank-mobile-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid #ebe6dc;
+    padding: 14px 8px 16px;
+  }
+
+  .rank-mobile-stats .rank-cell {
+    display: flex;
+    justify-content: center;
+    padding: 0 8px;
+  }
+
+  .rank-mobile-stats .rank-cell + .rank-cell {
+    border-left: 1px solid #e7e2d8 !important;
+  }
+
+  .rank-label {
+    font-size: 11px;
+    margin-bottom: 7px;
+  }
+
+  .rank-score {
+    font-size: 19px;
+  }
+
+  .rank-metric-value {
+    font-size: 18px;
+  }
+}
 /* Coming soon */
 .coming-soon { text-align: center; padding: 80px 0; color: var(--muted); font-size: 14px; }
 
@@ -831,38 +983,58 @@ function renderRank() {
     return Math.round(n).toLocaleString('es-CL');
   }
 
-  function playerPhotoHTML(playerName) {
-  const p = players.find(x => x.player_name === playerName || x.player === playerName) || {};
-  const url = p.photo_url || '';
-  const div = p.division_actual || p['division_actual'] || p['división_actual'] || '';
-  const divDisplay = div && div !== '-' ? div : '—';
-const divClass = divDisplay === '—' ? 'badge dark' : 'badge';
+  function getPlayerData(playerName) {
+    return players.find(x => x.player_name === playerName || x.player === playerName) || {};
+  }
 
-  const avatarHTML = (url && String(url).startsWith('http'))
-    ? `
-      <img class="rank-player-avatar" src="${url}" alt="${playerName}"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
-      <span class="rank-player-initials" style="display:none;">${ini(playerName)}</span>
-    `
-    : `
-      <span class="rank-player-initials">${ini(playerName)}</span>
+  function playerBlockHTML(playerName) {
+    const p = getPlayerData(playerName);
+    const url = p.photo_url || '';
+    const div = p.division_actual || p['division_actual'] || p['división_actual'] || '';
+    const divDisplay = div && div !== '-' ? div : '—';
+    const chipClass = divDisplay === '—' ? 'div-chip no-division' : 'div-chip';
+
+    const avatarHTML = (url && String(url).startsWith('http'))
+      ? `
+        <img class="rank-player-avatar" src="${url}" alt="${playerName}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
+        <span class="rank-player-initials" style="display:none;">${ini(playerName)}</span>
+      `
+      : `
+        <span class="rank-player-initials">${ini(playerName)}</span>
+      `;
+
+    return `
+      <div class="rank-player">
+        ${avatarHTML}
+        <div class="rank-player-info">
+          <span class="rank-player-name">${playerName}</span>
+          <span class="${chipClass}">División ${divDisplay}</span>
+        </div>
+      </div>
     `;
-
-  return `
-    ${avatarHTML}
-    <div style="display:flex;flex-direction:column;gap:4px;">
-      <span style="font-size:13px;font-weight:600;color:var(--text)">${playerName}</span>
-      <span class="${divClass}" style="display:inline-block;width:fit-content;margin:0;">División ${divDisplay}</span>
-    </div>
-  `;
-}
+  }
 
   function rachaHTML(playerName) {
-    const p = players.find(x => x.player_name === playerName || x.player === playerName) || {};
+    const p = getPlayerData(playerName);
     const racha = p.racha_actual || '';
-    if (!racha) return '—';
+    if (!racha) return '<span class="rank-metric-value">—</span>';
     const cls = racha.startsWith('W') ? 'rank-racha-w' : 'rank-racha-l';
     return `<span class="${cls}">${racha}</span>`;
+  }
+
+  function rowClass(pos) {
+    if (pos === 1) return 'top-1';
+    if (pos === 2) return 'top-2';
+    if (pos === 3) return 'top-3';
+    return '';
+  }
+
+  function posClass(pos) {
+    if (pos === 1) return 'top1';
+    if (pos === 2) return 'top2';
+    if (pos === 3) return 'top3';
+    return '';
   }
 
   document.getElementById('page-rank').innerHTML = `
@@ -875,57 +1047,70 @@ const divClass = divDisplay === '—' ? 'badge dark' : 'badge';
       </div>
     </div>
 
+    <div class="card-header" style="background:var(--white);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;">
+      <span class="card-title" style="font-size:10px;letter-spacing:.4px;">Ranking Last 14</span>
+      <span class="card-meta">${rows.length} jugadores</span>
+    </div>
+
     <div class="rank-card">
-      <div class="card-header">
-        <span class="card-title" style="font-size:10px;letter-spacing:.4px;">Ranking Last 14</span>
-        <span class="card-meta">${rows.length} jugadores</span>
-      </div>
-
-      <table class="rank-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th style="text-align:left">Jugador</th>
-            <th>Puntos</th>
-            <th>PJ</th>
-            <th>V-D</th>
-            <th>Racha</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${rows.length===0 ? `
-            <tr><td colspan="6" style="text-align:center;padding:24px;color:var(--muted);">Sin datos de ranking</td></tr>
-          ` : rows.map(r => {
+      ${rows.length===0 ? `
+        <div class="rank-empty">Sin datos de ranking</div>
+      ` : `
+        <div class="rank-list">
+          ${rows.map(r => {
             const pos = Number(r.rank_position || 0);
-            let posClass = '';
-            if (pos===1) posClass='top1';
-            else if (pos===2) posClass='top2';
-            else if (pos===3) posClass='top3';
-
             const wins = Number(r.g2||0) + Number(r.g3||0);
             const losses = Number(r.p3||0) + Number(r.p2||0);
             const pjRank = `${r.matches_counted||0}/${r.matches_played||0}`;
             const record = `${wins}-${losses}`;
-            const isTop3 = pos <= 3;
+            const playerName = r.player || '';
 
             return `
-              <tr class="${isTop3?'rank-top3':''}">
-                <td><span class="rank-pos ${posClass}">${pos}</span></td>
-                <td>
-                  <span class="rank-player">
-                    ${playerPhotoHTML(r.player||'')}
-                  </span>
-                </td>
-                <td><span class="rank-score">${fmtPoints(r.score_last14)}</span></td>
-                <td style="font-size:12px;color:var(--muted)">${pjRank}</td>
-                <td><span class="rank-record">${record}</span></td>
-                <td>${rachaHTML(r.player||'')}</td>
-              </tr>
+              <div class="rank-row ${rowClass(pos)}">
+                <div class="rank-cell position">
+                  <span class="rank-pos ${posClass(pos)}">${pos}</span>
+                </div>
+
+                <div class="rank-cell player">
+                  ${playerBlockHTML(playerName)}
+                </div>
+
+                <div class="rank-mobile-stats">
+                  <div class="rank-cell">
+                    <div class="rank-metric">
+                      <span class="rank-label">Puntos</span>
+                      <span class="rank-score">${fmtPoints(r.score_last14)}</span>
+                    </div>
+                  </div>
+
+                  <div class="rank-cell">
+                    <div class="rank-metric">
+                      <span class="rank-label">PJ</span>
+                      <span class="rank-metric-value">${pjRank}</span>
+                    </div>
+                  </div>
+
+                  <div class="rank-cell">
+                    <div class="rank-metric">
+                      <span class="rank-label">V-D</span>
+                      <span class="rank-metric-value">${record}</span>
+                    </div>
+                  </div>
+
+                  <div class="rank-cell">
+                    <div class="rank-metric">
+                      <span class="rank-label">Racha</span>
+                      ${rachaHTML(playerName)}
+                    </div>
+                  </div>
+                </div>
+              </div>
             `;
           }).join('')}
-        </tbody>
-      </table>
+        </div>
+      `}
     </div>
+
     <div class="foot">© 2026 LIG · Powered by NonData&Co</div>
   `;
 }
