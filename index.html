@@ -310,7 +310,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   background: var(--white);
   border: 1px solid #e8e3d8;
   border-radius: 14px;
-  min-height: 76px;
+  min-height: 68px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,0.025);
   transition: background .2s ease, box-shadow .2s ease, transform .15s ease;
@@ -338,8 +338,8 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .rank-cell {
-  min-height: 86px;
-  padding: 0 16px;
+  min-height: 68px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -397,8 +397,8 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .rank-player-avatar {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid #ddd7ca;
@@ -407,15 +407,15 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .rank-player-initials {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--bg);
   border: 1px solid #ddd7ca;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 850;
   color: var(--gold);
   flex-shrink: 0;
@@ -1042,15 +1042,23 @@ function renderRank() {
       <div>
         <div class="page-title">LIG Rank</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px;">
-          Últimos 14 partidos · ponderado por división
-        </div>
+  Rendimiento reciente ajustado por nivel competitivo
+</div>
       </div>
     </div>
 
-    <div class="card-header" style="background:var(--white);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;">
+    <div class="card-header" style="background:var(--white);border:1px solid var(--border);border-radius:14px;margin-bottom:10px;padding:12px 20px;">
+  <div style="width:100%;">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
       <span class="card-title" style="font-size:10px;letter-spacing:.4px;">Ranking Last 14</span>
       <span class="card-meta">${rows.length} jugadores</span>
     </div>
+
+    <div style="font-size:10px;color:var(--muted);margin-top:5px;font-weight:500;text-transform:none;letter-spacing:0;line-height:1.25;">
+      Desde el partido 15 se consideran los últimos 14. Antes, funciona como Race: cuenta todo lo jugado.
+    </div>
+  </div>
+</div>
 
     <div class="rank-card">
       ${rows.length===0 ? `
