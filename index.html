@@ -968,12 +968,12 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 const SHEET_ID = '1bTdib3kxhcTXVJlqGuySkcZPpb3NPu7ZFHhV45B_1EI';
 const API = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-let allStandings = [], allFixtures = [], allMatches = [], players = [], h2hSummary = [], rankRows = [];
+let allStandings = [], allFixtures = [], allMatches = [], players = [], h2hSummary = [], rankRows = [], leaguePlayers = [];
 let currentDiv = 'A', currentLiga = 'Cocar26A';
 let activePage = 'liga';
 
 async function fetchSheet(sheet) {
-  const res = await fetch(`${API}&sheet=${encodeURIComponent(sheet)}`);
+  const res = await fetch(`${API}&sheet=${encodeURIComponent(sheet)}&headers=1`);
   const text = await res.text();
   const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
   const cols = json.table.cols.map(c => c.label);
@@ -995,25 +995,39 @@ function avHTML(url, name, borderColor) {
 }
 function avHTMLA(url, name) { return avHTML(url, name, 'var(--gold)'); }
 function avHTMLB(url, name) { return avHTML(url, name, 'var(--black)'); }
-function isReplacementPlayer(playerName) {
-  const p = players.find(x => x.player_name === playerName || x.player === playerName) || {};
-  return p.division_actual === 'Reemplazo';
+function isReplacementPlayer(playerName, leagueId) {
+  if (!playerName || !leagueId) return false;
+
+  const targetPlayer = String(playerName).trim().toLowerCase();
+  const targetLeague = String(leagueId).trim().toLowerCase();
+
+  return leaguePlayers.some(lp => {
+    const lpLeague = String(lp.league_id || '').trim().toLowerCase();
+    const lpPlayer = String(lp.player_name || '').trim().toLowerCase();
+    const lpRole = String(lp.role || '').trim().toLowerCase();
+
+    return (
+      lpLeague === targetLeague &&
+      lpPlayer === targetPlayer &&
+      lpRole === 'reemplazo'
+    );
+  });
 }
 
-function displayPlayerName(playerName) {
+function displayPlayerName(playerName, leagueId) {
   if (!playerName) return '—';
 
-  return isReplacementPlayer(playerName)
+  return isReplacementPlayer(playerName, leagueId)
     ? `${playerName} <span style="font-weight:500;color:var(--muted);font-size:11px;">(R)</span>`
     : playerName;
 }
 
-function displayPairName(pairDisplay) {
+function displayPairName(pairDisplay, leagueId) {
   if (!pairDisplay) return '—';
 
   return String(pairDisplay)
     .split('/')
-    .map(name => displayPlayerName(name.trim()))
+    .map(name => displayPlayerName(name.trim(), leagueId))
     .join(' / ');
 }
 
@@ -1124,7 +1138,7 @@ function renderLiga() {
                                `<span style="color:var(--muted)">0</span>`;
                 return `<tr>
                   <td>${posEl}</td>
-                  <td style="font-weight:600;color:var(--text);text-align:left;font-size:13px;">${displayPlayerName(r.player)}</td>
+                  <td style="font-weight:600;color:var(--text);text-align:left;font-size:13px;">${displayPlayerName(r.player, currentLiga)}</td>
                   <td style="font-size:14px;font-weight:800;color:var(--text)">${r.pts||0}</td>
                  <td style="font-size:12px;font-weight:400">${diffEl}</td>
                   <td>${r.pj||0}</td>
@@ -1165,12 +1179,12 @@ function renderLiga() {
                 ${matches.map(m => {
                   const played = !!m.score_display;
                   return `<div class="match-row">
-                    <div class="match-pair">${displayPairName(m.pair1_display)}</div>
+                    <div class="match-pair">${displayPairName(m.pair1_display, currentLiga)}</div>
                     ${played
                       ? `<div class="match-score">${m.score_display}</div>`
                       : `<div class="match-pending">⏱ Pendiente</div>`
                     }
-                    <div class="match-pair right">${displayPairName(m.pair2_display)}</div>
+                    <div class="match-pair right">${displayPairName(m.pair2_display, currentLiga)}</div>
                   </div>`;
                 }).join('')}
               </div>`;
@@ -1465,13 +1479,14 @@ const divLabel = isReplacement
 // ── INIT ──
 async function init() {
   try {
-    const [standings, fixtures, matches, playerRows, summaryRows, rankingRows] = await Promise.all([
+    const [standings, fixtures, matches, playerRows, summaryRows, rankingRows, leaguePlayerRows] = await Promise.all([
   fetchSheet('division_standings'),
   fetchSheet('division_fixtures'),
   fetchSheet('app_h2h_matches'),
   fetchSheet('app_players'),
   fetchSheet('app_h2h_summary'),
-  fetchSheet('ranking_last14')
+  fetchSheet('ranking_last14'),
+  fetchSheet('league_players')
 ]);
     allStandings = standings;
 allFixtures = fixtures;
@@ -1479,6 +1494,7 @@ allMatches = matches;
 players = playerRows;
 h2hSummary = summaryRows;
 rankRows = rankingRows;
+leaguePlayers = leaguePlayerRows;
 renderLiga();
   } catch(err) {
     document.getElementById('page-liga').innerHTML = `<div class="loading">Error al cargar datos.<br><small>${err.message}</small></div>`;
