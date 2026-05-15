@@ -676,13 +676,19 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .rank-label {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 12px;
   margin-bottom: 5px;
   font-size: 10px;
   font-weight: 600;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: .45px;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .rank-metric {
@@ -690,6 +696,8 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  min-height: 42px;
 }
 
 .rank-metric-value {
@@ -731,12 +739,13 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 46px;
-  height: 27px;
-  padding: 0 10px;
+  min-width: 40px;
+  height: 21px;
+  padding: 0 8px;
   border-radius: 999px;
-  font-size: 12px;
-  font-weight: 850;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
   background: #dcfce7;
   color: #166534;
 }
@@ -745,12 +754,13 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 46px;
-  height: 27px;
-  padding: 0 10px;
+  min-width: 40px;
+  height: 21px;
+  padding: 0 8px;
   border-radius: 999px;
-  font-size: 12px;
-  font-weight: 850;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
   background: #fee2e2;
   color: #991b1b;
 }
@@ -844,17 +854,34 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
   .rank-label {
-    font-size: 11px;
-    margin-bottom: 7px;
-  }
+  font-size: 9px;
+  min-height: 11px;
+  margin-bottom: 4px;
+  line-height: 1;
+}
 
   .rank-score {
-    font-size: 19px;
-  }
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.2px;
+}
 
-  .rank-metric-value {
-    font-size: 18px;
-  }
+.rank-metric-value {
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.2px;
+}
+
+.rank-racha-w,
+.rank-racha-l {
+  min-width: 38px;
+  height: 20px;
+  padding: 0 8px;
+  font-size: 10px;
+  font-weight: 650;
+}
 }
 /* Coming soon */
 .coming-soon { text-align: center; padding: 80px 0; color: var(--muted); font-size: 14px; }
@@ -1450,21 +1477,21 @@ const divLabel = isReplacement
                 <div class="rank-mobile-stats">
                   <div class="rank-cell">
                     <div class="rank-metric">
-                      <span class="rank-label">Puntos</span>
+                      <span class="rank-label">LIG pts</span>
                       <span class="rank-score">${fmtPoints(r.score_last14)}</span>
                     </div>
                   </div>
 
                   <div class="rank-cell">
                     <div class="rank-metric">
-                      <span class="rank-label">PJ</span>
+                      <span class="rank-label">Comp-PJ</span>
                       <span class="rank-metric-value">${pjRank}</span>
                     </div>
                   </div>
 
                   <div class="rank-cell">
                     <div class="rank-metric">
-                      <span class="rank-label">V-D</span>
+                      <span class="rank-label">V-D L14</span>
                       <span class="rank-metric-value">${record}</span>
                     </div>
                   </div>
