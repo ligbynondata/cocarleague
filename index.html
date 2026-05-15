@@ -570,7 +570,14 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 .mbar-y { background: var(--gold); transition: width .4s ease; }
 .mbar-k { background: #111; transition: width .4s ease; }
 
-.hist { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; }
+.hist {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .hist-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
 .hist-line { width: 32px; height: 2px; background: var(--gold); border-radius: 2px; margin-bottom: 16px; }
 .hist-table { width: 100%; border-collapse: collapse; }
@@ -1036,11 +1043,32 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   .player-row { grid-template-columns: 1fr 180px 1fr; }
   .metrics { grid-template-columns: 1fr 1fr 1fr; }
 }
+@media (max-width: 600px) {
+  .hist {
+    padding: 16px 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
+  .hist-table {
+    min-width: 680px;
+  }
+
+  .hist-table th {
+    font-size: 8px;
+    padding: 0 8px 8px;
+  }
+
+  .hist-table td {
+    font-size: 11px;
+    padding: 10px 8px;
+  }
+}
 .standings-table tbody tr:hover td:nth-child(2) {
   color: var(--black) !important;
   font-weight: 800 !important;
 }
+
 
 </style>
 </head>
