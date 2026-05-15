@@ -1275,8 +1275,16 @@ function renderH2H() {
         ${avHTMLA(pA.photo_url||'',a)}
         <div class="pi">
           <h2>${a}</h2>
-          <div class="badge ${pA.division_actual === 'Reemplazo' ? 'replacement' : ''}">
-  ${pA.division_actual === 'Reemplazo' ? 'Reemplazo' : `División ${pA.division_actual || '—'}`}
+          <div class="badge ${
+  pA.division_actual === 'Reemplazo'
+    ? 'replacement'
+    : (pA.division_actual === '-' || !pA.division_actual ? 'dark' : '')
+}">
+  ${
+    pA.division_actual === 'Reemplazo'
+      ? 'Reemplazo'
+      : `División ${pA.division_actual || '—'}`
+  }
 </div>
           <div class="srow">
             <div class="sm"><span class="lb">Ranking</span><span class="vl">${pA.rank_position||'—'}°</span></div>
@@ -1300,8 +1308,16 @@ function renderH2H() {
         ${avHTMLB(pB.photo_url||'',b)}
         <div class="pi">
           <h2>${b}</h2>
-          <div class="badge ${pB.division_actual === 'Reemplazo' ? 'replacement' : 'dark'}">
-  ${pB.division_actual === 'Reemplazo' ? 'Reemplazo' : `División ${pB.division_actual || '—'}`}
+          <div class="badge ${
+  pB.division_actual === 'Reemplazo'
+    ? 'replacement'
+    : 'dark'
+}">
+  ${
+    pB.division_actual === 'Reemplazo'
+      ? 'Reemplazo'
+      : `División ${pB.division_actual || '—'}`
+  }
 </div>
           <div class="srow">
             <div class="sm" style="align-items:flex-end"><span class="lb">Ranking</span><span class="vl">${pB.rank_position||'—'}°</span></div>
