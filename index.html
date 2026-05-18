@@ -54,12 +54,318 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 /* PAGE HEADERS */
 .page-header {
-  display: flex; align-items: center;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
-.page-title { font-size: 18px; font-weight: 700; color: var(--text); }
-.page-controls { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
+
+.page-hero {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.page-hero-logo {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  flex-shrink: 0;
+}
+
+.page-hero-title {
+  font-size: 22px;
+  font-weight: 750;
+  color: var(--text);
+  letter-spacing: -0.4px;
+  line-height: 1.05;
+}
+
+.page-hero-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.2;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 750;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.page-toolbar {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+}
+.page-toolbar-heading {
+  width: 100%;
+  display: block;
+  font-size: 10px;
+  font-weight: 750;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  line-height: 1;
+  margin-bottom: -6px;
+}
+
+.page-toolbar-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.toolbar-label {
+  font-size: 9px;
+  font-weight: 750;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  line-height: 1;
+}
+
+.toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.toolbar-row select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 10px;
+  cursor: pointer;
+  outline: none;
+  min-width: 130px;
+}
+
+.toolbar-row select:focus {
+  border-color: var(--gold);
+}
+
+.page-toolbar-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .35px;
+  margin-right: 4px;
+  align-self: center;
+}
+
+.page-toolbar-note {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.25;
+}
+
+.page-toolbar .fg label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.page-toolbar .fg select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 10px;
+  cursor: pointer;
+  outline: none;
+  min-width: 120px;
+}
+
+.page-toolbar .fg select:focus {
+  border-color: var(--gold);
+}
+
+@media (max-width: 600px) {
+  .page-toolbar {
+  padding: 10px 10px;
+  gap: 10px;
+}
+
+.page-toolbar-left {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.toolbar-group {
+  width: auto;
+  min-width: 0;
+}
+
+.toolbar-group:first-child {
+  flex: 1 1 auto;
+}
+
+.toolbar-group:last-child {
+  flex: 0 0 122px;
+}
+
+.toolbar-row {
+  gap: 5px;
+  flex-wrap: nowrap;
+}
+
+.page-toolbar .fg {
+  width: auto;
+}
+.page-toolbar .div-tab {
+  padding: 6px 9px;
+  font-size: 11px;
+  min-width: 0;
+}
+@media (max-width: 600px) {
+  #page-h2h .page-toolbar {
+    padding: 9px 8px;
+    overflow: hidden;
+  }
+
+  #page-h2h .page-toolbar-left {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.78fr 0.78fr;
+    gap: 5px;
+    align-items: flex-start;
+  }
+
+  #page-h2h .toolbar-group {
+    width: 100%;
+    min-width: 0;
+    gap: 5px;
+  }
+
+  #page-h2h .toolbar-row {
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+
+  #page-h2h .toolbar-row select {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 34px;
+    font-size: 9.8px !important;
+    font-weight: 650;
+    padding: 5px 4px !important;
+    border-radius: 7px;
+    text-overflow: ellipsis;
+  }
+
+  #page-h2h .toolbar-label {
+    font-size: 7.5px;
+    letter-spacing: .25px;
+    white-space: nowrap;
+  }
+}
+
+#page-liga .page-toolbar select {
+  min-width: 122px !important;
+  max-width: 122px;
+  padding: 6px 8px !important;
+  font-size: 11px !important;
+}
+
+  .page-toolbar .fg select {
+    width: 100%;
+    min-width: 0;
+  }
+}
+/* ── STATS TOOLBAR MOBILE ── */
+@media (max-width: 600px) {
+  #page-stats .page-toolbar-left {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  #page-stats .toolbar-group {
+    width: 100%;
+    min-width: 0;
+  }
+
+
+  #page-stats .toolbar-row {
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+
+  #page-stats .toolbar-row select {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 34px;
+    font-size: 10.5px !important;
+    font-weight: 650;
+    padding: 6px 7px !important;
+    border-radius: 7px;
+  }
+
+  #page-stats .toolbar-label {
+    font-size: 8px;
+    letter-spacing: .35px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-hero {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .page-hero-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .page-hero-title {
+    font-size: 20px;
+  }
+
+  .page-hero-subtitle {
+    font-size: 11px;
+    margin-top: 3px;
+  }
+}
 
 .fg { display: flex; flex-direction: column; gap: 3px; }
 .fg label { font-size: 9px; font-weight: 700; color: var(--muted); letter-spacing: .5px; text-transform: uppercase; }
@@ -1146,6 +1452,424 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
     padding: 10px 12px;
   }
 }
+/* ── LIG STATS PAGE ── */
+.stats-header {
+  margin-bottom: 16px;
+}
+
+.stats-title {
+  font-size: 22px;
+  font-weight: 750;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.stats-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.stats-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-top: 14px;
+}
+
+.stats-section {
+  margin-top: 18px;
+}
+
+.stats-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 10px;
+}
+
+.stats-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stats-kpi-card {
+  background: var(--white);
+  border: 1px solid #e8e3d8;
+  border-radius: 14px;
+  padding: 16px 18px;
+  min-height: 94px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+}
+
+.stats-kpi-label {
+  font-size: 10px;
+  font-weight: 750;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .35px;
+  margin-bottom: 4px;
+}
+
+.stats-kpi-value {
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 0.9;
+  letter-spacing: -1px;
+}
+
+.stats-kpi-sub {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.stats-kpi-card.highlight {
+  border-color: #d9c36a;
+  background: #fffdf6;
+}
+
+.stats-kpi-card.highlight .stats-kpi-value {
+  color: var(--gold);
+}
+
+.stats-profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stats-panel {
+  background: var(--white);
+  border: 1px solid #e8e3d8;
+  border-radius: 14px;
+  padding: 16px 18px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+}
+
+.stats-panel-title {
+  font-size: 11px;
+  font-weight: 750;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .35px;
+  margin-bottom: 12px;
+}
+
+.stats-bar-row {
+  display: grid;
+  grid-template-columns: 58px 1fr 44px;
+  gap: 10px;
+  align-items: center;
+  min-height: 34px;
+  margin-bottom: 0;
+}
+
+.stats-bar-label {
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.stats-bar-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #eeeae1;
+  overflow: hidden;
+}
+
+.stats-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--gold);
+}
+
+.stats-bar-value {
+  font-size: 13px;
+  font-weight: 750;
+  color: var(--text);
+  text-align: right;
+}
+
+.stats-mini-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  border-top: 1px solid #f0eee8;
+  margin-top: 0;
+  padding-top: 10px;
+  min-height: 58px;
+  align-items: center;
+}
+
+.stats-mini {
+  text-align: center;
+}
+
+.stats-mini-label {
+  font-size: 9px;
+  font-weight: 650;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .35px;
+  margin-bottom: 4px;
+}
+
+.stats-mini-value {
+  font-size: 18px;
+  font-weight: 750;
+  color: var(--text);
+}
+
+.stats-set-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px 46px;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  padding: 0;
+  border-bottom: 1px solid #f0eee8;
+}
+
+.stats-set-row:last-child {
+  border-bottom: none;
+}
+
+.stats-set-label {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.stats-set-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stats-set-desc {
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.stats-set-value {
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--text);
+  text-align: right;
+}
+
+.stats-set-pct {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: right;
+}
+
+.stats-rank-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.stats-awards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.stats-rank-card {
+  background: var(--white);
+  border: 1px solid #e8e3d8;
+  border-radius: 14px;
+  padding: 14px 16px 12px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+}
+
+.stats-rank-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 24px;
+  margin-bottom: 8px;
+}
+
+.stats-rank-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .35px;
+  line-height: 1;
+  margin: 0;
+}
+.stats-rank-badges {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.stats-rank-head {
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.story-seq {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.story-chip {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.story-chip.w {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.story-chip.l {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.stats-rank-row {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  padding: 3px 0;
+  min-height: 22px;
+}
+
+.stats-rank-pos {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.stats-rank-player {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stats-rank-value {
+  color: var(--text);
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.stats-rank-note {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: auto;
+  padding-top: 8px;
+  line-height: 1.2;
+}
+
+@media (max-width: 900px) {
+  .stats-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-rank-grid-4,
+  .stats-awards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-title {
+    font-size: 20px;
+  }
+
+  .stats-filters {
+    gap: 8px;
+  }
+
+  .stats-filters .fg {
+    width: 100%;
+  }
+
+  .stats-filters .fg select {
+    width: 100%;
+  }
+
+  .stats-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .stats-kpi-card {
+    min-height: 78px;
+    padding: 12px 12px;
+    gap: 10px;
+  }
+
+  .stats-kpi-label {
+    font-size: 8.5px;
+  }
+
+    .stats-kpi-value {
+    font-size: 26px;
+    letter-spacing: -0.6px;
+  }
+
+  .stats-kpi-sub {
+    font-size: 8.5px;
+  }
+
+  .stats-panel {
+    padding: 14px 14px;
+  }
+
+  .stats-bar-row {
+    grid-template-columns: 50px 1fr 38px;
+    gap: 8px;
+  }
+
+  .stats-rank-grid-4,
+  .stats-awards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-rank-card {
+    min-height: auto;
+  }
+}
 
 </style>
 </head>
@@ -1180,7 +1904,10 @@ const SHEET_ID = '1bTdib3kxhcTXVJlqGuySkcZPpb3NPu7ZFHhV45B_1EI';
 const API = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
 let allStandings = [], allFixtures = [], allMatches = [], players = [], h2hSummary = [], rankRows = [], leaguePlayers = [];
+let leagueStatsSummary = [], leagueStatsRankings = [];
 let currentDiv = 'A', currentLiga = 'Cocar26A';
+let currentStatsLiga = 'Cocar26A';
+let currentStatsDiv = 'ALL';
 let activePage = 'liga';
 
 async function fetchSheet(sheet) {
@@ -1241,6 +1968,17 @@ function displayPairName(pairDisplay, leagueId) {
     .map(name => displayPlayerName(name.trim(), leagueId))
     .join(' / ');
 }
+function pageHeroHTML(title, subtitle) {
+  return `
+    <div class="page-hero">
+      <img src="assets/logo-cocar.png.jpg" class="page-hero-logo" alt="Cocar League">
+      <div>
+        <div class="page-hero-title">${title}</div>
+        <div class="page-hero-subtitle">${subtitle}</div>
+      </div>
+    </div>
+  `;
+}
 
 // ── SHOW PAGE ──
 function showPage(page) {
@@ -1250,10 +1988,11 @@ function showPage(page) {
   document.querySelectorAll('.nav-btn').forEach((btn,i) => {
     btn.classList.toggle('active', ['liga','h2h','stats','rank','jugadores'][i]===page);
   });
-  activePage = page;
-  if (page==='liga') renderLiga();
-if (page==='h2h') renderH2H();
-if (page==='rank') renderRank();
+    activePage = page;
+  if (page === 'liga') renderLiga();
+  if (page === 'h2h') renderH2H();
+  if (page === 'stats') renderStats();
+  if (page === 'rank') renderRank();
 }
 
 // ── LIGA PAGE ──
@@ -1276,28 +2015,31 @@ function renderLiga() {
   const isLive = currentLiga === 'Cocar26A';
 
   document.getElementById('page-liga').innerHTML = `
-    <div class="page-header">
-      <div style="display:flex;align-items:center;gap:12px;">
-  <img src="assets/logo-cocar.png.jpg" style="width:54px;height:54px;object-fit:cover;border-radius:50%;display:block;">
-  <div>
-    <div class="page-title">Cocar League</div>
-    <div style="font-size:11px;color:var(--muted);margin-top:2px;">Clasificación y fixture por división</div>
+    ${pageHeroHTML('Cocar League', 'Clasificación y fixture por división')}
+
+    <div class="page-toolbar">
+  <div class="page-toolbar-left">
+
+    <div class="toolbar-group">
+      <div class="toolbar-label">División</div>
+      <div class="toolbar-row">
+        ${['A','B','C','D'].map(d => `
+          <button class="div-tab ${d===currentDiv?'active':''}" onclick="currentDiv='${d}';renderLiga()">Div ${d}</button>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="toolbar-group">
+      <div class="toolbar-label">Temporada</div>
+      <div class="toolbar-row">
+        <select onchange="currentLiga=this.value;renderLiga()">
+          <option value="Cocar26A" ${currentLiga==='Cocar26A'?'selected':''}>Cocar 26A ${isLive?'· Live':''}</option>
+          <option value="Cocar25" ${currentLiga==='Cocar25'?'selected':''}>Cocar 25</option>
+        </select>
+      </div>
+    </div>
+
   </div>
-</div>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
-      ${['A','B','C','D'].map(d => `<button class="div-tab ${d===currentDiv?'active':''}" onclick="currentDiv='${d}';renderLiga()">Div ${d}</button>`).join('')}
-     <div style="width:3px;height:24px;background:var(--border);margin:0 4px;"></div>
-      <select onchange="currentLiga=this.value;renderLiga()" style="background:#fff;border:1.5px solid var(--border);font-size:12px;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;outline:none;color:var(--text);">
-        <option value="Cocar26A" ${currentLiga==='Cocar26A'?'selected':''}>Cocar 26A ${isLive?'· Live':''}</option>
-        <option value="Cocar25" ${currentLiga==='Cocar25'?'selected':''}>Cocar 25</option>
-      </select>
-    </div>
-
-    <div style="font-size:10px;color:var(--muted);margin-bottom:12px;letter-spacing:.3px;text-transform:uppercase;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-  <span>${currentLiga} · División ${currentDiv}</span>
-  ${isLive ? '<span style="display:inline-flex;align-items:center;gap:4px;background:#16a34a;color:#ffffff;font-size:10px;font-weight:850;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.3px;">● LIVE</span>' : ''}
 </div>
 
     <div class="liga-layout">
@@ -1455,13 +2197,51 @@ function renderH2H() {
 
   const optionsHTML = names.map(n => `<option value="${n}">${n}</option>`).join('');
 
-  document.getElementById('page-h2h').innerHTML = `
-    <div class="h2h-filters">
-      <span class="h2h-filters-title">Comparar</span>
-      <div class="fg"><label>Jugador 1</label><select id="h2h-sA" onchange="renderH2H()">${optionsHTML}</select></div>
-      <div class="fg"><label>Jugador 2</label><select id="h2h-sB" onchange="renderH2H()">${optionsHTML}</select></div>
-      <div class="fg"><label>Temporada</label><select id="h2h-sT" onchange="renderH2H()"><option value="all">Todas</option><option value="Cocar25">Liga 25</option><option value="Cocar26A">Liga 26A</option></select></div>
-      <div class="fg"><label>División</label><select id="h2h-sD" onchange="renderH2H()"><option value="all">Todas</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select></div>
+    document.getElementById('page-h2h').innerHTML = `
+    ${pageHeroHTML('H2H', 'Historial de enfrentamientos entre jugadores')}
+
+    <div class="page-toolbar">
+<div class="page-toolbar-left">
+
+        <div class="toolbar-group">
+          <div class="toolbar-label">Jugador 1</div>
+          <div class="toolbar-row">
+            <select id="h2h-sA" onchange="renderH2H()">${optionsHTML}</select>
+          </div>
+        </div>
+
+        <div class="toolbar-group">
+          <div class="toolbar-label">Jugador 2</div>
+          <div class="toolbar-row">
+            <select id="h2h-sB" onchange="renderH2H()">${optionsHTML}</select>
+          </div>
+        </div>
+
+        <div class="toolbar-group">
+          <div class="toolbar-label">Temporada</div>
+          <div class="toolbar-row">
+            <select id="h2h-sT" onchange="renderH2H()">
+              <option value="all">Todas</option>
+              <option value="Cocar25">Liga 25</option>
+              <option value="Cocar26A">Liga 26A</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="toolbar-group">
+          <div class="toolbar-label">División</div>
+          <div class="toolbar-row">
+            <select id="h2h-sD" onchange="renderH2H()">
+              <option value="all">Todas</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <div class="player-row">
@@ -1585,6 +2365,298 @@ function renderH2H() {
 }, 50);
 }
 
+// ── STATS PAGE ──
+function renderStats() {
+  const selectedLeague = currentStatsLiga || 'Cocar26A';
+  const selectedDivision = currentStatsDiv || 'ALL';
+
+  const row =
+    leagueStatsSummary.find(r =>
+      String(r.league_id || '') === selectedLeague &&
+      String(r.division || '') === selectedDivision
+    ) || {};
+
+  function n(v) {
+    return Number(v || 0);
+  }
+
+  function fmtInt(v) {
+    return Math.round(n(v)).toLocaleString('es-CL');
+  }
+
+  function fmtPct(v) {
+    const value = n(v);
+    return `${Math.round(value * 100)}%`;
+  }
+
+  function fmtDec(v) {
+    return n(v).toFixed(2);
+  }
+
+  function getRankRows(category) {
+    return leagueStatsRankings
+      .filter(r =>
+        String(r.league_id || '') === selectedLeague &&
+        String(r.division || '') === selectedDivision &&
+        String(r.category || '') === category
+      )
+      .sort((a, b) => n(a.rank) - n(b.rank))
+      .slice(0, 3);
+  }
+
+  function rankCard(title, category, icon, note) {
+    const rows = getRankRows(category);
+
+    const storyHTML = category === 'MR_COMEBACK'
+  ? `<div class="story-seq">
+      <span class="story-chip l">L</span>
+      <span class="story-chip w">W</span>
+      <span class="story-chip w">W</span>
+    </div>`
+  : category === 'MR_FARRA'
+  ? `<div class="story-seq">
+      <span class="story-chip w">W</span>
+      <span class="story-chip l">L</span>
+      <span class="story-chip l">L</span>
+    </div>`
+  : '';
+
+return `
+  <div class="stats-rank-card">
+    <div class="stats-rank-head">
+      <div class="stats-rank-title">${title}</div>
+      ${storyHTML}
+    </div>
+
+        ${
+          rows.length === 0
+            ? `<div class="no-data" style="padding:18px 0;font-size:11px;">Sin datos</div>`
+            : rows.map(r => {
+  let displayValue = r.label || r.value || '—';
+
+  if (category === 'TOP_WIN_RATE') {
+    displayValue = `${Math.round(n(r.value) * 100)}%`;
+  }
+
+  if (category === 'MOST_WINS') {
+    displayValue = fmtInt(r.value);
+  }
+if (category === 'MR_COMEBACK' || category === 'MR_FARRA' || category === 'MR_HAMMER') {
+  displayValue = fmtInt(r.value);
+}
+  return `
+    <div class="stats-rank-row">
+      <div class="stats-rank-pos">${r.rank}</div>
+      <div class="stats-rank-player">${r.player || '—'}</div>
+      <div class="stats-rank-value">${displayValue}</div>
+    </div>
+  `;
+}).join('')
+        }
+
+        ${note ? `<div class="stats-rank-note">${note}</div>` : ''}
+      </div>
+    `;
+  }
+
+  const closedSets = n(row.closed_sets);
+const score = n(row.competitive_score);
+const pct2 = n(row.pct_2s);
+const pct3 = n(row.pct_3s);
+
+function pctOfSets(v) {
+  return n(row.sets_played) > 0 ? `${Math.round((n(v) / n(row.sets_played)) * 100)}%` : '0%';
+}
+
+  document.getElementById('page-stats').innerHTML = `
+    ${pageHeroHTML('LIG Stats', 'Radiografía competitiva de la liga')}
+
+    <div class="page-toolbar">
+      <div class="page-toolbar-left">
+
+        <div class="toolbar-group">
+          <div class="toolbar-label">Temporada</div>
+          <div class="toolbar-row">
+            <select onchange="currentStatsLiga=this.value;renderStats()">
+              <option value="Cocar26A" ${selectedLeague === 'Cocar26A' ? 'selected' : ''}>Cocar 26A · Live</option>
+              <option value="Cocar25" ${selectedLeague === 'Cocar25' ? 'selected' : ''}>Cocar 25</option>
+              <option value="ALL" ${selectedLeague === 'ALL' ? 'selected' : ''}>Histórico</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="toolbar-group">
+          <div class="toolbar-label">División</div>
+          <div class="toolbar-row">
+            <select onchange="currentStatsDiv=this.value;renderStats()">
+              <option value="ALL" ${selectedDivision === 'ALL' ? 'selected' : ''}>Todas</option>
+              <option value="A" ${selectedDivision === 'A' ? 'selected' : ''}>División A</option>
+              <option value="B" ${selectedDivision === 'B' ? 'selected' : ''}>División B</option>
+              <option value="C" ${selectedDivision === 'C' ? 'selected' : ''}>División C</option>
+              <option value="D" ${selectedDivision === 'D' ? 'selected' : ''}>División D</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="stats-section">
+      <div class="stats-section-title">Resumen general</div>
+
+      <div class="stats-summary-grid">
+  <div class="stats-kpi-card">
+    <div>
+      <div class="stats-kpi-label">Partidos</div>
+      <div class="stats-kpi-value">${fmtInt(row.matches_played)}</div>
+      <div class="stats-kpi-sub">${n(row.wo_matches) > 0 ? `+${fmtInt(row.wo_matches)} WO` : 'Jugados reales'}</div>
+    </div>
+  </div>
+
+  <div class="stats-kpi-card">
+    <div>
+      <div class="stats-kpi-label">Sets</div>
+      <div class="stats-kpi-value">${fmtInt(row.sets_played)}</div>
+      <div class="stats-kpi-sub">Sets disputados</div>
+    </div>
+  </div>
+
+  <div class="stats-kpi-card">
+    <div>
+      <div class="stats-kpi-label">Games</div>
+      <div class="stats-kpi-value">${fmtInt(row.games_played)}</div>
+      <div class="stats-kpi-sub">Games totales</div>
+    </div>
+  </div>
+
+  <div class="stats-kpi-card">
+  <div>
+    <div class="stats-kpi-label">3 Sets</div>
+    <div class="stats-kpi-value">${fmtInt(row.matches_3s)}</div>
+    <div class="stats-kpi-sub">${fmtPct(row.pct_3s)} de los partidos</div>
+  </div>
+</div>
+
+  <div class="stats-kpi-card">
+  <div>
+    <div class="stats-kpi-label">Sets cerrados</div>
+    <div class="stats-kpi-value">${fmtInt(closedSets)}</div>
+    <div class="stats-kpi-sub">${fmtPct(row.closed_sets_pct)} · Tight + Tie break</div>
+  </div>
+</div>
+
+  <div class="stats-kpi-card highlight">
+    <div>
+      <div class="stats-kpi-label">Índice LIG</div>
+      <div class="stats-kpi-value">${fmtInt(score)}</div>
+      <div class="stats-kpi-sub">${row.competitive_label || 'Sin datos'}</div>
+    </div>
+  </div>
+</div>
+
+    <div class="stats-section">
+      <div class="stats-section-title">Perfil competitivo</div>
+
+      <div class="stats-profile-grid">
+        <div class="stats-panel">
+          <div class="stats-panel-title">Perfil de partidos</div>
+
+          <div class="stats-bar-row">
+            <div class="stats-bar-label">2 sets</div>
+            <div class="stats-bar-track">
+              <div class="stats-bar-fill" style="width:${Math.round(pct2 * 100)}%;"></div>
+            </div>
+            <div class="stats-bar-value">${fmtPct(row.pct_2s)}</div>
+          </div>
+
+          <div class="stats-bar-row">
+            <div class="stats-bar-label">3 sets</div>
+            <div class="stats-bar-track">
+              <div class="stats-bar-fill" style="width:${Math.round(pct3 * 100)}%;"></div>
+            </div>
+            <div class="stats-bar-value">${fmtPct(row.pct_3s)}</div>
+          </div>
+
+          <div class="stats-mini-split">
+            <div class="stats-mini">
+              <div class="stats-mini-label">Avg sets / partido</div>
+              <div class="stats-mini-value">${fmtDec(row.avg_sets_per_match)}</div>
+            </div>
+            <div class="stats-mini">
+              <div class="stats-mini-label">Avg games / partido</div>
+              <div class="stats-mini-value">${fmtDec(row.avg_games_per_match)}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-panel">
+          <div class="stats-panel-title">Perfil de sets</div>
+
+          <div class="stats-set-row">
+  <div class="stats-set-label">
+    <span class="stats-set-name">Hammer</span>
+    <span class="stats-set-desc">6-0 / 6-1</span>
+  </div>
+  <div class="stats-set-value">${fmtInt(row.hammer_sets)}</div>
+  <div class="stats-set-pct">${pctOfSets(row.hammer_sets)}</div>
+</div>
+
+<div class="stats-set-row">
+  <div class="stats-set-label">
+    <span class="stats-set-name">Cold</span>
+    <span class="stats-set-desc">6-2 / 6-3</span>
+  </div>
+  <div class="stats-set-value">${fmtInt(row.cold_sets)}</div>
+  <div class="stats-set-pct">${pctOfSets(row.cold_sets)}</div>
+</div>
+
+<div class="stats-set-row">
+  <div class="stats-set-label">
+    <span class="stats-set-name">Tight</span>
+    <span class="stats-set-desc">6-4 / 7-5</span>
+  </div>
+  <div class="stats-set-value">${fmtInt(row.tight_sets)}</div>
+  <div class="stats-set-pct">${pctOfSets(row.tight_sets)}</div>
+</div>
+
+<div class="stats-set-row">
+  <div class="stats-set-label">
+    <span class="stats-set-name">Tie break</span>
+    <span class="stats-set-desc">7-6</span>
+  </div>
+  <div class="stats-set-value">${fmtInt(row.tie_break_sets)}</div>
+  <div class="stats-set-pct">${pctOfSets(row.tie_break_sets)}</div>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-section">
+      <div class="stats-section-title">Top performers</div>
+
+      <div class="stats-rank-grid-4">
+        ${rankCard('Top win rate', 'TOP_WIN_RATE', '%', 'Mínimo 3 partidos.')}
+        ${rankCard('Más victorias', 'MOST_WINS', 'W', '')}
+        ${rankCard('Mejor racha histórica', 'BEST_STREAK', '↗', 'Mayor secuencia lograda.')}
+        ${rankCard('Mejor racha actual', 'BEST_CURRENT_STREAK', '🔥', 'Victorias consecutivas activas.')}
+      </div>
+    </div>
+
+    <div class="stats-section">
+      <div class="stats-section-title">Destacados de la liga</div>
+
+      <div class="stats-awards-grid">
+        ${rankCard('Comeback Story', 'MR_COMEBACK', '', 'Gana tras perder el primer set.')}
+${rankCard('Collapse Story', 'MR_FARRA', '', 'Pierde tras ganar el primer set.')}
+        ${rankCard('Tie Break King', 'MR_TIE_BREAK', '7', 'Tie breaks ganados (TB jugados).')}
+        ${rankCard('Mr Hammer Set', 'MR_HAMMER', '6', 'Sets 6-0 / 6-1 ganados.')}
+      </div>
+    </div>
+
+    <div class="foot">© 2026 LIG · Powered by NonData&Co</div>
+  `;
+}
+
 // ── RANK PAGE ──
 function renderRank() {
   const rows = [...rankRows].sort((a,b) => (a.rank_position||999) - (b.rank_position||999));
@@ -1660,14 +2732,7 @@ const divLabel = isReplacement
   }
 
   document.getElementById('page-rank').innerHTML = `
-    <div class="page-header">
-      <div>
-        <div class="page-title">LIG Rank</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px;">
-  Rendimiento reciente ajustado por nivel competitivo
-</div>
-      </div>
-    </div>
+    ${pageHeroHTML('LIG Rank', 'Rendimiento reciente ajustado por nivel competitivo')}
 
     <div class="card-header" style="background:var(--white);border:1px solid var(--border);border-radius:14px;margin-bottom:10px;padding:12px 20px;">
   <div style="width:100%;">
@@ -1747,14 +2812,26 @@ const divLabel = isReplacement
 // ── INIT ──
 async function init() {
   try {
-    const [standings, fixtures, matches, playerRows, summaryRows, rankingRows, leaguePlayerRows] = await Promise.all([
+    const [
+  standings,
+  fixtures,
+  matches,
+  playerRows,
+  summaryRows,
+  rankingRows,
+  leaguePlayerRows,
+  statsSummaryRows,
+  statsRankingRows
+] = await Promise.all([
   fetchSheet('division_standings'),
   fetchSheet('division_fixtures'),
   fetchSheet('app_h2h_matches'),
   fetchSheet('app_players'),
   fetchSheet('app_h2h_summary'),
   fetchSheet('ranking_last14'),
-  fetchSheet('league_players')
+  fetchSheet('league_players'),
+  fetchSheet('league_stats_summary'),
+  fetchSheet('league_stats_rankings')
 ]);
     allStandings = standings;
 allFixtures = fixtures;
@@ -1763,6 +2840,9 @@ players = playerRows;
 h2hSummary = summaryRows;
 rankRows = rankingRows;
 leaguePlayers = leaguePlayerRows;
+leagueStatsSummary = statsSummaryRows;
+leagueStatsRankings = statsRankingRows;
+
 renderLiga();
   } catch(err) {
     document.getElementById('page-liga').innerHTML = `<div class="loading">Error al cargar datos.<br><small>${err.message}</small></div>`;
