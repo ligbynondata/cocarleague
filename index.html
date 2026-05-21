@@ -1195,6 +1195,13 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   font-weight: 650;
   color: var(--text);
 }
+.rank-result-mobile {
+  display: none;
+}
+
+.rank-result-desktop {
+  display: inline;
+}
 
 .div-chip {
   display: inline-flex;
@@ -1255,6 +1262,34 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   color: #991b1b;
 }
 
+.rank-player-score-mobile {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 92px;
+  padding-left: 12px;
+}
+
+.rank-player-score-value {
+  font-size: 20px;
+  font-weight: 850;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.6px;
+}
+
+.rank-player-score-label {
+  font-size: 8px;
+  font-weight: 750;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .45px;
+  margin-top: 4px;
+  line-height: 1;
+}
+
 .rank-empty {
   background: var(--white);
   border: 1px solid var(--border);
@@ -1303,6 +1338,34 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
     padding: 0;
     gap: 13px;
   }
+
+.rank-player-score-mobile {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 78px;
+  padding-left: 8px;
+}
+
+.rank-player-score-value {
+  font-size: 21px;
+  font-weight: 850;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.7px;
+}
+
+.rank-player-score-label {
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .45px;
+  margin-top: 3px;
+  line-height: 1;
+}
 
   .rank-player-avatar,
   .rank-player-initials {
@@ -1355,6 +1418,19 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   font-weight: 650;
   line-height: 1;
   letter-spacing: -0.2px;
+}
+.rank-result-desktop {
+  display: none;
+}
+
+.rank-result-mobile {
+  display: inline;
+}
+
+.rank-result-mix {
+  font-size: 14px;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
 }
 
 .rank-metric-value {
@@ -2881,7 +2957,7 @@ function renderRank() {
     return players.find(x => x.player_name === playerName || x.player === playerName) || {};
   }
 
-  function playerBlockHTML(playerName) {
+  function playerBlockHTML(playerName, scoreText) {
     const p = getPlayerData(playerName);
     const url = p.photo_url || '';
     const div = p.division_actual || p['division_actual'] || p['división_actual'] || '';
@@ -2910,14 +2986,19 @@ const divLabel = isReplacement
       `;
 
     return `
-      <div class="rank-player">
-        ${avatarHTML}
-        <div class="rank-player-info">
-          <span class="rank-player-name">${playerName}</span>
-          <span class="${chipClass}">${divLabel}</span>
-        </div>
-      </div>
-    `;
+  <div class="rank-player">
+    ${avatarHTML}
+    <div class="rank-player-info">
+      <span class="rank-player-name">${playerName}</span>
+      <span class="${chipClass}">${divLabel}</span>
+    </div>
+
+    <div class="rank-player-score-mobile">
+      <span class="rank-player-score-value">${scoreText}</span>
+      <span class="rank-player-score-label">LIG PTS</span>
+    </div>
+  </div>
+`;
   }
 
   function rachaHTML(playerName) {
@@ -2969,11 +3050,13 @@ const divLabel = isReplacement
         <div class="rank-list">
           ${rows.map(r => {
             const pos = Number(r.rank_position || 0);
-            const wins = Number(r.g2||0) + Number(r.g3||0);
-            const losses = Number(r.p3||0) + Number(r.p2||0);
-            const pjRank = `${r.matches_counted||0}/${r.matches_played||0}`;
-            const record = `${wins}-${losses}`;
-            const playerName = r.player || '';
+           const wins = Number(r.g2||0) + Number(r.g3||0);
+const losses = Number(r.p3||0) + Number(r.p2||0);
+const pjRank = `${r.matches_counted||0}/${r.matches_played||0}`;
+const record = `${wins}-${losses}`;
+const resultMix = `${r.g2||0} - ${r.g3||0} - ${r.p3||0} - ${r.p2||0}`;
+const resultMixMobile = `${r.g2||0}-${r.g3||0}-${r.p3||0}-${r.p2||0}`;
+const playerName = r.player || '';
 
             return `
               <div class="rank-row ${rowClass(pos)}">
@@ -2982,16 +3065,19 @@ const divLabel = isReplacement
                 </div>
 
                 <div class="rank-cell player">
-                  ${playerBlockHTML(playerName)}
+                  ${playerBlockHTML(playerName, fmtPoints(r.score_last14))}
                 </div>
 
                 <div class="rank-mobile-stats">
                   <div class="rank-cell">
-                    <div class="rank-metric">
-                      <span class="rank-label">LIG pts</span>
-                      <span class="rank-score">${fmtPoints(r.score_last14)}</span>
-                    </div>
-                  </div>
+  <div class="rank-metric">
+    <span class="rank-label">G2-G3-P3-P2</span>
+    <span class="rank-metric-value rank-result-mix">
+      <span class="rank-result-desktop">${resultMix}</span>
+      <span class="rank-result-mobile">${resultMixMobile}</span>
+    </span>
+  </div>
+</div>
 
                   <div class="rank-cell">
                     <div class="rank-metric">
