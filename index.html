@@ -432,8 +432,40 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   display: flex; align-items: center; justify-content: space-between;
   border-bottom: 1px solid var(--border);
 }
-.card-title { font-size: 11px; font-weight: 700; color: var(--text); letter-spacing: .5px; text-transform: uppercase; }
-.card-meta { font-size: 11px; color: var(--muted); }
+.card-title { 
+  font-size: 11px; 
+  font-weight: 700; 
+  color: var(--text); 
+  letter-spacing: .5px; 
+  text-transform: uppercase; 
+}
+
+.card-title-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-pill-mini {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 19px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .45px;
+  line-height: 1;
+}
+
+.card-meta { 
+  font-size: 11px; 
+  color: var(--muted); 
+}
 
 .standings-table { 
   width: 100%; 
@@ -543,13 +575,27 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .standings-table tbody tr:hover .pos-badge,
-.standings-table tbody tr:hover .pos-other {
+.standings-table tbody tr:hover .pos-other,
+.standings-table tbody tr:hover .pos-replacement {
   transform: scale(1.06);
 }
 .pos-asc-dark { background: #16a34a; color: #fff; }
 .pos-asc { background: #4ade80; color: #14532d; }
 .pos-rel { background: #ef4444; color: #fff; }
 .pos-rel-dark { background: #7f1d1d; color: #fff; }
+.pos-replacement {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--black);
+  color: #fff;
+  border: 1px solid var(--black);
+}
 
 .pts-cell { font-weight: 700; color: var(--text); font-size: 13px; }
 .diff-pos { color: var(--green); font-weight: 600; }
@@ -2074,9 +2120,24 @@ function showPage(page) {
 
 // ── LIGA PAGE ──
 function renderLiga() {
-  const standings = allStandings
-    .filter(r => r.league_id === currentLiga && r.division === currentDiv)
-    .sort((a,b) => (b.pts||0)-(a.pts||0) || (b.diff_games||0)-(a.diff_games||0));
+  const standingsRaw = allStandings
+  .filter(r => r.league_id === currentLiga && r.division === currentDiv);
+
+const standingsFormal = standingsRaw
+  .filter(r => !isReplacementPlayer(r.player, currentLiga))
+  .sort((a,b) => 
+    (b.pts||0) - (a.pts||0) ||
+    (b.diff_games||0) - (a.diff_games||0)
+  );
+
+const standingsReplacement = standingsRaw
+  .filter(r => isReplacementPlayer(r.player, currentLiga))
+  .sort((a,b) => 
+    (b.pts||0) - (a.pts||0) ||
+    (b.diff_games||0) - (a.diff_games||0)
+  );
+
+const standings = [...standingsFormal, ...standingsReplacement];
   const fixtures = allFixtures.filter(r => r.league_id === currentLiga && r.division === currentDiv);
 
   // Group fixtures by fecha
@@ -2123,9 +2184,12 @@ function renderLiga() {
       <div>
         <div class="card">
           <div class="card-header">
-            <span class="card-title">Clasificación</span>
-            <span class="card-meta">${standings.length} jugadores</span>
-          </div>
+  <div class="card-title-wrap">
+    <span class="card-title">Clasificación</span>
+    ${isLive ? `<span class="live-pill-mini">LIVE</span>` : ''}
+  </div>
+  <span class="card-meta">${standings.length} jugadores</span>
+</div>
           <table class="standings-table">
             <thead>
               <tr>
@@ -2137,10 +2201,15 @@ function renderLiga() {
             </thead>
             <tbody>
               ${standings.length===0?`<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--muted)">Sin datos</td></tr>`:
-              standings.map(r => {
-                const pos = r.pos || 0;
-                const div = currentDiv;
-                let posEl;
+              standings.map((r, idx) => {
+                const isReplacement = isReplacementPlayer(r.player, currentLiga);
+const pos = isReplacement ? null : idx + 1;
+const div = currentDiv;
+let posEl;
+
+if (isReplacement) {
+  posEl = `<span class="pos-replacement">R</span>`;
+} else
                 if (div === 'A') {
                   // Division A: medals top 3, red bottom 2
                   if (pos===1) posEl=`<span class="pos-badge pos-1">${pos}</span>`;
