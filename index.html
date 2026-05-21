@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CoCar League</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wt7qdhuegj");
+</script>
+
 <style>
 :root {
   --gold: #C8A600;
@@ -1396,6 +1405,74 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   font-weight: 800 !important;
 }
 
+/* ── POINTS RULE CARD ── */
+.points-rule-card {
+  background: var(--white);
+  border: 1px solid #e8e3d8;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+}
+
+.points-rule-title {
+  font-size: 8px;
+  font-weight: 800;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: .55px;
+  margin-bottom: 7px;
+}
+
+.points-rule-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 10px;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.points-rule-row span {
+  white-space: nowrap;
+}
+
+.points-rule-row strong {
+  font-weight: 800;
+}
+
+.points-rule-note {
+  margin-top: 6px;
+  font-size: 9px;
+  color: var(--muted);
+  line-height: 1.2;
+}
+
+@media (max-width: 600px) {
+  .points-rule-card {
+    padding: 10px 11px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .points-rule-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 8px;
+    font-size: 9.5px;
+  }
+
+  .points-rule-row span {
+    white-space: normal;
+  }
+
+  .points-rule-note {
+    font-size: 8.8px;
+  }
+}
+
 /* ── ADS / SPONSOR CALLOUTS ── */
 .ad-grid {
   display: grid;
@@ -2104,6 +2181,19 @@ function renderLiga() {
             </tbody>
           </table>
                 </div>
+
+       <div class="points-rule-card">
+  <div class="points-rule-title">Reglamento de puntos</div>
+  <div class="points-rule-row">
+    <span><strong>Gana 2 sets:</strong> 3 pts</span>
+    <span><strong>Gana 3 sets:</strong> 2 pts</span>
+    <span><strong>Pierde 3 sets:</strong> 1 pt</span>
+    <span><strong>Pierde 2 sets:</strong> 0 pts</span>
+  </div>
+  <div class="points-rule-note">
+    Desempate: diferencia de games.
+  </div>
+</div>         
 
         <div class="ad-grid">
           <div class="ad-card">
