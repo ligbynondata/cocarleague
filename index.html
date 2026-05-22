@@ -3050,12 +3050,13 @@ const divLabel = isReplacement
         <div class="rank-list">
           ${rows.map(r => {
             const pos = Number(r.rank_position || 0);
-           const wins = Number(r.g2||0) + Number(r.g3||0);
-const losses = Number(r.p3||0) + Number(r.p2||0);
-const pjRank = `${r.matches_counted||0}/${r.matches_played||0}`;
-const record = `${wins}-${losses}`;
-const resultMix = `${r.g2||0} - ${r.g3||0} - ${r.p3||0} - ${r.p2||0}`;
-const resultMixMobile = `${r.g2||0}-${r.g3||0}-${r.p3||0}-${r.p2||0}`;
+           const pjRank = `${r.matches_counted||0}/${r.matches_played||0}`;
+const record = r.record_last14 || '0-0';
+
+const resultMixRaw = r.result_mix_last14 || '0-0-0-0';
+const resultMix = resultMixRaw.replaceAll('-', ' - ');
+const resultMixMobile = resultMixRaw;
+
 const playerName = r.player || '';
 
             return `
