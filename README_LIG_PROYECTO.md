@@ -91,3 +91,27 @@ git status
 git add .
 git commit -m "mensaje del cambio"
 git push
+
+## 7. Inventario de archivos locales
+
+La carpeta local oficial del proyecto es:
+
+`Escritorio / Cocar`
+
+Archivos actuales:
+
+| Archivo / carpeta | Estado | Uso |
+|---|---|---|
+| `index.html` | OFICIAL | Front vivo actual de la app LIG para Cocar League. |
+| `assets/` | OFICIAL | Logos e imágenes usadas por el front. |
+| `README_LIG_PROYECTO.md` | OFICIAL | Documento base de arquitectura y reglas del proyecto. |
+| `index_backup.html` | BACKUP | Copia de seguridad actualizada de `index.html`. |
+| `landing.html` | EN REVISIÓN | Archivo antiguo/experimental. No usar como base oficial sin revisarlo. |
+
+Reglas:
+
+- Todo cambio funcional de la app se hace primero en `index.html`.
+- Después de un cambio importante estable, se puede actualizar `index_backup.html`.
+- `landing.html` no debe usarse como fuente oficial.
+- Si se crea una web pública de LIG, deberá hacerse en un archivo nuevo, probablemente `home.html`.
+- Si se crea un flujo de registro para nuevas comunidades, deberá hacerse en un archivo nuevo, probablemente `registro.html`.
