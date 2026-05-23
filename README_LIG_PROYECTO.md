@@ -115,3 +115,73 @@ Reglas:
 - `landing.html` no debe usarse como fuente oficial.
 - Si se crea una web pública de LIG, deberá hacerse en un archivo nuevo, probablemente `home.html`.
 - Si se crea un flujo de registro para nuevas comunidades, deberá hacerse en un archivo nuevo, probablemente `registro.html`.
+## 8. Arquitectura multicomunidad
+
+LIG debe operar como sistema multicomunidad.
+
+### Backend actual
+
+`PADEL NONDATA` es el backend operativo actual de la comunidad Cocar League.
+
+No debe convertirse en el backend único de todas las comunidades.
+
+### Núcleo global
+
+`LIG_CORE` será el núcleo global futuro de LIG.
+
+Su rol será administrar:
+
+- jugadores globales
+- comunidades
+- relación jugador-comunidad
+- registros e inscripciones
+
+### Backend por comunidad
+
+Cada nueva comunidad deberá tener su propio Sheet operativo basado en una plantilla común.
+
+Ejemplos futuros:
+
+- `LIG_COCAR_OPERATIVO`
+- `LIG_CLUB_X_OPERATIVO`
+- `LIG_EMPRESA_Y_OPERATIVO`
+
+Cada Sheet operativo contendrá sus propias hojas deportivas:
+
+- matches_raw
+- division_standings
+- division_fixtures
+- ranking_last14
+- league_stats_summary
+- league_stats_rankings
+- app_players
+- league_players
+- stats_indiv
+- stats_rachas
+- Apps Script operativo
+
+### Front
+
+El front debe evolucionar hacia un único código parametrizable por comunidad.
+
+Conceptualmente:
+
+`app.html?community=cocar`
+
+`app.html?community=club_x`
+
+Cada comunidad tendrá su propio:
+
+- sheet_id
+- logo
+- nombre visible
+- colores
+- estado
+
+### Regla base
+
+LIG_CORE administra identidad y pertenencia.
+
+Cada Sheet operativo administra competencia.
+
+El front muestra la comunidad seleccionada.
