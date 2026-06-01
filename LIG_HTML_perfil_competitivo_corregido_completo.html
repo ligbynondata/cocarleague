@@ -1159,20 +1159,19 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .rank-score {
-  font-size: 13px;
-  font-weight: 560;
+  font-size: 17px;
+  font-weight: 700;
   color: var(--text);
-  line-height: 20px;
-  letter-spacing: -0.08px;
+  line-height: 1;
+  letter-spacing: -0.2px;
 }
 
 .rank-label {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 11px;
-  min-height: 11px;
-  margin: 0;
+  min-height: 12px;
+  margin-bottom: 5px;
   font-size: 10px;
   font-weight: 600;
   color: var(--muted);
@@ -1185,22 +1184,18 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 .rank-metric {
   text-align: center;
-  display: grid;
-  grid-template-rows: 11px 20px;
-  justify-items: center;
-  align-content: start;
-  row-gap: 5px;
-  min-height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 42px;
 }
 
 .rank-metric-value {
-  font-size: 13px;
-  font-weight: 560;
+  font-size: 14px;
+  font-weight: 650;
   color: var(--text);
-  line-height: 20px;
-  letter-spacing: -0.08px;
 }
-
 .rank-result-mobile {
   display: none;
 }
@@ -1412,34 +1407,19 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   border-left: 1px solid #e7e2d8 !important;
 }
 
-  .rank-metric {
-  display: grid;
-  grid-template-rows: 10px 20px;
-  justify-items: center;
-  align-content: start;
-  row-gap: 4px;
-  min-height: 34px;
-  padding-top: 0;
-}
-
   .rank-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 9px;
-  height: 10px;
-  min-height: 10px;
-  margin: 0;
+  min-height: 11px;
+  margin-bottom: 4px;
   line-height: 1;
 }
 
   .rank-score {
-  font-size: 12px;
-  font-weight: 540;
-  line-height: 20px;
-  letter-spacing: -0.05px;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.2px;
 }
-
 .rank-result-desktop {
   display: none;
 }
@@ -1449,18 +1429,16 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .rank-result-mix {
-  font-size: 11px;
-  font-weight: 540;
-  line-height: 20px;
-  letter-spacing: -0.1px;
+  font-size: 14px;
+  letter-spacing: -0.3px;
   white-space: nowrap;
 }
 
 .rank-metric-value {
-  font-size: 12px;
-  font-weight: 540;
-  line-height: 20px;
-  letter-spacing: -0.05px;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.2px;
 }
 
 .rank-racha-w,
@@ -1470,7 +1448,6 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   padding: 0 8px;
   font-size: 10px;
   font-weight: 650;
-  align-self: center;
 }
 }
 
@@ -2968,20 +2945,14 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  align-items: stretch;
 }
 
 .stats-panel {
   background: var(--white);
   border: 1px solid #e8e3d8;
   border-radius: 14px;
-  padding: 16px 24px 10px;
-  min-height: 206px;
+  padding: 16px 18px 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.025);
-
-  display: grid;
-  grid-template-rows: 24px repeat(4, 34px);
-  row-gap: 3px;
 }
 
 .stats-panel-title {
@@ -2990,17 +2961,15 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   color: var(--text);
   text-transform: uppercase;
   letter-spacing: .35px;
-  margin: 0;
-  align-self: start;
+  margin-bottom: 12px;
 }
 
 .stats-bar-row {
   display: grid;
-  grid-template-columns: 110px minmax(0, 1fr) 48px;
+  grid-template-columns: 92px 1fr 42px;
   align-items: center;
-  gap: 12px;
-  min-height: 34px;
-  margin: 0;
+  gap: 10px;
+  margin-bottom: 13px;
 }
 
 .stats-bar-label {
@@ -3010,23 +2979,21 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   line-height: 1.05;
   text-transform: uppercase;
   letter-spacing: -0.2px;
-  white-space: nowrap;
 }
 
 .stats-bar-label span {
-  display: inline;
+  display: block;
   font-size: 9.5px;
   font-weight: 600;
   color: var(--muted);
   line-height: 1.05;
-  margin-left: 5px;
+  margin-top: 2px;
   text-transform: none;
   letter-spacing: -0.2px;
   white-space: nowrap;
 }
 
 .stats-bar-track {
-  width: 100%;
   height: 6px;
   border-radius: 999px;
   background: #eeeae1;
@@ -3041,22 +3008,20 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 .stats-bar-value {
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 750;
   color: var(--text);
   text-align: right;
-  line-height: 1;
 }
 
 .stats-mini-split {
-  grid-row: 4 / 6;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   border-top: 1px solid #f0eee8;
-  margin-top: 2px;
-  padding-top: 13px;
+  margin-top: 0;
+  padding-top: 10px;
+  min-height: 58px;
   align-items: center;
-  align-self: stretch;
 }
 
 .stats-mini {
@@ -3069,19 +3034,18 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: .35px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .stats-mini-value {
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 18px;
+  font-weight: 750;
   color: var(--text);
-  line-height: 1;
 }
 
 .stats-set-row {
   display: grid;
-  grid-template-columns: 180px minmax(0, 1fr) 48px;
+  grid-template-columns: 118px clamp(220px, 58%, 460px) 42px;
   gap: 12px;
   align-items: center;
   min-height: 34px;
@@ -3900,9 +3864,6 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 const SHEET_ID = '1bTdib3kxhcTXVJlqGuySkcZPpb3NPu7ZFHhV45B_1EI';
 const API = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-// Feature flags de publicación
-const ENABLE_LIG_PLAYERS = false;
-
 let allStandings = [], allFixtures = [], allMatches = [], players = [], h2hSummary = [], rankRows = [], leaguePlayers = [];
 let leagueStatsSummary = [], leagueStatsRankings = [], playerProfiles = [], playerLigEvolution = [], playerRecognitions = [];
 let currentDiv = 'A', currentLiga = 'Cocar26A';
@@ -4019,31 +3980,17 @@ function pageHeroHTML(title, subtitle) {
 // ── SHOW PAGE ──
 function showPage(page) {
   ['liga','h2h','stats','rank','jugadores'].forEach(p => {
-    document.getElementById('page-' + p).style.display = p === page ? '' : 'none';
+    document.getElementById('page-'+p).style.display = p===page ? '' : 'none';
   });
-
-  document.querySelectorAll('.nav-btn').forEach((btn, i) => {
-    btn.classList.toggle('active', ['liga','h2h','stats','rank','jugadores'][i] === page);
+  document.querySelectorAll('.nav-btn').forEach((btn,i) => {
+    btn.classList.toggle('active', ['liga','h2h','stats','rank','jugadores'][i]===page);
   });
-
-  activePage = page;
-
+    activePage = page;
   if (page === 'liga') renderLiga();
   if (page === 'h2h') renderH2H();
   if (page === 'stats') renderStats();
   if (page === 'rank') renderRank();
-
-  if (page === 'jugadores') {
-    if (!ENABLE_LIG_PLAYERS) {
-      document.getElementById('page-jugadores').innerHTML = `
-        ${pageHeroHTML('LIG Players', 'Hoja de vida competitiva del jugador')}
-        <div class="coming-soon">Próximamente</div>
-      `;
-      return;
-    }
-
-    renderJugadores();
-  }
+  if (page === 'jugadores') renderJugadores();
 }
 
 // ── LIGA PAGE ──
@@ -5681,14 +5628,6 @@ let recognitionPageByPlayer = {};
 
 function renderJugadores() {
   const page = document.getElementById('page-jugadores');
-
-  if (!ENABLE_LIG_PLAYERS) {
-    page.innerHTML = `
-      ${pageHeroHTML('LIG Players', 'Hoja de vida competitiva del jugador')}
-      <div class="coming-soon">Próximamente</div>
-    `;
-    return;
-  }
 
   if (!playerProfiles || playerProfiles.length === 0) {
     page.innerHTML = `

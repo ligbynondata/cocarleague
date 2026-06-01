@@ -4414,7 +4414,6 @@ if (!currentLeagueId) throw new Error('No se encontró current_league en current
   );
 }
 
-
 function notifyUser(message) {
   try {
     SpreadsheetApp.getUi().alert(message);
@@ -4947,13 +4946,16 @@ const standingsByPlayerLeagueDiv = indexStandingsByPlayerLeagueDiv_(standings);
   'racha_actual',
 
   // Logros / badges
-  'badge_1',
-  'badge_1_type',
-  'badge_2',
-  'badge_2_type',
-  'badge_3',
-  'badge_3_type',
-  'achievements_count',
+'badge_1',
+'badge_1_type',
+'badge_1_season',
+'badge_2',
+'badge_2_type',
+'badge_2_season',
+'badge_3',
+'badge_3_type',
+'badge_3_season',
+'achievements_count',
 
   // Carrera LIG global
   'match_g',
@@ -5093,13 +5095,21 @@ const role =
   valueProfile_(ap, 'player_role') ||
   '';
 
-const badge1 = '';
-const badge1Type = '';
-const badge2 = '';
-const badge2Type = '';
-const badge3 = '';
-const badge3Type = '';
-const achievementsCount = '';
+const playerAchievements = buildPlayerAchievementBadges_(player);
+
+const badge1 = playerAchievements[0]?.label || '';
+const badge1Type = playerAchievements[0]?.type || '';
+const badge1Season = playerAchievements[0]?.season || '';
+
+const badge2 = playerAchievements[1]?.label || '';
+const badge2Type = playerAchievements[1]?.type || '';
+const badge2Season = playerAchievements[1]?.season || '';
+
+const badge3 = playerAchievements[2]?.label || '';
+const badge3Type = playerAchievements[2]?.type || '';
+const badge3Season = playerAchievements[2]?.season || '';
+
+const achievementsCount = playerAchievements.length;
 
     const photoUrl = valueProfile_(ap, 'photo_url');
     const divisionActual =
