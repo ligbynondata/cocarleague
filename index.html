@@ -530,6 +530,11 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 .standings-table td:nth-child(2) { text-align: left; }
 .standings-table tr:last-child td { border-bottom: none; }
+
+.replacement-row-first td {
+  border-top: 4px solid var(--bg);
+}
+
 .standings-table tbody tr {
   transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
   cursor: default;
@@ -2660,7 +2665,19 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   .standings-table td { font-size: 11px; padding: 7px 4px; }
   .standings-table td:nth-child(2) { font-size: 12px; }
   .fraction { font-size: 10px; }
-  .pos-badge { width: 20px; height: 20px; font-size: 9px; }
+
+  .pos-badge,
+  .pos-replacement {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .replacement-row-first td {
+    border-top: 4px solid var(--bg);
+  }
+
   .card-header { padding: 12px 14px 10px; }
 .match-row {
   grid-template-columns: minmax(0, 1.25fr) auto minmax(0, 1.25fr);
@@ -4131,14 +4148,16 @@ const standings = [...standingsFormal, ...standingsReplacement];
               ${standings.length===0?`<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--muted)">Sin datos</td></tr>`:
               standings.map((r, idx) => {
                 const isReplacement = isReplacementPlayer(r.player, currentLiga);
-const pos = isReplacement ? null : idx + 1;
-const div = currentDiv;
-let posEl;
+                const prevIsReplacement = idx > 0 ? isReplacementPlayer(standings[idx - 1].player, currentLiga) : false;
+                const rowClass = isReplacement ? (prevIsReplacement ? 'replacement-row' : 'replacement-row replacement-row-first') : '';
 
-if (isReplacement) {
-  posEl = `<span class="pos-replacement">R</span>`;
-} else
-                if (div === 'A') {
+                const pos = isReplacement ? null : idx + 1;
+                const div = currentDiv;
+                let posEl;
+
+                if (isReplacement) {
+                  posEl = `<span class="pos-replacement">R</span>`;
+                } else if (div === 'A') {
                   // Division A: medals top 3, red bottom 2
                   if (pos===1) posEl=`<span class="pos-badge pos-1">${pos}</span>`;
                   else if (pos===2) posEl=`<span class="pos-badge pos-2">${pos}</span>`;
@@ -4159,11 +4178,13 @@ if (isReplacement) {
                   else if (pos===8) posEl=`<span class="pos-badge pos-rel-dark">${pos}</span>`;
                   else posEl=`<span class="pos-other">${pos}</span>`;
                 }
+
                 const diff = r.diff_games || 0;
                 const diffEl = diff>0?`<span class="diff-pos">+${diff}</span>`:
                                diff<0?`<span class="diff-neg">${diff}</span>`:
                                `<span style="color:var(--muted)">0</span>`;
-                return `<tr>
+
+                return `<tr class="${rowClass}">
                   <td>${posEl}</td>
                   <td style="font-weight:600;color:var(--text);text-align:left;font-size:13px;">${displayPlayerName(r.player, currentLiga)}</td>
                   <td style="font-size:14px;font-weight:800;color:var(--text)">${r.pts||0}</td>
