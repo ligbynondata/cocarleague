@@ -1385,10 +1385,16 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   }
 
   .rank-player-name {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-}
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.35px;
+    line-height: 1.05;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
 
   .div-chip {
   font-size: 10px;
@@ -1481,20 +1487,20 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 /* ── LIG PLAYERS PAGE ── */
 .player-profile-hero {
-  --hero-avatar: 96px;
+  --hero-avatar: 84px;
 
   background: var(--white);
   color: var(--text);
   border: 1px solid #e8e3d8;
   border-radius: 18px;
-  padding: 20px 26px;
+  padding: 10px 22px;
   margin-bottom: 14px;
-  min-height: 196px;
+  min-height: 146px;
 
   display: grid;
-  grid-template-columns: 178px 1px minmax(0, 1fr) 1px 154px;
+  grid-template-columns: 154px 1px minmax(0, 1fr) 1px 136px;
   align-items: center;
-  gap: 24px;
+  gap: 18px;
 
   box-shadow: 0 2px 8px rgba(0,0,0,0.025);
   position: relative;
@@ -1503,7 +1509,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 .player-profile-divider {
   width: 1px;
-  height: 124px;
+  height: 104px;
   background: linear-gradient(
     to bottom,
     transparent,
@@ -1521,10 +1527,10 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-rows: var(--hero-avatar) auto;
+  grid-template-rows: 92px 28px;
   justify-items: center;
   align-items: center;
-  gap: 10px;
+  gap: 0;
   min-width: 0;
 }
 
@@ -1534,29 +1540,63 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   height: var(--hero-avatar);
   border-radius: 50%;
   flex-shrink: 0;
-  border: 3px solid rgba(200,166,0,0.95);
-  background: #f2f1ed;
+  border: 2.5px solid rgba(200,166,0,0.95);
   object-fit: cover;
+  align-self: center;
+}
+
+.player-profile-avatar {
+  background: #f2f1ed;
   box-shadow:
     inset 0 2px 10px rgba(255,255,255,0.65),
     0 4px 10px rgba(0,0,0,0.16);
 }
 
 .player-profile-initials {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--gold);
-  font-size: 24px;
+  font-size: 23px;
   font-weight: 850;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(255,255,255,0.96) 0%, rgba(246,244,239,0.9) 42%, rgba(232,226,214,0.72) 100%);
+  box-shadow:
+    inset 0 2px 8px rgba(255,255,255,0.86),
+    inset 0 -10px 18px rgba(0,0,0,0.035),
+    0 5px 12px rgba(0,0,0,0.13);
+  overflow: hidden;
+}
+
+.player-profile-initials::before {
+  content: '';
+  position: absolute;
+  width: 38%;
+  height: 38%;
+  top: 17%;
+  border-radius: 50%;
+  background: rgba(200,166,0,0.08);
+  pointer-events: none;
+}
+
+.player-profile-initials::after {
+  content: '';
+  position: absolute;
+  width: 66%;
+  height: 34%;
+  bottom: 10%;
+  border-radius: 50% 50% 38% 38%;
+  background: rgba(200,166,0,0.055);
+  pointer-events: none;
 }
 
 .player-profile-name {
   width: 100%;
-  max-width: 168px;
-  font-size: 24px;
+  max-width: 148px;
+  font-size: 22px;
   font-weight: 850;
-  letter-spacing: -0.7px;
+  letter-spacing: -0.65px;
   line-height: 1.05;
   color: var(--text);
   text-align: center;
@@ -1564,6 +1604,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   overflow: visible;
   text-overflow: unset;
   word-break: normal;
+  align-self: start;
 }
 
 /* Centro: palmarés */
@@ -1580,10 +1621,10 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 .player-recognition-shelf {
   width: 100%;
   min-width: 0;
-  height: 152px;
+  height: 132px;
   display: grid;
-  grid-template-rows: 18px 1fr 14px;
-  gap: 7px;
+  grid-template-rows: 16px 108px 8px;
+  gap: 0;
   align-items: center;
   overflow: hidden;
 }
@@ -1592,12 +1633,12 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  font-size: 9px;
+  gap: 9px;
+  font-size: 10px;
   font-weight: 900;
   color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: 1.8px;
+  letter-spacing: 1.9px;
   line-height: 1;
 }
 
@@ -1621,28 +1662,29 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 .player-recognition-window {
   position: relative;
   min-width: 0;
-  height: 114px;
+  height: 108px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 34px;
 }
 
 .player-recognition-grid {
-  width: min(100%, 492px);
-  height: 114px;
+  width: min(100%, 468px);
+  height: 108px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 14px;
   align-items: center;
   justify-items: center;
 }
 
 .player-recognition-item {
-  width: 140px;
+  width: 136px;
   min-width: 0;
-  height: 114px;
+  height: 108px;
   display: grid;
-  grid-template-rows: 82px 17px 11px;
+  grid-template-rows: 70px 18px 16px;
   align-items: center;
   justify-items: center;
   gap: 2px;
@@ -1651,8 +1693,8 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .player-recognition-media {
-  width: 134px;
-  height: 82px;
+  width: 130px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1690,41 +1732,43 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .player-recognition-img.medal {
-  width: 88px;
-  height: 88px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
 }
 
 .player-recognition-img.promotion {
-  width: 124px;
-  height: 70px;
+  width: 110px;
+  height: 62px;
 }
 
 .player-recognition-img.special {
-  width: 72px;
-  height: 70px;
+  width: 64px;
+  height: 62px;
 }
 
 .player-recognition-title {
   width: 100%;
-  font-size: 10px;
+  font-size: 11.5px;
   font-weight: 850;
-  line-height: 1.05;
+  line-height: 1.08;
   color: var(--text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  align-self: end;
 }
 
 .player-recognition-season {
   width: 100%;
-  font-size: 7.8px;
+  font-size: 11px;
   font-weight: 750;
-  line-height: 1;
+  line-height: 1.05;
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  align-self: start;
 }
 
 .player-recognition-nav {
@@ -1755,11 +1799,11 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .player-recognition-nav.prev {
-  left: 0;
+  left: 4px;
 }
 
 .player-recognition-nav.next {
-  right: 0;
+  right: 4px;
 }
 
 .player-recognition-nav.disabled {
@@ -1792,31 +1836,74 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .player-recognition-ghost {
-  opacity: .42;
-  border: 1.4px dashed #d1c7b5;
+  opacity: .72;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.6px dashed rgba(200,166,0,0.42);
   background:
-    linear-gradient(135deg, rgba(255,255,255,0.74), rgba(242,241,237,0.42));
+    linear-gradient(135deg, rgba(255,255,255,0.94), rgba(242,241,237,0.62));
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.82),
-    0 2px 5px rgba(0,0,0,0.035);
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -8px 18px rgba(200,166,0,0.035),
+    0 4px 10px rgba(0,0,0,0.045);
+}
+
+.player-recognition-ghost::before {
+  content: '';
+  display: block;
+  opacity: .34;
+  background: rgba(200,166,0,0.38);
+}
+
+.player-recognition-ghost::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  border: 1px solid rgba(200,166,0,0.08);
+  pointer-events: none;
 }
 
 .player-recognition-ghost.placeholder-medal {
-  width: 78px;
-  height: 78px;
+  width: 66px;
+  height: 66px;
   border-radius: 50%;
 }
 
+.player-recognition-ghost.placeholder-medal::before {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 8px rgba(200,166,0,0.08),
+    0 0 0 16px rgba(200,166,0,0.035);
+}
+
 .player-recognition-ghost.placeholder-promotion {
-  width: 110px;
-  height: 58px;
-  border-radius: 13px;
+  width: 96px;
+  height: 50px;
+  border-radius: 12px;
+}
+
+.player-recognition-ghost.placeholder-promotion::before {
+  width: 62px;
+  height: 30px;
+  border-radius: 9px;
+  clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
 }
 
 .player-recognition-ghost.placeholder-special {
-  width: 64px;
-  height: 58px;
+  width: 56px;
+  height: 50px;
   clip-path: polygon(50% 0%, 90% 22%, 90% 72%, 50% 100%, 10% 72%, 10% 22%);
+}
+
+.player-recognition-ghost.placeholder-special::before {
+  width: 30px;
+  height: 30px;
+  clip-path: polygon(50% 0%, 62% 35%, 100% 35%, 70% 56%, 82% 94%, 50% 72%, 18% 94%, 30% 56%, 0% 35%, 38% 35%);
 }
 
 .player-recognition-ghost.placeholder-neutral {
@@ -1829,10 +1916,11 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 .player-profile-side {
   position: relative;
   z-index: 1;
-  min-width: 138px;
+  min-width: 136px;
+  height: 120px;
   display: grid;
-  grid-template-rows: 70px 1px 50px;
-  gap: 10px;
+  grid-template-rows: 55px 1px 55px;
+  gap: 5px;
   align-items: center;
   justify-items: end;
 }
@@ -1845,63 +1933,66 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0,0,0,0.09),
+    rgba(200,166,0,0.28),
     transparent
   );
 }
 
 .profile-rank-metric {
+  width: 100%;
   display: grid;
+  grid-template-rows: 12px 36px;
+  gap: 4px;
   justify-items: end;
-  align-content: end;
+  align-content: center;
 }
 
 .profile-rank-metric.top {
   grid-row: 1;
-  height: 70px;
-  grid-template-rows: 42px 12px;
-  gap: 2px;
+  height: 55px;
 }
 
 .profile-rank-metric.bottom {
   grid-row: 3;
-  height: 50px;
-  grid-template-rows: 30px 12px;
-  gap: 2px;
+  height: 55px;
 }
 
 .profile-rank-number {
-  font-size: 42px;
+  grid-row: 2;
+  font-size: 39px;
   font-weight: 900;
-  line-height: .86;
+  line-height: 1;
   letter-spacing: -1px;
   color: var(--gold);
   text-align: right;
-  align-self: center;
-  transform: translateY(2px);
+  align-self: start;
+  transform: none;
 }
 
 .profile-rank-points {
-  font-size: 35px;
+  grid-row: 2;
+  font-size: 37px;
   font-weight: 900;
-  line-height: .9;
+  line-height: 1;
   letter-spacing: -1px;
   color: var(--gold);
   text-align: right;
-  align-self: end;
+  align-self: start;
+  transform: none;
 }
 
 .profile-rank-label,
 .profile-rank-points-label {
-  font-size: 8px;
+  grid-row: 1;
+  font-size: 9px;
   font-weight: 850;
   color: var(--muted);
   text-transform: uppercase;
-  letter-spacing: .55px;
+  letter-spacing: .65px;
   line-height: 1;
   text-align: right;
   align-self: end;
-  transform: translateY(-1px);
+  transform: none;
 }
 
 /* Bloques de contenido */
@@ -1912,6 +2003,38 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   text-transform: uppercase;
   letter-spacing: .5px;
   margin: 16px 0 9px;
+}
+
+.profile-block-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 16px 0 9px;
+}
+
+.profile-block-title-row .profile-block-title {
+  margin: 0;
+}
+
+.profile-context-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .45px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.profile-context-pill.replacement {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
 }
 
 .profile-block-title:first-of-type {
@@ -2176,7 +2299,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 @media (max-width: 600px) {
   .player-profile-hero {
     --hero-avatar: 56px;
-    grid-template-columns: 72px 1px minmax(0, 1fr) 56px;
+    grid-template-columns: 72px 1px minmax(0, 1fr) 68px;
     gap: 7px;
     padding: 8px 9px;
     border-radius: 14px;
@@ -2246,37 +2369,39 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   }
 
   .player-recognition-heading {
-    gap: 3px;
-    font-size: 5.2px;
-    letter-spacing: .72px;
+    gap: 4px;
+    font-size: 6.4px;
+    letter-spacing: .9px;
   }
 
   .player-recognition-heading::before,
   .player-recognition-heading::after {
-    width: 13px;
+    width: 15px;
   }
 
   .player-recognition-window {
     height: 61px;
+    padding: 0;
   }
 
   .player-recognition-grid {
     width: 100%;
+    max-width: 156px;
     height: 61px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4px;
+    gap: 3px;
   }
 
   .player-recognition-item {
-    width: 100%;
+    width: 50px;
     height: 61px;
-    grid-template-rows: 43px 9px 6px;
+    grid-template-rows: 40px 10px 7px;
     gap: 1px;
   }
 
   .player-recognition-media {
-    width: 100%;
-    height: 43px;
+    width: 50px;
+    height: 40px;
   }
   .player-recognition-item.asset-missing .player-recognition-media::after {
   width: 34px;
@@ -2285,29 +2410,30 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
   .player-recognition-img.medal {
-    width: 39px;
-    height: 39px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
   }
 
   .player-recognition-img.promotion {
-    width: 64px;
-    height: 36px;
+    width: 48px;
+    height: 28px;
   }
 
   .player-recognition-img.special {
-    width: 41px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
   }
 
   .player-recognition-title {
-    font-size: 5.2px;
+    font-size: 5.8px;
     font-weight: 850;
     line-height: 1;
   }
 
   .player-recognition-season {
-    font-size: 4.7px;
+    font-size: 5.9px;
+    font-weight: 750;
     line-height: 1;
   }
 
@@ -2330,33 +2456,33 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   }
 
   .player-recognition-ghost.placeholder-medal {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
   }
 
   .player-recognition-ghost.placeholder-promotion {
-    width: 54px;
-    height: 29px;
+    width: 44px;
+    height: 24px;
     border-radius: 7px;
   }
 
   .player-recognition-ghost.placeholder-special {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
   }
 
   .player-recognition-ghost.placeholder-neutral {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
   }
 
   .player-profile-side {
-    min-width: 52px;
-    width: 52px;
+    min-width: 68px;
+    width: 68px;
     height: 78px;
     display: grid;
-    grid-template-rows: 33px 1px 33px;
-    gap: 5px;
+    grid-template-rows: 34px 1px 34px;
+    gap: 4px;
     justify-items: end;
     align-items: center;
   }
@@ -2367,41 +2493,56 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   }
 
   .profile-rank-metric {
+    width: 100%;
     display: grid;
+    grid-template-rows: 8px 22px;
+    gap: 2px;
     justify-items: end;
-    align-content: end;
+    align-content: center;
   }
 
   .profile-rank-metric.top {
     grid-row: 1;
-    height: 33px;
-    grid-template-rows: 22px 7px;
-    gap: 2px;
+    height: 34px;
   }
 
   .profile-rank-metric.bottom {
     grid-row: 3;
-    height: 33px;
-    grid-template-rows: 22px 7px;
-    gap: 2px;
+    height: 34px;
   }
 
-  .profile-rank-number,
-  .profile-rank-points {
-    font-size: 21px;
-    line-height: .9;
+  .profile-rank-number {
+    grid-row: 2;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
     letter-spacing: -0.6px;
     transform: none;
-    align-self: end;
+    align-self: start;
+    white-space: nowrap;
+  }
+
+  .profile-rank-points {
+    grid-row: 2;
+    font-size: 21px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.7px;
+    transform: none;
+    align-self: start;
+    white-space: nowrap;
   }
 
   .profile-rank-label,
   .profile-rank-points-label {
-    font-size: 5px;
+    grid-row: 1;
+    font-size: 5.5px;
+    font-weight: 850;
     line-height: 1;
     letter-spacing: .18px;
     transform: none;
     align-self: end;
+    white-space: nowrap;
   }
 
   .profile-kpi-grid-6 {
@@ -2438,6 +2579,433 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
   .profile-row {
     font-size: 11px;
+  }
+}
+
+/* ── LIG PLAYERS COMPETITIVE PROFILE ── */
+.profile-competitive-panel {
+  margin-bottom: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.profile-competitive-card {
+  min-width: 0;
+  padding: 16px 18px;
+  background: var(--white);
+  border: 1px solid #e8e3d8;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+  overflow: hidden;
+}
+
+.profile-competitive-card + .profile-competitive-card {
+  border-left: 1px solid #e8e3d8;
+}
+
+.profile-competitive-title {
+  font-size: 11px;
+  font-weight: 850;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .45px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.profile-competitive-subtitle {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.15;
+  margin-bottom: 13px;
+}
+
+.profile-competitive-body {
+  min-width: 0;
+}
+
+.profile-competitive-card {
+  display: block;
+}
+
+.profile-competitive-body {
+  min-width: 0;
+}
+
+.wr-condition-grid {
+  height: 158px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: end;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.wr-condition-item {
+  min-width: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 22px 1fr 16px 14px;
+  justify-items: center;
+  align-items: end;
+  text-align: center;
+}
+
+.wr-condition-pct {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.wr-condition-bar {
+  width: 12px;
+  height: 78px;
+  border-radius: 999px;
+  background: #ebe7df;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.035);
+}
+
+.wr-condition-fill {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 999px;
+  background: var(--gold);
+}
+
+.wr-condition-label {
+  max-width: 100%;
+  font-size: 9px;
+  font-weight: 900;
+  color: var(--text);
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wr-condition-total {
+  font-size: 9px;
+  font-weight: 650;
+  color: var(--muted);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.profile-competitive-placeholder {
+  height: 100%;
+  border: 1px dashed rgba(200,166,0,0.35);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(242,241,237,0.45));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.35;
+  padding: 18px;
+}
+
+@media (max-width: 600px) {
+  .profile-competitive-panel {
+    grid-template-columns: 1fr;
+    border-radius: 14px;
+    margin-bottom: 12px;
+  }
+
+  .profile-competitive-card {
+    padding: 14px 13px;
+  }
+
+    .wr-condition-grid {
+    height: auto;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: 4px;
+    row-gap: 0;
+    padding-top: 2px;
+    align-items: end;
+  }
+
+  .wr-condition-item {
+    height: auto;
+    grid-template-rows: 12px 48px 16px 10px;
+    row-gap: 2px;
+  }
+
+  .wr-condition-bar {
+    height: 48px;
+    width: 8px;
+  }
+
+  .wr-condition-pct {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+
+  .wr-condition-label {
+    font-size: 7px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: 0.15px;
+    white-space: nowrap;
+  }
+
+  .wr-condition-total {
+    font-size: 7px;
+    font-weight: 700;
+    color: #5f6672;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .profile-competitive-card + .profile-competitive-card {
+    border-left: none;
+    border-top: 1px solid #eee7d8;
+  }
+
+  .profile-competitive-title {
+    font-size: 10.5px;
+    margin-bottom: 4px;
+  }
+
+  .profile-competitive-subtitle {
+    font-size: 9.5px;
+    margin-bottom: 11px;
+  }
+}
+
+/* ── LIG PLAYERS MATCH HISTORY ── */
+.profile-match-history-panel {
+  background: var(--white);
+  border: 1px solid #e8e3d8;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+}
+
+.profile-match-history-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.profile-match-history-title {
+  font-size: 11px;
+  font-weight: 850;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .45px;
+  line-height: 1;
+}
+
+.profile-match-history-subtitle {
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.profile-match-history-toggle {
+  border: 1px solid rgba(200,166,0,0.42);
+  background: #fffdf4;
+  color: var(--gold);
+  border-radius: 999px;
+  padding: 6px 11px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .15px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.profile-match-history-toggle:hover {
+  background: #fff8dc;
+  border-color: rgba(200,166,0,0.62);
+}
+
+.profile-match-history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.profile-match-history-table th {
+  padding: 0 10px 9px;
+  border-bottom: 1px solid #ebe6dc;
+  font-size: 9px;
+  font-weight: 850;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .45px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.profile-match-history-table td {
+  padding: 10px;
+  border-bottom: 1px solid #f1eee7;
+  font-size: 12px;
+  font-weight: 560;
+  color: #444;
+  vertical-align: middle;
+}
+
+.profile-match-history-table tr:last-child td {
+  border-bottom: none;
+}
+
+.profile-match-division-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 6px;
+  background: #f6f3ea;
+  border: 1px solid #e8dfcc;
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.profile-match-result-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.profile-match-result-pill.win {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.profile-match-result-pill.loss {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.profile-match-score {
+  font-weight: 750 !important;
+  color: var(--text) !important;
+  white-space: nowrap;
+}
+
+.profile-match-history-empty {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 8px 0 2px;
+}
+
+.profile-match-history-mobile {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .profile-match-history-panel {
+    padding: 13px;
+    border-radius: 14px;
+  }
+
+  .profile-match-history-head {
+    margin-bottom: 10px;
+  }
+
+  .profile-match-history-table-wrap {
+    display: none;
+  }
+
+  .profile-match-history-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .profile-match-card {
+    position: relative;
+    border: 1px solid #eee7d8;
+    background: #fbfaf6;
+    border-radius: 12px;
+    padding: 9px 11px 8px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 68px;
+    column-gap: 8px;
+  }
+
+  .profile-match-card-top {
+    display: contents;
+  }
+
+  .profile-match-card-date {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 10px;
+    font-weight: 850;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: .25px;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .profile-match-card-line {
+    grid-column: 1;
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 2px;
+  }
+
+  .profile-match-card-line.muted {
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+
+  .profile-match-card-score {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    align-self: center;
+    justify-self: end;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 850;
+    color: var(--text);
+    text-align: right;
+    line-height: 1;
+    transform: translateX(-9px);
+    white-space: nowrap;
+  }
+
+  .profile-match-result-pill {
+    min-width: 58px;
+    height: 18px;
+    font-size: 9px;
+    padding: 0 8px;
+    align-self: flex-start;
+    margin-top: 0;
   }
 }
 
@@ -3918,10 +4486,16 @@ const SHEET_ID = '1bTdib3kxhcTXVJlqGuySkcZPpb3NPu7ZFHhV45B_1EI';
 const API = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
 // Feature flags de publicación
-const ENABLE_LIG_PLAYERS = false;
+const IS_LOCAL_ENV =
+  location.hostname === 'localhost' ||
+  location.hostname === '127.0.0.1' ||
+  location.protocol === 'file:';
+
+const ENABLE_LIG_PLAYERS = IS_LOCAL_ENV;
 
 let allStandings = [], allFixtures = [], allMatches = [], players = [], h2hSummary = [], rankRows = [], leaguePlayers = [];
-let leagueStatsSummary = [], leagueStatsRankings = [], playerProfiles = [], playerLigEvolution = [], playerRecognitions = [];
+let leagueStatsSummary = [], leagueStatsRankings = [], playerProfiles = [], playerLigEvolution = [], playerRecognitions = [], playerMatchLog = [];
+let currentPlayerContexts = [];
 let currentDiv = 'A', currentLiga = 'Cocar26A';
 let currentStatsLiga = 'Cocar26A';
 let currentStatsDiv = 'ALL';
@@ -3986,16 +4560,24 @@ function avHTML(url, name, borderColor) {
 }
 function avHTMLA(url, name) { return avHTML(url, name, 'var(--gold)'); }
 function avHTMLB(url, name) { return avHTML(url, name, 'var(--black)'); }
+function normalizeKey(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function normalizeDivision(value) {
+  return String(value || '').trim().toUpperCase();
+}
+
 function isReplacementPlayer(playerName, leagueId) {
   if (!playerName || !leagueId) return false;
 
-  const targetPlayer = String(playerName).trim().toLowerCase();
-  const targetLeague = String(leagueId).trim().toLowerCase();
+  const targetPlayer = normalizeKey(playerName);
+  const targetLeague = normalizeKey(leagueId);
 
   return leaguePlayers.some(lp => {
-    const lpLeague = String(lp.league_id || '').trim().toLowerCase();
-    const lpPlayer = String(lp.player_name || '').trim().toLowerCase();
-    const lpRole = String(lp.role || '').trim().toLowerCase();
+    const lpLeague = normalizeKey(lp.league_id);
+    const lpPlayer = normalizeKey(lp.player_name);
+    const lpRole = normalizeKey(lp.role);
 
     return (
       lpLeague === targetLeague &&
@@ -4005,20 +4587,49 @@ function isReplacementPlayer(playerName, leagueId) {
   });
 }
 
-function displayPlayerName(playerName, leagueId) {
+function isReplacementPlayerInDivision(playerName, leagueId, division) {
+  if (!playerName || !leagueId || !division) return false;
+
+  const targetPlayer = normalizeKey(playerName);
+  const targetLeague = normalizeKey(leagueId);
+  const targetDivision = normalizeDivision(division);
+
+  const hasContextData = Array.isArray(currentPlayerContexts) && currentPlayerContexts.length > 0;
+
+  if (hasContextData) {
+    return currentPlayerContexts.some(ctx => {
+      const ctxPlayer = normalizeKey(ctx.player);
+      const ctxLeague = normalizeKey(ctx.current_league_id);
+      const ctxDivision = normalizeDivision(ctx.stats_division);
+      const isReplacement = Number(ctx.is_replacement || 0) === 1;
+
+      return (
+        ctxPlayer === targetPlayer &&
+        ctxLeague === targetLeague &&
+        ctxDivision === targetDivision &&
+        isReplacement
+      );
+    });
+  }
+
+  // Fallback antiguo, solo si aún no cargó current_player_contexts.
+  return isReplacementPlayer(playerName, leagueId);
+}
+
+function displayPlayerName(playerName, leagueId, division) {
   if (!playerName) return '—';
 
-  return isReplacementPlayer(playerName, leagueId)
+  return isReplacementPlayerInDivision(playerName, leagueId, division)
     ? `${playerName} <span style="font-weight:500;color:var(--muted);font-size:11px;">(R)</span>`
     : playerName;
 }
 
-function displayPairName(pairDisplay, leagueId) {
+function displayPairName(pairDisplay, leagueId, division) {
   if (!pairDisplay) return '—';
 
   return String(pairDisplay)
     .split('/')
-    .map(name => displayPlayerName(name.trim(), leagueId))
+    .map(name => displayPlayerName(name.trim(), leagueId, division))
     .join(' / ');
 }
 function pageHeroHTML(title, subtitle) {
@@ -4069,14 +4680,14 @@ function renderLiga() {
   .filter(r => r.league_id === currentLiga && r.division === currentDiv);
 
 const standingsFormal = standingsRaw
-  .filter(r => !isReplacementPlayer(r.player, currentLiga))
+  .filter(r => !isReplacementPlayerInDivision(r.player, currentLiga, currentDiv))
   .sort((a,b) => 
     (b.pts||0) - (a.pts||0) ||
     (b.diff_games||0) - (a.diff_games||0)
   );
 
 const standingsReplacement = standingsRaw
-  .filter(r => isReplacementPlayer(r.player, currentLiga))
+  .filter(r => isReplacementPlayerInDivision(r.player, currentLiga, currentDiv))
   .sort((a,b) => 
     (b.pts||0) - (a.pts||0) ||
     (b.diff_games||0) - (a.diff_games||0)
@@ -4147,8 +4758,10 @@ const standings = [...standingsFormal, ...standingsReplacement];
             <tbody>
               ${standings.length===0?`<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--muted)">Sin datos</td></tr>`:
               standings.map((r, idx) => {
-                const isReplacement = isReplacementPlayer(r.player, currentLiga);
-                const prevIsReplacement = idx > 0 ? isReplacementPlayer(standings[idx - 1].player, currentLiga) : false;
+                const isReplacement = isReplacementPlayerInDivision(r.player, currentLiga, currentDiv);
+const prevIsReplacement = idx > 0
+  ? isReplacementPlayerInDivision(standings[idx - 1].player, currentLiga, currentDiv)
+  : false;
                 const rowClass = isReplacement ? (prevIsReplacement ? 'replacement-row' : 'replacement-row replacement-row-first') : '';
 
                 const pos = isReplacement ? null : idx + 1;
@@ -4260,12 +4873,12 @@ const standings = [...standingsFormal, ...standingsReplacement];
                 ${matches.map(m => {
                   const played = !!m.score_display;
                   return `<div class="match-row">
-                    <div class="match-pair">${displayPairName(m.pair1_display, currentLiga)}</div>
+                    <div class="match-pair">${displayPairName(m.pair1_display, currentLiga, currentDiv)}</div>
                     ${played
                       ? `<div class="match-score">${m.score_display}</div>`
                       : `<div class="match-pending">⏱ Pendiente</div>`
                     }
-                    <div class="match-pair right">${displayPairName(m.pair2_display, currentLiga)}</div>
+                    <div class="match-pair right">${displayPairName(m.pair2_display, currentLiga, currentDiv)}</div>
                   </div>`;
                 }).join('')}
               </div>`;
@@ -5046,7 +5659,7 @@ function renderStats() {
         .filter(r =>
           normalizeLeagueKey(r.league_id) === normalizeLeagueKey(selectedLeague) &&
           String(r.division || '').toUpperCase() === div &&
-          !isReplacementPlayer(r.player, selectedLeague)
+          !isReplacementPlayerInDivision(r.player, selectedLeague, div)
         )
         .sort((a, b) =>
           n(b.pts) - n(a.pts) ||
@@ -5779,32 +6392,7 @@ function renderJugadores() {
       </div>
     </div>
 
-    <div class="profile-block-title">Temporada actual</div>
-<div class="profile-kpi-grid profile-kpi-grid-6 current">
-  ${profileKpi('División', p.division_actual || '-', boldDivisionSeason(p.division_seasons_label || 'Temporada actual'))}
-  ${profileKpi(
-  'Posición tabla',
-  ordinalPosition(p.division_table_position),
-  p.division_position_zone || '-',
-  zoneClass(p.division_position_zone)
-)}
-  ${profileKpi('Puntos acumulados', p.division_table_points ?? '-', boldPointsMix(p.division_points_mix || '-'))}
-  ${profileKpi(
-  'Match G-P',
-  p.division_table_record || '-',
-  playedWR(sumValues(p.division_table_record?.split('-')?.[0], p.division_table_record?.split('-')?.[1]), p.division_table_match_wr || '-')
-)}
-  ${profileKpi(
-  'Sets G-P',
-  p.division_table_sets_record || '-',
-  playedWR(sumValues(p.division_table_sets_record?.split('-')?.[0], p.division_table_sets_record?.split('-')?.[1]), p.division_table_sets_wr || '-')
-)}
-  ${profileKpi(
-  'Games G-P',
-  p.division_table_games_record || '-',
-  playedWR(sumValues(p.division_table_games_record?.split('-')?.[0], p.division_table_games_record?.split('-')?.[1]), p.division_table_games_wr || '-')
-)}
-</div>
+    ${currentSeasonContextsHTML(p.player)}
 
 <div class="profile-block-title">LIG Stats (Histórico)</div>
 <div class="profile-kpi-grid profile-kpi-grid-6 career">
@@ -5836,6 +6424,10 @@ ${profileKpi(
 ${profileKpi('Comeback / Collapse', `${p.cbs_total || 0}-${p.farra_total || 0}`, comebackCollapseStoryHTML())}
 </div>
 
+${playerCompetitiveProfileHTML(p)}
+
+${playerRecentMatchesHTML(p.player)}
+
         <div class="lig-evolution-panel">
       <div class="lig-evolution-head">
         <div>
@@ -5855,18 +6447,6 @@ ${profileKpi('Comeback / Collapse', `${p.cbs_total || 0}-${p.farra_total || 0}`,
         </div>
 
         <div class="lig-chart-x-label">PARTIDOS</div>
-      </div>
-    </div>
-
-    <div class="stats-profile-grid" style="margin-bottom:12px;">
-      <div class="stats-panel">
-        <div class="stats-panel-title">Perfil de partidos</div>
-        ${buildPlayerMatchProfileHTML(p)}
-      </div>
-
-      <div class="stats-panel">
-        <div class="stats-panel-title">Perfil de sets</div>
-        ${buildPlayerSetProfileHTML(p)}
       </div>
     </div>
 
@@ -5913,6 +6493,182 @@ ${profileKpi('Comeback / Collapse', `${p.cbs_total || 0}-${p.farra_total || 0}`,
   `;
 
   requestAnimationFrame(() => renderLigEvolutionChart(p));
+}
+
+function playerCompetitiveProfileHTML(p) {
+  return `
+    <div class="profile-block-title">Perfil competitivo</div>
+
+    <div class="profile-competitive-panel">
+      <div class="profile-competitive-card">
+        <div class="profile-competitive-title">Perfil de partidos</div>
+        <div class="profile-competitive-subtitle">Cómo se resuelven sus partidos</div>
+
+        <div class="profile-competitive-body">
+          ${buildPlayerMatchProfileHTML(p)}
+        </div>
+      </div>
+
+      <div class="profile-competitive-card">
+        <div class="profile-competitive-title">Perfil de sets</div>
+        <div class="profile-competitive-subtitle">Tipo de sets que más juega</div>
+
+        <div class="profile-competitive-body">
+          ${buildPlayerSetProfileHTML(p)}
+        </div>
+      </div>
+
+      <div class="profile-competitive-card">
+        <div class="profile-competitive-title">WR por condición</div>
+        <div class="profile-competitive-subtitle">Rendimiento según formato de partido y tipo de set</div>
+
+        <div class="profile-competitive-body">
+          ${buildPlayerWrConditionHTML(p)}
+        </div>
+      </div>
+
+      <div class="profile-competitive-card">
+        <div class="profile-competitive-title">Métrica avanzada</div>
+        <div class="profile-competitive-subtitle">Espacio reservado para siguiente lectura competitiva</div>
+
+        <div class="profile-competitive-body">
+          ${profileCompetitivePlaceholderHTML()}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+let showAllPlayerMatches = false;
+
+function playerRecentMatchesHTML(playerName) {
+  const rows = getPlayerMatchHistory(playerName);
+
+  if (!rows.length) {
+    return `
+      <div class="profile-match-history-panel">
+        <div class="profile-match-history-head">
+          <div class="profile-match-history-title">Últimos 5 partidos</div>
+        </div>
+        <div class="profile-match-history-empty">No hay partidos disponibles para este jugador.</div>
+      </div>
+    `;
+  }
+
+  const visibleRows = showAllPlayerMatches ? rows : rows.slice(0, 5);
+  const hasMore = rows.length > 5;
+
+  return `
+    <div class="profile-match-history-panel">
+      <div class="profile-match-history-head">
+        <div>
+          <div class="profile-match-history-title">Últimos 5 partidos</div>
+          <div class="profile-match-history-subtitle">${rows.length} partidos registrados</div>
+        </div>
+
+        ${hasMore ? `
+          <button
+            type="button"
+            class="profile-match-history-toggle"
+            onclick="togglePlayerMatchHistory()"
+          >
+            ${showAllPlayerMatches ? 'Ver últimos 5' : 'Ver todos'}
+          </button>
+        ` : ''}
+      </div>
+
+      <div class="profile-match-history-table-wrap">
+        <table class="profile-match-history-table">
+          <thead>
+            <tr>
+              <th>Liga / Fecha</th>
+              <th>Div.</th>
+              <th>Partner</th>
+              <th>Rivales</th>
+              <th>Resultado</th>
+              <th>Marcador</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${visibleRows.map(match => playerMatchHistoryRowHTML(match)).join('')}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="profile-match-history-mobile">
+        ${visibleRows.map(match => playerMatchHistoryCardHTML(match)).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function getPlayerMatchHistory(playerName) {
+  const target = String(playerName || '').trim().toLowerCase();
+
+  return playerMatchLog
+    .filter(row => String(row.player || '').trim().toLowerCase() === target)
+    .sort((a, b) => Number(b.chronological_index || 0) - Number(a.chronological_index || 0));
+}
+
+function togglePlayerMatchHistory() {
+  showAllPlayerMatches = !showAllPlayerMatches;
+  renderJugadores();
+}
+
+function playerResultPillHTML(result) {
+  const r = String(result || '').trim().toUpperCase();
+  const isWin = r === 'W';
+
+  return `
+    <span class="profile-match-result-pill ${isWin ? 'win' : 'loss'}">
+      ${isWin ? 'Victoria' : 'Derrota'}
+    </span>
+  `;
+}
+
+function leagueShortLabel(leagueId) {
+  const value = String(leagueId || '').trim();
+
+  if (value === 'Cocar25') return 'C25';
+  if (value === 'Cocar26A') return 'C26A';
+
+  return value || '-';
+}
+
+function playerMatchLeagueRoundLabel(match) {
+  const league = leagueShortLabel(match.campeonato);
+  const fecha = match.fecha || '-';
+
+  return `${league} - F${fecha}`;
+}
+
+function playerMatchHistoryRowHTML(match) {
+  return `
+    <tr>
+      <td>${playerMatchLeagueRoundLabel(match)}</td>
+      <td><span class="profile-match-division-chip">${match.division || '-'}</span></td>
+      <td>${match.partner || '-'}</td>
+      <td>${match.opp_1 || '-'} / ${match.opp_2 || '-'}</td>
+      <td>${playerResultPillHTML(match.match_result)}</td>
+      <td class="profile-match-score">${match.score_display || '-'}</td>
+    </tr>
+  `;
+}
+
+function playerMatchHistoryCardHTML(match) {
+  return `
+    <div class="profile-match-card">
+      <div class="profile-match-card-top">
+        <div class="profile-match-card-date">${playerMatchLeagueRoundLabel(match)} · División ${match.division || '-'}</div>
+        ${playerResultPillHTML(match.match_result)}
+      </div>
+
+      <div class="profile-match-card-line">Con <strong>${match.partner || '-'}</strong></div>
+      <div class="profile-match-card-line muted">vs ${match.opp_1 || '-'} / ${match.opp_2 || '-'}</div>
+
+      <div class="profile-match-card-score">${match.score_display || '-'}</div>
+    </div>
+  `;
 }
 
 let ligEvolutionChartInstance = null;
@@ -6291,7 +7047,7 @@ function playerRecognitionShelfHTML(p) {
     <div class="player-recognition-shelf">
       <div class="player-recognition-heading">
         <span class="player-recognition-heading-mark">⌁</span>
-        <span>Palmarés</span>
+        <span>Logros</span>
         <span class="player-recognition-heading-mark">⌁</span>
       </div>
 
@@ -6332,6 +7088,8 @@ function playerRecognitionShelfHTML(p) {
 }
 
 function buildRecognitionGalleryItems(realItems) {
+  const safeRealItems = Array.isArray(realItems) ? realItems : [];
+
   const structuralPlaceholders = [
     {
       kind: 'placeholder',
@@ -6356,19 +7114,20 @@ function buildRecognitionGalleryItems(realItems) {
     }
   ];
 
-  const items = [...realItems, ...structuralPlaceholders];
+  const items = [...safeRealItems];
+  const usedInCurrentBlock = items.length % 3;
 
-  while (items.length % 3 !== 0) {
-    items.push({
-      kind: 'placeholder',
-      type: 'neutral',
-      label: '',
-      season: '',
-      visualType: 'placeholder-neutral'
-    });
+  if (items.length === 0) {
+    return [...structuralPlaceholders];
   }
 
-  return items;
+  if (usedInCurrentBlock === 0) {
+    return [...items, ...structuralPlaceholders];
+  }
+
+  const placeholdersToCompleteBlock = structuralPlaceholders.slice(usedInCurrentBlock);
+
+  return [...items, ...placeholdersToCompleteBlock];
 }
 
 function chunkRecognitionItems(items, size) {
@@ -6572,6 +7331,49 @@ function profileMatchBarRow(label, value, total) {
   `;
 }
 
+function wrConditionItemHTML(label, wins, losses, unit) {
+  const w = profileNum(wins);
+  const l = profileNum(losses);
+  const total = w + l;
+  const pct = total > 0 ? Math.round((w / total) * 100) : 0;
+  const pctLabel = total > 0 ? `${pct}%` : '-';
+
+  return `
+    <div class="wr-condition-item">
+      <div class="wr-condition-pct">${pctLabel}</div>
+
+      <div class="wr-condition-bar">
+        <div class="wr-condition-fill" style="height:${pct}%;"></div>
+      </div>
+
+      <div class="wr-condition-label">${label}</div>
+      <div class="wr-condition-total">${total} ${unit}</div>
+    </div>
+  `;
+}
+
+function buildPlayerWrConditionHTML(p) {
+  return `
+    <div class="wr-condition-grid">
+      ${wrConditionItemHTML('2 sets', p.pg_2s, p.pp_2s, 'PJ')}
+      ${wrConditionItemHTML('3 sets', p.pg_3s, p.pp_3s, 'PJ')}
+      ${wrConditionItemHTML('Hammer', p.hammer_total_g, p.hammer_total_p, 'sets')}
+      ${wrConditionItemHTML('Cold', p.cold_total_g, p.cold_total_p, 'sets')}
+      ${wrConditionItemHTML('Tight', p.tight_total_g, p.tight_total_p, 'sets')}
+      ${wrConditionItemHTML('Tie break', p.tb_total_g, p.tb_total_p, 'sets')}
+    </div>
+  `;
+}
+
+function profileCompetitivePlaceholderHTML() {
+  return `
+    <div class="profile-competitive-placeholder">
+      Nueva métrica disponible para<br>
+      perfil de presión, clutch o consistencia.
+    </div>
+  `;
+}
+
 function buildPlayerMatchProfileHTML(p) {
   const total2S = profileNum(p.tot_2s);
   const total3S = profileNum(p.tot_3s);
@@ -6622,8 +7424,8 @@ function profileSetRowHTML(name, desc, value, total) {
 }
 
 function buildPlayerSetProfileHTML(p) {
-  const hammer = profileNum(p.hard_sets_g) + profileNum(p.hard_sets_p);
-  const cold = profileNum(p.easy_sets_g) + profileNum(p.easy_sets_p);
+  const hammer = profileNum(p.hammer_total_g) + profileNum(p.hammer_total_p);
+  const cold = profileNum(p.cold_total_g) + profileNum(p.cold_total_p);
   const tight = profileNum(p.tight_total_g) + profileNum(p.tight_total_p);
   const tieBreak = profileNum(p.tb_total_g) + profileNum(p.tb_total_p);
 
@@ -6723,36 +7525,228 @@ function comebackCollapseStoryHTML() {
   `;
 }
 
+function getCurrentPlayerContexts(playerName) {
+  const targetPlayer = normalizeKey(playerName);
+
+  return currentPlayerContexts
+    .filter(ctx => normalizeKey(ctx.player) === targetPlayer)
+    .map(ctx => ({
+      player: String(ctx.player || '').trim(),
+      leagueId: String(ctx.current_league_id || '').trim(),
+      role: String(ctx.role || '').trim(),
+      statsDivision: normalizeDivision(ctx.stats_division),
+      isReplacement: Number(ctx.is_replacement || 0) === 1,
+      tablePositionEnabled: Number(ctx.table_position_enabled || 0) === 1,
+      contextLabel: String(ctx.context_label || '').trim(),
+      contextOrder: Number(ctx.context_order || 999)
+    }))
+    .filter(ctx => ctx.leagueId && ctx.statsDivision)
+    .sort((a, b) =>
+      a.contextOrder - b.contextOrder ||
+      a.statsDivision.localeCompare(b.statsDivision)
+    );
+}
+
+function getContextMatchRows(playerName, leagueId, division) {
+  const targetPlayer = normalizeKey(playerName);
+  const targetLeague = String(leagueId || '').trim();
+  const targetDivision = normalizeDivision(division);
+
+  return playerMatchLog.filter(row =>
+    normalizeKey(row.player) === targetPlayer &&
+    String(row.campeonato || '').trim() === targetLeague &&
+    normalizeDivision(row.division) === targetDivision
+  );
+}
+
+function getContextStandingRow(playerName, leagueId, division) {
+  const targetPlayer = normalizeKey(playerName);
+  const targetLeague = String(leagueId || '').trim();
+  const targetDivision = normalizeDivision(division);
+
+  return allStandings.find(row =>
+    normalizeKey(row.player) === targetPlayer &&
+    String(row.league_id || '').trim() === targetLeague &&
+    normalizeDivision(row.division) === targetDivision
+  ) || null;
+}
+
+function contextWinRate(wins, total) {
+  const w = Number(wins || 0);
+  const t = Number(total || 0);
+
+  if (t <= 0) return '-';
+
+  return `WR ${Math.round((w / t) * 100)}%`;
+}
+
+function buildCurrentSeasonContextStats(ctx) {
+  const rows = getContextMatchRows(ctx.player, ctx.leagueId, ctx.statsDivision);
+  const standing = getContextStandingRow(ctx.player, ctx.leagueId, ctx.statsDivision);
+
+  const matchWins = rows.reduce((acc, r) => acc + Number(r.won_match || 0), 0);
+  const matchLosses = rows.reduce((acc, r) => acc + Number(r.lost_match || 0), 0);
+  const matches = matchWins + matchLosses;
+
+  const setsWon = rows.reduce((acc, r) => acc + Number(r.sets_won || 0), 0);
+  const setsLost = rows.reduce((acc, r) => acc + Number(r.sets_lost || 0), 0);
+  const setsPlayed = setsWon + setsLost;
+
+  const gamesWon = rows.reduce((acc, r) => acc + Number(r.games_won || 0), 0);
+  const gamesLost = rows.reduce((acc, r) => acc + Number(r.games_lost || 0), 0);
+  const gamesPlayed = gamesWon + gamesLost;
+
+  const g2 = rows.reduce((acc, r) => acc + Number(r.won_2s || 0), 0);
+  const g3 = rows.reduce((acc, r) => acc + Number(r.won_3s || 0), 0);
+  const p3 = rows.reduce((acc, r) => acc + Number(r.lost_3s || 0), 0);
+
+  const points = rows.reduce((acc, r) => {
+    return acc +
+      Number(r.won_2s || 0) * 3 +
+      Number(r.won_3s || 0) * 2 +
+      Number(r.lost_3s || 0) * 1;
+  }, 0);
+
+  const tablePosition = ctx.tablePositionEnabled
+    ? Number(standing?.official_pos || standing?.pos || 0)
+    : 0;
+
+  return {
+    division: ctx.statsDivision,
+    isReplacement: ctx.isReplacement,
+    tablePositionEnabled: ctx.tablePositionEnabled,
+    tablePosition,
+    points,
+    g2,
+    g3,
+    p3,
+    matchRecord: `${matchWins}-${matchLosses}`,
+    matches,
+    matchWR: contextWinRate(matchWins, matches),
+    setsRecord: `${setsWon}-${setsLost}`,
+    setsPlayed,
+    setsWR: contextWinRate(setsWon, setsPlayed),
+    gamesRecord: `${gamesWon}-${gamesLost}`,
+    gamesPlayed,
+    gamesWR: contextWinRate(gamesWon, gamesPlayed)
+  };
+}
+
+function contextPositionSubtext(stats) {
+  if (stats.isReplacement) return 'No compite por tabla';
+
+  const pos = Number(stats.tablePosition || 0);
+
+  if (!pos) return '-';
+  if (pos <= 2) return 'Zona ascenso';
+  if (pos >= 7) return 'Zona descenso';
+
+  return 'Zona permanencia';
+}
+
+function currentSeasonContextBlockHTML(ctx) {
+  const stats = buildCurrentSeasonContextStats(ctx);
+
+  return `
+    <div class="profile-block-title-row">
+      <div class="profile-block-title">Temporada actual</div>
+      ${stats.isReplacement ? '<span class="profile-context-pill replacement">Reemplazo</span>' : ''}
+    </div>
+
+    <div class="profile-kpi-grid profile-kpi-grid-6 current">
+      ${profileKpi(
+        'División',
+        stats.division || '-',
+        stats.isReplacement ? 'Participación reemplazo' : 'Participación oficial'
+      )}
+
+      ${profileKpi(
+        'Posición tabla',
+        stats.tablePositionEnabled ? ordinalPosition(stats.tablePosition) : '-',
+        contextPositionSubtext(stats),
+        stats.isReplacement ? '' : (
+          Number(stats.tablePosition || 0) >= 7 ? 'red' :
+          Number(stats.tablePosition || 0) <= 2 ? 'green' :
+          ''
+        )
+      )}
+
+      ${profileKpi(
+        'Puntos acumulados',
+        stats.points || '-',
+        `G2:${stats.g2} · G3:${stats.g3} · P3:${stats.p3}`
+      )}
+
+      ${profileKpi(
+        'Match G-P',
+        stats.matchRecord,
+        playedWR(stats.matches, stats.matchWR)
+      )}
+
+      ${profileKpi(
+        'Sets G-P',
+        stats.setsRecord,
+        playedWR(stats.setsPlayed, stats.setsWR)
+      )}
+
+      ${profileKpi(
+        'Games G-P',
+        stats.gamesRecord,
+        playedWR(stats.gamesPlayed, stats.gamesWR)
+      )}
+    </div>
+  `;
+}
+
+function currentSeasonContextsHTML(playerName) {
+  const contexts = getCurrentPlayerContexts(playerName);
+
+  if (!contexts.length) {
+    return `
+      <div class="profile-block-title">Temporada actual</div>
+      <div class="rank-empty">No hay contexto activo para este jugador.</div>
+    `;
+  }
+
+  return contexts
+    .map(ctx => currentSeasonContextBlockHTML(ctx))
+    .join('');
+}
+
 // ── INIT ──
 async function init() {
   try {
     const [
-      standings,
-      fixtures,
-      matches,
-      playerRows,
-      summaryRows,
-      rankingRows,
-      leaguePlayerRows,
-      statsSummaryRows,
-      statsRankingRows,
-      playerProfileRows,
-      playerLigEvolutionRows,
-      playerRecognitionRows
-    ] = await Promise.all([
-      fetchSheet('division_standings'),
-      fetchSheet('division_fixtures'),
-      fetchSheet('app_h2h_matches'),
-      fetchSheet('app_players'),
-      fetchSheet('app_h2h_summary'),
-      fetchSheet('ranking_last14'),
-      fetchSheet('league_players'),
-      fetchSheet('league_stats_summary'),
-      fetchSheet('league_stats_rankings'),
-      fetchSheet('app_player_profiles'),
-      fetchSheet('app_player_lig_evolution'),
-      fetchSheet('app_player_recognitions')
-    ]);
+  standings,
+  fixtures,
+  matches,
+  playerRows,
+  summaryRows,
+  rankingRows,
+  leaguePlayerRows,
+  statsSummaryRows,
+  statsRankingRows,
+  playerProfileRows,
+  playerLigEvolutionRows,
+  playerRecognitionRows,
+  playerMatchLogRows,
+  currentPlayerContextRows
+] = await Promise.all([
+  fetchSheet('division_standings'),
+  fetchSheet('division_fixtures'),
+  fetchSheet('app_h2h_matches'),
+  fetchSheet('app_players'),
+  fetchSheet('app_h2h_summary'),
+  fetchSheet('ranking_last14'),
+  fetchSheet('league_players'),
+  fetchSheet('league_stats_summary'),
+  fetchSheet('league_stats_rankings'),
+  fetchSheet('app_player_profiles'),
+  fetchSheet('app_player_lig_evolution'),
+  fetchSheet('app_player_recognitions'),
+  fetchSheet('player_match_log'),
+  fetchSheet('current_player_contexts')
+]);
 
     allStandings = standings;
     allFixtures = fixtures;
@@ -6766,6 +7760,8 @@ async function init() {
     playerProfiles = playerProfileRows;
     playerLigEvolution = playerLigEvolutionRows;
     playerRecognitions = playerRecognitionRows;
+    playerMatchLog = playerMatchLogRows;
+currentPlayerContexts = currentPlayerContextRows;
 
     renderLiga();
   } catch(err) {
