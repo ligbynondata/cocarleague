@@ -2010,17 +2010,49 @@ body {
 
 @media (max-width: 760px) {
   .rank-list {
-    gap: 6px;
+    gap: 8px;
   }
 
   .rank-row {
     display: block;
     min-height: auto;
     border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
   }
 
   .rank-row:hover {
     transform: none;
+  }
+
+  .rank-row.top-1,
+  .rank-row.top-2,
+  .rank-row.top-3 {
+    min-height: 126px;
+  }
+
+  .rank-row.top-1 {
+    border-color: rgba(200,166,0,0.48);
+    box-shadow:
+      var(--shadow-card),
+      inset 4px 0 0 #d4af37,
+      inset 0 0 0 1px rgba(200,166,0,0.10);
+  }
+
+  .rank-row.top-2 {
+    border-color: rgba(150,156,164,0.34);
+    box-shadow:
+      var(--shadow-card),
+      inset 4px 0 0 #b9c0c8,
+      inset 0 0 0 1px rgba(160,168,180,0.09);
+  }
+
+  .rank-row.top-3 {
+    border-color: rgba(201,145,82,0.42);
+    box-shadow:
+      var(--shadow-card),
+      inset 4px 0 0 #c99152,
+      inset 0 0 0 1px rgba(201,145,82,0.10);
   }
 
   .rank-cell {
@@ -2031,59 +2063,70 @@ body {
 
   .rank-cell.position {
     position: absolute;
-    top: 18px;
-    left: 16px;
-    z-index: 2;
+    top: 17px;
+    left: 15px;
+    z-index: 3;
   }
 
   .rank-cell.player {
-    padding: 12px 14px 10px 66px;
+    padding: 12px 14px 10px 64px;
   }
 
   .rank-player {
     border: none;
     background: transparent;
+    box-shadow: none;
     padding: 0;
-    gap: 13px;
+    gap: 12px;
   }
 
-.rank-player-score-mobile {
-  margin-left: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  min-width: 78px;
-  padding-left: 8px;
-}
+  .rank-player-score-mobile {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    min-width: 78px;
+    padding-left: 8px;
+  }
 
-.rank-player-score-value {
-  font-size: 21px;
-  font-weight: 850;
-  color: var(--text);
-  line-height: 1;
-  letter-spacing: -0.7px;
-}
+  .rank-player-score-value {
+    font-size: 22px;
+    font-weight: 950;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: -0.8px;
+  }
 
-.rank-player-score-label {
-  font-size: 8px;
-  font-weight: 700;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: .45px;
-  margin-top: 3px;
-  line-height: 1;
-}
+  .rank-player-score-label {
+    font-size: 7.5px;
+    font-weight: 850;
+    color: rgba(17,17,17,0.52);
+    text-transform: uppercase;
+    letter-spacing: .45px;
+    margin-top: 3px;
+    line-height: 1;
+  }
 
   .rank-player-avatar,
   .rank-player-initials {
+    width: 52px;
+    height: 52px;
+  }
+
+  .rank-row.top-1 .rank-player-avatar,
+  .rank-row.top-1 .rank-player-initials,
+  .rank-row.top-2 .rank-player-avatar,
+  .rank-row.top-2 .rank-player-initials,
+  .rank-row.top-3 .rank-player-avatar,
+  .rank-row.top-3 .rank-player-initials {
     width: 56px;
     height: 56px;
   }
 
   .rank-player-name {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 850;
     letter-spacing: -0.35px;
     line-height: 1.05;
     white-space: normal;
@@ -2093,93 +2136,101 @@ body {
     overflow-wrap: anywhere;
   }
 
+  .rank-row.top-1 .rank-player-name,
+  .rank-row.top-2 .rank-player-name,
+  .rank-row.top-3 .rank-player-name {
+    font-size: 19px;
+    font-weight: 900;
+  }
+
   .div-chip {
-  font-size: 10px;
-  padding: 3px 7px;
-  border-radius: 5px;
-  min-width: 24px;
-}
+    font-size: 9.5px;
+    padding: 3px 7px;
+    border-radius: 6px;
+    min-width: 24px;
+    font-weight: 800;
+  }
 
   .rank-mobile-stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid #ebe6dc;
-  padding: 8px 8px 9px;
-  align-items: center;
-}
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid rgba(30,30,30,0.06);
+    padding: 8px 8px 9px;
+    align-items: center;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.32), rgba(250,248,242,0.34));
+  }
 
-.rank-mobile-stats .rank-cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 6px;
-  min-width: 0;
-}
+  .rank-mobile-stats .rank-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5px;
+    min-width: 0;
+  }
 
-.rank-mobile-stats .rank-cell + .rank-cell {
-  border-left: 1px solid #e7e2d8 !important;
-}
+  .rank-mobile-stats .rank-cell + .rank-cell {
+    border-left: 1px solid rgba(30,30,30,0.06) !important;
+  }
 
   .rank-metric {
-  display: grid;
-  grid-template-rows: 10px 20px;
-  justify-items: center;
-  align-content: start;
-  row-gap: 4px;
-  min-height: 34px;
-  padding-top: 0;
-}
+    display: grid;
+    grid-template-rows: 10px 20px;
+    justify-items: center;
+    align-content: start;
+    row-gap: 4px;
+    min-height: 34px;
+    padding-top: 0;
+  }
 
   .rank-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9px;
-  height: 10px;
-  min-height: 10px;
-  margin: 0;
-  line-height: 1;
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    height: 10px;
+    min-height: 10px;
+    margin: 0;
+    line-height: 1;
+    font-weight: 850;
+    color: rgba(17,17,17,0.50);
+    letter-spacing: .25px;
+    white-space: nowrap;
+  }
 
-  .rank-score {
-  font-size: 12px;
-  font-weight: 540;
-  line-height: 20px;
-  letter-spacing: -0.05px;
-}
+  .rank-result-desktop {
+    display: none;
+  }
 
-.rank-result-desktop {
-  display: none;
-}
+  .rank-result-mobile {
+    display: inline;
+  }
 
-.rank-result-mobile {
-  display: inline;
-}
+  .rank-result-mix {
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 20px;
+    letter-spacing: -0.1px;
+    white-space: nowrap;
+  }
 
-.rank-result-mix {
-  font-size: 11px;
-  font-weight: 540;
-  line-height: 20px;
-  letter-spacing: -0.1px;
-  white-space: nowrap;
-}
+  .rank-metric-value {
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 20px;
+    letter-spacing: -0.05px;
+    color: var(--text);
+  }
 
-.rank-metric-value {
-  font-size: 12px;
-  font-weight: 540;
-  line-height: 20px;
-  letter-spacing: -0.05px;
-}
-
-.rank-racha-w,
-.rank-racha-l {
-  min-width: 38px;
-  height: 20px;
-  padding: 0 8px;
-  font-size: 10px;
-  font-weight: 650;
-  align-self: center;
-}
+  .rank-racha-w,
+  .rank-racha-l {
+    min-width: 40px;
+    height: 21px;
+    padding: 0 8px;
+    font-size: 10px;
+    font-weight: 850;
+    align-self: center;
+  }
 }
 
 /* ── LIG PLAYERS PAGE ── */
