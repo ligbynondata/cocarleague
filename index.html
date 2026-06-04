@@ -5466,6 +5466,18 @@ body {
   }
 }
 
+/* ── FIX LIG STATS CAROUSEL · prevent 4 cards from wrapping 2x2 on landscape ── */
+@media (min-width: 761px) and (max-width: 900px) {
+  #page-stats .stats-official-carousel .stats-rank-grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  #page-stats .stats-official-carousel .stats-rank-card {
+    min-width: 0;
+  }
+}
+
 </style>
 </head>
 <body>
