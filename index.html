@@ -2146,6 +2146,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-bottom: 12px;
+  align-items: start;
 }
 
 .profile-panel {
@@ -2154,6 +2155,19 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   border-radius: 14px;
   padding: 16px 18px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+}
+
+/* Cards hermanas: Rendimiento por división + Rachas */
+.profile-section-grid > .profile-panel {
+  padding: 14px 18px 14px;
+}
+
+.profile-section-grid > .profile-panel .profile-panel-title {
+  margin-bottom: 10px;
+}
+
+.profile-section-grid > .profile-panel .profile-row {
+  min-height: 29px;
 }
 
 .profile-panel.dark {
@@ -2692,27 +2706,296 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .wr-condition-total {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 650;
   color: var(--muted);
   line-height: 1;
   white-space: nowrap;
 }
 
-.profile-competitive-placeholder {
+.pressure-index-layout {
+  height: 158px;
+  min-height: 158px;
+  display: grid;
+  grid-template-columns: 48% 52%;
+  gap: 10px;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.pressure-gauge-area {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: 126px 1fr;
+  align-items: end;
+  justify-items: center;
+  padding-top: 14px;
+}
+
+.pressure-gauge-shell {
+  position: relative;
+  width: 100%;
+  max-width: 226px;
+  height: 108px;
+  overflow: visible;
+}
+
+.pressure-gauge-score-top {
+  position: absolute;
+  left: 50%;
+  top: -26px;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 27px;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.8px;
+  text-align: center;
+}
+
+.pressure-gauge-svg {
+  width: 100%;
   height: 100%;
-  border: 1px dashed rgba(200,166,0,0.35);
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(242,241,237,0.45));
+  display: block;
+}
+
+.pressure-gauge-arc-bg {
+  fill: none;
+  stroke: #ebe7df;
+  stroke-width: 11;
+  stroke-linecap: round;
+}
+
+.pressure-gauge-arc-fill {
+  fill: none;
+  stroke: url(#pressureGaugeGradient);
+  stroke-width: 11;
+  stroke-linecap: round;
+  transition: stroke-dashoffset .35s ease;
+}
+
+.pressure-gauge-hub {
+  fill: #242424;
+}
+
+.pressure-gauge-center {
+  position: absolute;
+  left: 50%;
+  top: 69px;
+  width: 128px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.pressure-gauge-label {
+  margin-bottom: 4px;
+  font-size: 9px;
+  font-weight: 850;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .35px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pressure-gauge-dot {
+  display: none;
+}
+
+.pressure-gauge-caption {
+  width: 100%;
+  max-width: 224px;
+  font-size: 8px;
+  font-weight: 650;
+  color: var(--muted);
+  line-height: 1.15;
+  text-align: center;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-top: -13px;
+}
+
+.pressure-components-area {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: repeat(4, 30px);
+  gap: 6px;
+  align-content: center;
+  align-self: stretch;
+  padding-right: 12px;
+}
+
+.pressure-component-row {
+  min-width: 0;
+  border: 1px solid #eee6d9;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, #fffdf8 0%, #fbfaf6 100%);
+  padding: 0 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 34px;
+  align-items: center;
+  column-gap: 10px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.82),
+    0 1px 3px rgba(0,0,0,0.018);
+}
+
+.pressure-component-main {
+  min-width: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  gap: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.pressure-component-label {
+  font-size: 10px;
+  font-weight: 900;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .25px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pressure-component-sample {
+  font-size: 9px;
+  font-weight: 750;
+  color: #5f6672;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pressure-component-label::after {
+  content: '·';
+  margin-left: 6px;
+  color: #b9b1a4;
+  font-weight: 900;
+}
+
+.pressure-component-score {
+  font-size: 14px;
+  font-weight: 950;
+  color: var(--text);
+  line-height: 1;
+  text-align: right;
+  letter-spacing: -0.25px;
+}
+
+.pressure-index-layout.low .pressure-gauge-value,
+.pressure-index-layout.warn .pressure-gauge-value,
+.pressure-index-layout.mid .pressure-gauge-value,
+.pressure-index-layout.strong .pressure-gauge-value,
+.pressure-index-layout.elite .pressure-gauge-value {
+  color: var(--text);
+}
+
+.pressure-index-layout.empty .pressure-gauge-value {
   color: var(--muted);
-  font-size: 11px;
-  font-weight: 650;
-  line-height: 1.35;
-  padding: 18px;
+}
+
+.pressure-index-layout.empty .pressure-gauge-arc-bg {
+  stroke: #e8e3d8;
+}
+
+.pressure-index-layout.empty .pressure-component-row {
+  background: #faf8f3;
+}
+
+@media (max-width: 600px) {
+  .pressure-index-layout {
+    height: 158px;
+    min-height: 158px;
+    grid-template-columns: 45% 55%;
+    gap: 8px;
+  }
+
+  .pressure-gauge-area {
+    grid-template-rows: 108px 1fr;
+  }
+
+  .pressure-gauge-shell {
+    max-width: 210px;
+    height: 108px;
+  }
+
+  .pressure-gauge-score-top {
+    top: 0px;
+    font-size: 23px;
+  }
+
+  .pressure-gauge-svg {
+    margin-top: 10px;
+  }
+
+  .pressure-gauge-center {
+    top: 78px;
+    width: 104px;
+  }
+
+  .pressure-gauge-label {
+    font-size: 7.5px;
+    margin-bottom: 3px;
+    letter-spacing: .25px;
+    transform: translateY(-5px);
+  }
+
+  .pressure-gauge-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .pressure-gauge-caption {
+    font-size: 6.5px;
+    line-height: 1.05;
+    margin-top: -27px;
+    transform: translateY(-14px);
+  }
+
+  .pressure-components-area {
+    grid-template-rows: repeat(4, 30px);
+    gap: 5px;
+    padding-right: 0;
+  }
+
+  .pressure-component-row {
+    padding: 0 8px;
+    border-radius: 9px;
+    grid-template-columns: minmax(0, 1fr) 28px;
+    column-gap: 7px;
+  }
+
+  .pressure-component-main {
+    gap: 4px;
+  }
+
+  .pressure-component-label {
+    font-size: 8.2px;
+    font-weight: 900;
+    letter-spacing: .08px;
+  }
+
+  .pressure-component-label::after {
+    margin-left: 4px;
+  }
+
+  .pressure-component-sample {
+    font-size: 7.8px;
+    font-weight: 800;
+  }
+
+  .pressure-component-score {
+    font-size: 12px;
+    letter-spacing: -0.2px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -2762,8 +3045,8 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   }
 
   .wr-condition-total {
-    font-size: 7px;
-    font-weight: 700;
+    font-size: 8px;
+    font-weight: 750;
     color: #5f6672;
     line-height: 1;
     white-space: nowrap;
@@ -4485,17 +4768,73 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 const SHEET_ID = '1bTdib3kxhcTXVJlqGuySkcZPpb3NPu7ZFHhV45B_1EI';
 const API = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
+// ── DATA ACCESS · GOOGLE SHEETS ──
+function normalizeGvizValue(cell) {
+  if (!cell) return null;
+
+  const raw = cell.v;
+
+  if (raw === null || raw === undefined) return null;
+
+  const s = String(raw).trim();
+
+  // Google Visualization puede devolver números chicos con formato fecha.
+  // Ej: Date(1900,0,3) debe leerse como 3.
+  const dateMatch = s.match(/^Date\((\d{4}),(\d{1,2}),(\d{1,2})/);
+
+  if (dateMatch) {
+    const year = Number(dateMatch[1]);
+    const month = Number(dateMatch[2]);
+    const day = Number(dateMatch[3]);
+
+    if (year === 1899 && month === 11 && day === 30) return 0;
+    if (year === 1899 && month === 11 && day === 31) return 1;
+    if (year === 1900 && month === 0) return day;
+
+    return cell.f !== undefined && cell.f !== null ? cell.f : s;
+  }
+
+  return raw;
+}
+
+async function fetchSheet(sheetName) {
+  const url = `${API}&sheet=${encodeURIComponent(sheetName)}&headers=1`;
+  const response = await fetch(url);
+  const text = await response.text();
+
+  const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/);
+
+  if (!match) {
+    throw new Error(`No se pudo leer la hoja: ${sheetName}`);
+  }
+
+  const json = JSON.parse(match[1]);
+  const cols = json.table.cols.map(col => col.label);
+
+  return json.table.rows.map(row => {
+    const obj = {};
+
+    cols.forEach((col, index) => {
+      obj[col] = normalizeGvizValue(row.c[index]);
+    });
+
+    return obj;
+  });
+}
+
 // Feature flags de publicación
 const IS_LOCAL_ENV =
   location.hostname === 'localhost' ||
   location.hostname === '127.0.0.1' ||
   location.protocol === 'file:';
 
-const ENABLE_LIG_PLAYERS = IS_LOCAL_ENV;
+// v1.0: LIG Players publicado en producción
+const ENABLE_LIG_PLAYERS = true;
 
 let allStandings = [], allFixtures = [], allMatches = [], players = [], h2hSummary = [], rankRows = [], leaguePlayers = [];
 let leagueStatsSummary = [], leagueStatsRankings = [], playerProfiles = [], playerLigEvolution = [], playerRecognitions = [], playerMatchLog = [];
 let currentPlayerContexts = [];
+let appPlayerCurrentContexts = [];
 let currentDiv = 'A', currentLiga = 'Cocar26A';
 let currentStatsLiga = 'Cocar26A';
 let currentStatsDiv = 'ALL';
@@ -4537,12 +4876,23 @@ function setStatsCarouselPage(carouselKey, pageIndex) {
   renderStats();
 }
 
-async function fetchSheet(sheet) {
-  const res = await fetch(`${API}&sheet=${encodeURIComponent(sheet)}&headers=1`);
-  const text = await res.text();
-  const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
-  const cols = json.table.cols.map(c => c.label);
-  return json.table.rows.map(r => { const o = {}; cols.forEach((c,i) => o[c] = r.c[i] ? r.c[i].v : null); return o; });
+function currentStreakFromSeq(seqArr) {
+  if (!seqArr || seqArr.length === 0) return '';
+
+  const last = seqArr[seqArr.length - 1];
+  if (last !== 'W' && last !== 'L') return '';
+
+  let count = 0;
+
+  for (let i = seqArr.length - 1; i >= 0; i--) {
+    if (seqArr[i] === last) {
+      count++;
+    } else {
+      break;
+    }
+  }
+
+  return `${last}${count}`;
 }
 
 function ini(n) { return n ? n.replace(/\./g,'').substring(0,2).toUpperCase() : '?'; }
@@ -6475,11 +6825,7 @@ ${playerRecentMatchesHTML(p.player)}
         </div>
         <div class="profile-row">
           <span>Últimos 5</span>
-          <strong>${p.last5_record || '-'}</strong>
-        </div>
-        <div class="profile-row">
-          <span>Últimos 10</span>
-          <strong>${p.last10_record || '-'}</strong>
+          <strong>${streakSequenceHTML(p.last5_record)}</strong>
         </div>
       </div>
     </div>
@@ -6528,11 +6874,11 @@ function playerCompetitiveProfileHTML(p) {
       </div>
 
       <div class="profile-competitive-card">
-        <div class="profile-competitive-title">Métrica avanzada</div>
-        <div class="profile-competitive-subtitle">Espacio reservado para siguiente lectura competitiva</div>
+        <div class="profile-competitive-title">Pressure Index</div>
+        <div class="profile-competitive-subtitle">Rendimiento bajo presión</div>
 
         <div class="profile-competitive-body">
-          ${profileCompetitivePlaceholderHTML()}
+          ${buildPressureIndexHTML(p)}
         </div>
       </div>
     </div>
@@ -7365,11 +7711,149 @@ function buildPlayerWrConditionHTML(p) {
   `;
 }
 
-function profileCompetitivePlaceholderHTML() {
+function pressureValueOrDash(value) {
+  if (value === '' || value === null || value === undefined) return '—';
+
+  const n = Number(value);
+
+  if (Number.isNaN(n)) return '—';
+
+  return Math.round(n);
+}
+
+function pressureSampleText(value, unit) {
+  const n = pressureValueOrDash(value);
+
+  if (n === '—' || n === 0) return '—';
+
+  return `${n} ${unit}`;
+}
+
+function pressureLabelFromIndex(score) {
+  const n = Number(score || 0);
+
+  if (n >= 80) return 'Dominante';
+  if (n >= 65) return 'Fuerte';
+  if (n >= 50) return 'Competitivo';
+  if (n >= 35) return 'Vulnerable';
+  return 'En deuda';
+}
+
+function pressureToneClass(score) {
+  const n = Number(score || 0);
+
+  if (n >= 80) return 'elite';
+  if (n >= 65) return 'strong';
+  if (n >= 50) return 'mid';
+  if (n >= 35) return 'warn';
+  return 'low';
+}
+
+function pressureComponentRowHTML(label, score, sampleText) {
   return `
-    <div class="profile-competitive-placeholder">
-      Nueva métrica disponible para<br>
-      perfil de presión, clutch o consistencia.
+    <div class="pressure-component-row">
+      <div class="pressure-component-main">
+        <span class="pressure-component-label">${label}</span>
+        <span class="pressure-component-sample">${sampleText || '—'}</span>
+      </div>
+
+      <strong class="pressure-component-score">${pressureValueOrDash(score)}</strong>
+    </div>
+  `;
+}
+
+function pressureGaugeHTML(score, label, isEmpty) {
+  const safeScore = Math.max(0, Math.min(100, Math.round(Number(score || 0))));
+  const arcLength = 300;
+  const arcOffset = arcLength - ((arcLength * safeScore) / 100);
+
+  if (isEmpty) {
+    return `
+      <div class="pressure-gauge-shell is-empty">
+        <div class="pressure-gauge-score-top">—</div>
+
+        <svg viewBox="0 0 240 118" class="pressure-gauge-svg" aria-hidden="true">
+          <path
+            d="M34 100 A86 86 0 0 1 206 100"
+            class="pressure-gauge-arc-bg"
+          />
+        </svg>
+
+        <div class="pressure-gauge-center">
+          <div class="pressure-gauge-label">Insuficiente</div>
+          <div class="pressure-gauge-dot"></div>
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="pressure-gauge-shell">
+      <div class="pressure-gauge-score-top">${safeScore}</div>
+
+      <svg viewBox="0 0 240 118" class="pressure-gauge-svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="pressureGaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#c84d3f"/>
+            <stop offset="30%" stop-color="#d88432"/>
+            <stop offset="54%" stop-color="#c8a600"/>
+            <stop offset="78%" stop-color="#7fae45"/>
+            <stop offset="100%" stop-color="#2f8b56"/>
+          </linearGradient>
+        </defs>
+
+        <path
+          d="M34 100 A86 86 0 0 1 206 100"
+          class="pressure-gauge-arc-bg"
+        />
+
+        <path
+          d="M34 100 A86 86 0 0 1 206 100"
+          class="pressure-gauge-arc-fill"
+          pathLength="${arcLength}"
+          stroke-dasharray="${arcLength}"
+          stroke-dashoffset="${arcOffset}"
+        />
+
+        <circle cx="120" cy="94" r="3.2" class="pressure-gauge-hub"/>
+      </svg>
+
+      <div class="pressure-gauge-center">
+        <div class="pressure-gauge-label">${label}</div>
+        <div class="pressure-gauge-dot"></div>
+      </div>
+    </div>
+  `;
+}
+
+function buildPressureIndexHTML(p) {
+  const rawIndex = p.pressure_index;
+  const hasIndex = rawIndex !== '' && rawIndex !== null && rawIndex !== undefined;
+  const score = hasIndex ? Math.max(0, Math.min(100, Math.round(Number(rawIndex || 0)))) : null;
+  const label = hasIndex
+    ? (String(p.pressure_label || '').trim() || pressureLabelFromIndex(score))
+    : 'Insuficiente';
+
+  const tone = hasIndex ? pressureToneClass(score) : 'empty';
+
+  return `
+    <div class="pressure-index-layout ${tone}">
+      <div class="pressure-gauge-area">
+        ${pressureGaugeHTML(score, label, !hasIndex)}
+
+        <div class="pressure-gauge-caption">
+          ${hasIndex
+            ? (p.pressure_summary || 'Lectura combinada de rendimiento en contextos de presión.')
+            : 'Mínimo requerido: 5 partidos'}
+        </div>
+      </div>
+
+      <div class="pressure-components-area">
+  ${pressureComponentRowHTML('3 SETS', p.pressure_3s_score, pressureSampleText(p.pressure_3s_sample, 'PJ'))}
+  ${pressureComponentRowHTML('TIGHT', p.pressure_tight_score, pressureSampleText(p.pressure_tight_sample, 'SETS'))}
+  ${pressureComponentRowHTML('TIE BREAK', p.pressure_tb_score, pressureSampleText(p.pressure_tb_sample, 'SETS'))}
+  ${pressureComponentRowHTML('Comeback / Collapse', p.pressure_cbs_score, pressureSampleText(p.pressure_cbs_sample, 'EV.'))}
+</div>
     </div>
   `;
 }
@@ -7510,6 +7994,23 @@ function playedWR(played, wrText) {
 function sumValues(a, b) {
   return Number(a || 0) + Number(b || 0);
 }
+function recordDisplay(value) {
+  if (value === null || value === undefined || value === '') return '-';
+
+  const s = String(value).trim();
+
+  // Google Visualization puede devolver records tipo 1-3 como Date(2026,0,3).
+  // Lo reconstruimos como mes-día: 1-3, 2-6, etc.
+  const m = s.match(/^Date\((\d{4}),(\d{1,2}),(\d{1,2})/);
+
+  if (m) {
+    const month = Number(m[2]) + 1;
+    const day = Number(m[3]);
+    return `${month}-${day}`;
+  }
+
+  return s;
+}
 
 function comebackCollapseStoryHTML() {
   return `
@@ -7524,175 +8025,110 @@ function comebackCollapseStoryHTML() {
     </span>
   `;
 }
+function streakSequenceHTML(value) {
+  const seq = String(value || '')
+    .trim()
+    .replaceAll('-', ' ')
+    .split(/\s+/)
+    .map(v => v.trim().toUpperCase())
+    .filter(v => v === 'W' || v === 'L');
+
+  if (!seq.length) return '-';
+
+  return `
+    <span class="profile-story-seq">
+      ${seq.map(v => `
+        <span class="story-chip ${v === 'W' ? 'w' : 'l'}">${v}</span>
+      `).join('')}
+    </span>
+  `;
+}
 
 function getCurrentPlayerContexts(playerName) {
   const targetPlayer = normalizeKey(playerName);
 
-  return currentPlayerContexts
+  return appPlayerCurrentContexts
     .filter(ctx => normalizeKey(ctx.player) === targetPlayer)
     .map(ctx => ({
       player: String(ctx.player || '').trim(),
-      leagueId: String(ctx.current_league_id || '').trim(),
+      leagueId: String(ctx.league_id || '').trim(),
+      contextOrder: Number(ctx.context_order || 999),
       role: String(ctx.role || '').trim(),
-      statsDivision: normalizeDivision(ctx.stats_division),
+      division: normalizeDivision(ctx.division),
       isReplacement: Number(ctx.is_replacement || 0) === 1,
       tablePositionEnabled: Number(ctx.table_position_enabled || 0) === 1,
-      contextLabel: String(ctx.context_label || '').trim(),
-      contextOrder: Number(ctx.context_order || 999)
+      tablePosition: Number(ctx.table_position || 0),
+      positionZone: String(ctx.position_zone || '').trim(),
+      points: ctx.points,
+      pointsMixLabel: String(ctx.points_mix_label || '').trim(),
+      matchWins: Number(ctx.match_wins || 0),
+      matchLosses: Number(ctx.match_losses || 0),
+      matchRecord: `${Number(ctx.match_wins || 0)}-${Number(ctx.match_losses || 0)}`,
+      matchesPlayed: ctx.matches_played,
+      matchWR: String(ctx.match_wr || '-').trim(),
+
+      setsWon: Number(ctx.sets_won || 0),
+      setsLost: Number(ctx.sets_lost || 0),
+      setsRecord: `${Number(ctx.sets_won || 0)}-${Number(ctx.sets_lost || 0)}`,
+      setsPlayed: ctx.sets_played,
+      setsWR: String(ctx.sets_wr || '-').trim(),
+
+      gamesWon: Number(ctx.games_won || 0),
+      gamesLost: Number(ctx.games_lost || 0),
+      gamesRecord: `${Number(ctx.games_won || 0)}-${Number(ctx.games_lost || 0)}`,
+      gamesPlayed: ctx.games_played,
+      gamesWR: String(ctx.games_wr || '-').trim()
     }))
-    .filter(ctx => ctx.leagueId && ctx.statsDivision)
+    .filter(ctx => ctx.leagueId && ctx.division)
     .sort((a, b) =>
       a.contextOrder - b.contextOrder ||
-      a.statsDivision.localeCompare(b.statsDivision)
+      a.division.localeCompare(b.division)
     );
 }
 
-function getContextMatchRows(playerName, leagueId, division) {
-  const targetPlayer = normalizeKey(playerName);
-  const targetLeague = String(leagueId || '').trim();
-  const targetDivision = normalizeDivision(division);
-
-  return playerMatchLog.filter(row =>
-    normalizeKey(row.player) === targetPlayer &&
-    String(row.campeonato || '').trim() === targetLeague &&
-    normalizeDivision(row.division) === targetDivision
-  );
-}
-
-function getContextStandingRow(playerName, leagueId, division) {
-  const targetPlayer = normalizeKey(playerName);
-  const targetLeague = String(leagueId || '').trim();
-  const targetDivision = normalizeDivision(division);
-
-  return allStandings.find(row =>
-    normalizeKey(row.player) === targetPlayer &&
-    String(row.league_id || '').trim() === targetLeague &&
-    normalizeDivision(row.division) === targetDivision
-  ) || null;
-}
-
-function contextWinRate(wins, total) {
-  const w = Number(wins || 0);
-  const t = Number(total || 0);
-
-  if (t <= 0) return '-';
-
-  return `WR ${Math.round((w / t) * 100)}%`;
-}
-
-function buildCurrentSeasonContextStats(ctx) {
-  const rows = getContextMatchRows(ctx.player, ctx.leagueId, ctx.statsDivision);
-  const standing = getContextStandingRow(ctx.player, ctx.leagueId, ctx.statsDivision);
-
-  const matchWins = rows.reduce((acc, r) => acc + Number(r.won_match || 0), 0);
-  const matchLosses = rows.reduce((acc, r) => acc + Number(r.lost_match || 0), 0);
-  const matches = matchWins + matchLosses;
-
-  const setsWon = rows.reduce((acc, r) => acc + Number(r.sets_won || 0), 0);
-  const setsLost = rows.reduce((acc, r) => acc + Number(r.sets_lost || 0), 0);
-  const setsPlayed = setsWon + setsLost;
-
-  const gamesWon = rows.reduce((acc, r) => acc + Number(r.games_won || 0), 0);
-  const gamesLost = rows.reduce((acc, r) => acc + Number(r.games_lost || 0), 0);
-  const gamesPlayed = gamesWon + gamesLost;
-
-  const g2 = rows.reduce((acc, r) => acc + Number(r.won_2s || 0), 0);
-  const g3 = rows.reduce((acc, r) => acc + Number(r.won_3s || 0), 0);
-  const p3 = rows.reduce((acc, r) => acc + Number(r.lost_3s || 0), 0);
-
-  const points = rows.reduce((acc, r) => {
-    return acc +
-      Number(r.won_2s || 0) * 3 +
-      Number(r.won_3s || 0) * 2 +
-      Number(r.lost_3s || 0) * 1;
-  }, 0);
-
-  const tablePosition = ctx.tablePositionEnabled
-    ? Number(standing?.official_pos || standing?.pos || 0)
-    : 0;
-
-  return {
-    division: ctx.statsDivision,
-    isReplacement: ctx.isReplacement,
-    tablePositionEnabled: ctx.tablePositionEnabled,
-    tablePosition,
-    points,
-    g2,
-    g3,
-    p3,
-    matchRecord: `${matchWins}-${matchLosses}`,
-    matches,
-    matchWR: contextWinRate(matchWins, matches),
-    setsRecord: `${setsWon}-${setsLost}`,
-    setsPlayed,
-    setsWR: contextWinRate(setsWon, setsPlayed),
-    gamesRecord: `${gamesWon}-${gamesLost}`,
-    gamesPlayed,
-    gamesWR: contextWinRate(gamesWon, gamesPlayed)
-  };
-}
-
-function contextPositionSubtext(stats) {
-  if (stats.isReplacement) return 'No compite por tabla';
-
-  const pos = Number(stats.tablePosition || 0);
-
-  if (!pos) return '-';
-  if (pos <= 2) return 'Zona ascenso';
-  if (pos >= 7) return 'Zona descenso';
-
-  return 'Zona permanencia';
-}
-
 function currentSeasonContextBlockHTML(ctx) {
-  const stats = buildCurrentSeasonContextStats(ctx);
-
   return `
     <div class="profile-block-title-row">
       <div class="profile-block-title">Temporada actual</div>
-      ${stats.isReplacement ? '<span class="profile-context-pill replacement">Reemplazo</span>' : ''}
+      ${ctx.isReplacement ? '<span class="profile-context-pill replacement">Reemplazo</span>' : ''}
     </div>
 
     <div class="profile-kpi-grid profile-kpi-grid-6 current">
       ${profileKpi(
         'División',
-        stats.division || '-',
-        stats.isReplacement ? 'Participación reemplazo' : 'Participación oficial'
+        ctx.division || '-',
+        ctx.isReplacement ? 'Participación reemplazo' : 'Participación oficial'
       )}
 
       ${profileKpi(
         'Posición tabla',
-        stats.tablePositionEnabled ? ordinalPosition(stats.tablePosition) : '-',
-        contextPositionSubtext(stats),
-        stats.isReplacement ? '' : (
-          Number(stats.tablePosition || 0) >= 7 ? 'red' :
-          Number(stats.tablePosition || 0) <= 2 ? 'green' :
-          ''
-        )
+        ctx.tablePositionEnabled ? ordinalPosition(ctx.tablePosition) : '-',
+        ctx.positionZone || (ctx.isReplacement ? 'No compite por tabla' : '-'),
+        ctx.isReplacement ? '' : zoneClass(ctx.positionZone)
       )}
 
       ${profileKpi(
         'Puntos acumulados',
-        stats.points || '-',
-        `G2:${stats.g2} · G3:${stats.g3} · P3:${stats.p3}`
+        ctx.points || '-',
+        ctx.pointsMixLabel ? boldPointsMix(ctx.pointsMixLabel) : '-'
       )}
 
       ${profileKpi(
         'Match G-P',
-        stats.matchRecord,
-        playedWR(stats.matches, stats.matchWR)
+        ctx.matchRecord || '-',
+        playedWR(ctx.matchesPlayed, ctx.matchWR)
       )}
 
       ${profileKpi(
         'Sets G-P',
-        stats.setsRecord,
-        playedWR(stats.setsPlayed, stats.setsWR)
+        ctx.setsRecord || '-',
+        playedWR(ctx.setsPlayed, ctx.setsWR)
       )}
 
       ${profileKpi(
         'Games G-P',
-        stats.gamesRecord,
-        playedWR(stats.gamesPlayed, stats.gamesWR)
+        ctx.gamesRecord || '-',
+        playedWR(ctx.gamesPlayed, ctx.gamesWR)
       )}
     </div>
   `;
@@ -7730,7 +8166,8 @@ async function init() {
   playerLigEvolutionRows,
   playerRecognitionRows,
   playerMatchLogRows,
-  currentPlayerContextRows
+  currentPlayerContextRows,
+  appPlayerCurrentContextRows
 ] = await Promise.all([
   fetchSheet('division_standings'),
   fetchSheet('division_fixtures'),
@@ -7745,7 +8182,8 @@ async function init() {
   fetchSheet('app_player_lig_evolution'),
   fetchSheet('app_player_recognitions'),
   fetchSheet('player_match_log'),
-  fetchSheet('current_player_contexts')
+  fetchSheet('current_player_contexts'),
+  fetchSheet('app_player_current_contexts')
 ]);
 
     allStandings = standings;
@@ -7762,6 +8200,7 @@ async function init() {
     playerRecognitions = playerRecognitionRows;
     playerMatchLog = playerMatchLogRows;
 currentPlayerContexts = currentPlayerContextRows;
+appPlayerCurrentContexts = appPlayerCurrentContextRows;
 
     renderLiga();
   } catch(err) {

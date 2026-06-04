@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CoCar League</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -409,7 +410,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   color: var(--black);
   border-color: #d8d2c6;
   box-shadow: 0 3px 10px rgba(0,0,0,0.045);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .div-tab.active {
@@ -1449,6 +1450,1142 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   font-weight: 650;
 }
 }
+
+/* ── LIG PLAYERS PAGE ── */
+.player-profile-hero {
+  --hero-avatar: 96px;
+
+  background: var(--white);
+  color: var(--text);
+  border: 1px solid #e8e3d8;
+  border-radius: 18px;
+  padding: 20px 26px;
+  margin-bottom: 14px;
+  min-height: 196px;
+
+  display: grid;
+  grid-template-columns: 178px 1px minmax(0, 1fr) 1px 154px;
+  align-items: center;
+  gap: 24px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+  position: relative;
+  overflow: visible;
+}
+
+.player-profile-divider {
+  width: 1px;
+  height: 124px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0,0,0,0.07),
+    rgba(200,166,0,0.18),
+    rgba(0,0,0,0.06),
+    transparent
+  );
+  position: relative;
+  z-index: 1;
+}
+
+/* Identidad */
+.player-profile-identity {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: var(--hero-avatar) auto;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.player-profile-avatar,
+.player-profile-initials {
+  width: var(--hero-avatar);
+  height: var(--hero-avatar);
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 3px solid rgba(200,166,0,0.95);
+  background: #f2f1ed;
+  object-fit: cover;
+  box-shadow:
+    inset 0 2px 10px rgba(255,255,255,0.65),
+    0 4px 10px rgba(0,0,0,0.16);
+}
+
+.player-profile-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 24px;
+  font-weight: 850;
+}
+
+.player-profile-name {
+  width: 100%;
+  max-width: 168px;
+  font-size: 24px;
+  font-weight: 850;
+  letter-spacing: -0.7px;
+  line-height: 1.05;
+  color: var(--text);
+  text-align: center;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  word-break: normal;
+}
+
+/* Centro: palmarés */
+.player-profile-core {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.player-recognition-shelf {
+  width: 100%;
+  min-width: 0;
+  height: 152px;
+  display: grid;
+  grid-template-rows: 18px 1fr 14px;
+  gap: 7px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.player-recognition-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 9px;
+  font-weight: 900;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  line-height: 1;
+}
+
+.player-recognition-heading::before,
+.player-recognition-heading::after {
+  content: '';
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(200,166,0,0.58),
+    transparent
+  );
+}
+
+.player-recognition-heading-mark {
+  display: none;
+}
+
+.player-recognition-window {
+  position: relative;
+  min-width: 0;
+  height: 114px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-recognition-grid {
+  width: min(100%, 492px);
+  height: 114px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+}
+
+.player-recognition-item {
+  width: 140px;
+  min-width: 0;
+  height: 114px;
+  display: grid;
+  grid-template-rows: 82px 17px 11px;
+  align-items: center;
+  justify-items: center;
+  gap: 2px;
+  text-align: center;
+  position: relative;
+}
+
+.player-recognition-media {
+  width: 134px;
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  position: relative;
+}
+
+.player-recognition-item.asset-missing .player-recognition-media::after {
+  content: 'asset';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 24px;
+  border: 1px dashed #d8d2c6;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  background: #fbfaf6;
+}
+
+.player-recognition-img {
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 7px rgba(0,0,0,0.14));
+  transition: transform .18s ease, filter .18s ease;
+}
+
+.player-recognition-item:hover .player-recognition-img {
+  transform: translateY(-3px) scale(1.045);
+  filter: drop-shadow(0 7px 10px rgba(0,0,0,0.18));
+}
+
+.player-recognition-img.medal {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+}
+
+.player-recognition-img.promotion {
+  width: 124px;
+  height: 70px;
+}
+
+.player-recognition-img.special {
+  width: 72px;
+  height: 70px;
+}
+
+.player-recognition-title {
+  width: 100%;
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.05;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-recognition-season {
+  width: 100%;
+  font-size: 7.8px;
+  font-weight: 750;
+  line-height: 1;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-recognition-nav {
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 30px;
+  border: 1px solid #ded6c8;
+  border-radius: 999px;
+  background: #fbfaf6;
+  color: var(--gold);
+  font-size: 21px;
+  font-weight: 850;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  cursor: pointer;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.045);
+  transition: background .16s ease, border-color .16s ease, transform .16s ease, opacity .16s ease;
+}
+
+.player-recognition-nav:hover:not(.disabled) {
+  background: #fffdf6;
+  border-color: rgba(200,166,0,0.55);
+  transform: translateY(-50%) scale(1.04);
+}
+
+.player-recognition-nav.prev {
+  left: 0;
+}
+
+.player-recognition-nav.next {
+  right: 0;
+}
+
+.player-recognition-nav.disabled {
+  opacity: .25;
+  cursor: default;
+}
+
+.player-recognition-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.player-recognition-dot {
+  width: 5px;
+  height: 5px;
+  border: 0;
+  border-radius: 999px;
+  background: #d8d2c6;
+  cursor: pointer;
+  padding: 0;
+  transition: width .16s ease, background .16s ease;
+}
+
+.player-recognition-dot.active {
+  width: 13px;
+  height: 5px;
+  background: var(--gold);
+}
+
+.player-recognition-ghost {
+  opacity: .42;
+  border: 1.4px dashed #d1c7b5;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.74), rgba(242,241,237,0.42));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.82),
+    0 2px 5px rgba(0,0,0,0.035);
+}
+
+.player-recognition-ghost.placeholder-medal {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+}
+
+.player-recognition-ghost.placeholder-promotion {
+  width: 110px;
+  height: 58px;
+  border-radius: 13px;
+}
+
+.player-recognition-ghost.placeholder-special {
+  width: 64px;
+  height: 58px;
+  clip-path: polygon(50% 0%, 90% 22%, 90% 72%, 50% 100%, 10% 72%, 10% 22%);
+}
+
+.player-recognition-ghost.placeholder-neutral {
+  width: 64px;
+  height: 58px;
+  opacity: 0;
+}
+
+/* Derecha: ranking + puntos */
+.player-profile-side {
+  position: relative;
+  z-index: 1;
+  min-width: 138px;
+  display: grid;
+  grid-template-rows: 70px 1px 50px;
+  gap: 10px;
+  align-items: center;
+  justify-items: end;
+}
+
+.player-profile-side::before {
+  content: '';
+  grid-row: 2;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0,0,0,0.09),
+    transparent
+  );
+}
+
+.profile-rank-metric {
+  display: grid;
+  justify-items: end;
+  align-content: end;
+}
+
+.profile-rank-metric.top {
+  grid-row: 1;
+  height: 70px;
+  grid-template-rows: 42px 12px;
+  gap: 2px;
+}
+
+.profile-rank-metric.bottom {
+  grid-row: 3;
+  height: 50px;
+  grid-template-rows: 30px 12px;
+  gap: 2px;
+}
+
+.profile-rank-number {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: .86;
+  letter-spacing: -1px;
+  color: var(--gold);
+  text-align: right;
+  align-self: center;
+  transform: translateY(2px);
+}
+
+.profile-rank-points {
+  font-size: 35px;
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: -1px;
+  color: var(--gold);
+  text-align: right;
+  align-self: end;
+}
+
+.profile-rank-label,
+.profile-rank-points-label {
+  font-size: 8px;
+  font-weight: 850;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .55px;
+  line-height: 1;
+  text-align: right;
+  align-self: end;
+  transform: translateY(-1px);
+}
+
+/* Bloques de contenido */
+.profile-block-title {
+  font-size: 11px;
+  font-weight: 850;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin: 16px 0 9px;
+}
+
+.profile-block-title:first-of-type {
+  margin-top: 0;
+}
+
+.profile-kpi-grid {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.profile-kpi-grid-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.profile-kpi-grid-6 .profile-kpi-card {
+  min-height: 92px;
+  height: 92px;
+}
+
+.profile-kpi-card {
+  background: var(--white);
+  border: 1px solid #e8e3d8;
+  border-radius: 14px;
+  padding: 10px 14px;
+  min-height: 92px;
+  height: 92px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+  display: grid;
+  grid-template-rows: 14px 1fr 14px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.profile-kpi-label {
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .45px;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-kpi-value {
+  font-size: 27px;
+  font-weight: 850;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.7px;
+  align-self: center;
+}
+
+.profile-kpi-sub {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-self: end;
+}
+
+.profile-kpi-sub-green {
+  color: var(--green);
+  font-weight: 850;
+}
+
+.profile-kpi-sub-red {
+  color: var(--red);
+  font-weight: 850;
+}
+
+.profile-kpi-sub strong {
+  font-size: calc(1em + 2px);
+  font-weight: 900;
+  color: inherit;
+}
+
+.profile-story-seq {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.profile-story-seq .story-chip {
+  width: 17px;
+  height: 17px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.story-separator,
+.profile-story-seq .story-separator {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--muted);
+  margin: 0 2px;
+}
+
+.profile-section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.profile-panel {
+  background: var(--white);
+  border: 1px solid #e8e3d8;
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+}
+
+.profile-panel.dark {
+  background: #111111;
+  color: #fff;
+  border-color: #111111;
+}
+
+.profile-panel-title {
+  font-size: 11px;
+  font-weight: 850;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .45px;
+  margin-bottom: 12px;
+}
+
+.profile-panel.dark .profile-panel-title {
+  color: #fff;
+}
+
+.profile-summary {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+
+.profile-panel.dark .profile-summary {
+  color: rgba(255,255,255,0.72);
+}
+
+.profile-critical-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.critical-mini {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.critical-label {
+  font-size: 8px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.62);
+  text-transform: uppercase;
+  letter-spacing: .45px;
+  margin-bottom: 5px;
+}
+
+.critical-value {
+  font-size: 18px;
+  font-weight: 850;
+  color: #fff;
+  line-height: 1;
+}
+
+.critical-sub {
+  font-size: 9px;
+  color: var(--gold);
+  font-weight: 750;
+  margin-top: 5px;
+}
+
+.profile-row {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #f0eee8;
+  font-size: 12px;
+}
+
+.profile-row:last-child {
+  border-bottom: none;
+}
+
+.profile-row span {
+  color: var(--muted);
+}
+
+.profile-row strong {
+  color: var(--text);
+  font-weight: 800;
+  text-align: right;
+}
+
+.profile-row.muted strong {
+  color: #aaa;
+  font-weight: 600;
+}
+
+.muted-panel {
+  background: #fbfaf6;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .player-profile-hero {
+    --hero-avatar: 82px;
+    grid-template-columns: 112px 1px minmax(0, 1fr) 1px 116px;
+    gap: 16px;
+    padding: 16px 18px;
+  }
+
+  .player-profile-name {
+    font-size: 21px;
+  }
+
+  .player-profile-band {
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .profile-rank-number {
+    font-size: 31px;
+  }
+
+  .profile-rank-points {
+    font-size: 31px;
+  }
+
+  .profile-kpi-grid-6 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .profile-section-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-critical-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .player-profile-hero {
+    --hero-avatar: 56px;
+    grid-template-columns: 72px 1px minmax(0, 1fr) 56px;
+    gap: 7px;
+    padding: 8px 9px;
+    border-radius: 14px;
+    min-height: 104px;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .player-profile-divider {
+    display: block;
+    width: 1px;
+    height: 78px;
+    opacity: .72;
+  }
+
+  /*
+    En mobile dejamos solo el divisor entre identidad y reconocimientos.
+    El segundo divisor existe en el HTML desktop, pero en mobile debe desaparecer
+    para que el ranking no salte a una segunda fila.
+  */
+  .player-profile-hero > .player-profile-divider:nth-of-type(4) {
+    display: none;
+  }
+
+  .player-profile-identity {
+    display: grid;
+    grid-template-rows: 56px 17px;
+    justify-items: center;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .player-profile-avatar,
+  .player-profile-initials {
+    width: 56px;
+    height: 56px;
+    border-width: 2px;
+    font-size: 19px;
+  }
+
+  .player-profile-name {
+    width: 72px;
+    max-width: 72px;
+    font-size: 12px;
+    font-weight: 850;
+    line-height: 1;
+    letter-spacing: -0.25px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .player-profile-core {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .player-recognition-shelf {
+    width: 100%;
+    min-width: 0;
+    height: 78px;
+    grid-template-rows: 9px 1fr 6px;
+    gap: 2px;
+    overflow: hidden;
+  }
+
+  .player-recognition-heading {
+    gap: 3px;
+    font-size: 5.2px;
+    letter-spacing: .72px;
+  }
+
+  .player-recognition-heading::before,
+  .player-recognition-heading::after {
+    width: 13px;
+  }
+
+  .player-recognition-window {
+    height: 61px;
+  }
+
+  .player-recognition-grid {
+    width: 100%;
+    height: 61px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .player-recognition-item {
+    width: 100%;
+    height: 61px;
+    grid-template-rows: 43px 9px 6px;
+    gap: 1px;
+  }
+
+  .player-recognition-media {
+    width: 100%;
+    height: 43px;
+  }
+  .player-recognition-item.asset-missing .player-recognition-media::after {
+  width: 34px;
+  height: 16px;
+  font-size: 5.5px;
+}
+
+  .player-recognition-img.medal {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+  }
+
+  .player-recognition-img.promotion {
+    width: 64px;
+    height: 36px;
+  }
+
+  .player-recognition-img.special {
+    width: 41px;
+    height: 38px;
+  }
+
+  .player-recognition-title {
+    font-size: 5.2px;
+    font-weight: 850;
+    line-height: 1;
+  }
+
+  .player-recognition-season {
+    font-size: 4.7px;
+    line-height: 1;
+  }
+
+  .player-recognition-nav {
+    display: none;
+  }
+
+  .player-recognition-dots {
+    gap: 3px;
+  }
+
+  .player-recognition-dot {
+    width: 4px;
+    height: 4px;
+  }
+
+  .player-recognition-dot.active {
+    width: 9px;
+    height: 4px;
+  }
+
+  .player-recognition-ghost.placeholder-medal {
+    width: 32px;
+    height: 32px;
+  }
+
+  .player-recognition-ghost.placeholder-promotion {
+    width: 54px;
+    height: 29px;
+    border-radius: 7px;
+  }
+
+  .player-recognition-ghost.placeholder-special {
+    width: 35px;
+    height: 35px;
+  }
+
+  .player-recognition-ghost.placeholder-neutral {
+    width: 35px;
+    height: 35px;
+  }
+
+  .player-profile-side {
+    min-width: 52px;
+    width: 52px;
+    height: 78px;
+    display: grid;
+    grid-template-rows: 33px 1px 33px;
+    gap: 5px;
+    justify-items: end;
+    align-items: center;
+  }
+
+  .player-profile-side::before {
+    grid-row: 2;
+    width: 100%;
+  }
+
+  .profile-rank-metric {
+    display: grid;
+    justify-items: end;
+    align-content: end;
+  }
+
+  .profile-rank-metric.top {
+    grid-row: 1;
+    height: 33px;
+    grid-template-rows: 22px 7px;
+    gap: 2px;
+  }
+
+  .profile-rank-metric.bottom {
+    grid-row: 3;
+    height: 33px;
+    grid-template-rows: 22px 7px;
+    gap: 2px;
+  }
+
+  .profile-rank-number,
+  .profile-rank-points {
+    font-size: 21px;
+    line-height: .9;
+    letter-spacing: -0.6px;
+    transform: none;
+    align-self: end;
+  }
+
+  .profile-rank-label,
+  .profile-rank-points-label {
+    font-size: 5px;
+    line-height: 1;
+    letter-spacing: .18px;
+    transform: none;
+    align-self: end;
+  }
+
+  .profile-kpi-grid-6 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .profile-kpi-grid-6 .profile-kpi-card {
+    height: 80px;
+    min-height: 80px;
+    padding: 9px 12px;
+    grid-template-rows: 13px 1fr 13px;
+  }
+
+  .profile-kpi-value {
+    font-size: 22px;
+  }
+
+  .profile-kpi-label {
+    font-size: 8px;
+  }
+
+  .profile-kpi-sub {
+    font-size: 8.5px;
+  }
+
+  .profile-panel {
+    padding: 14px;
+  }
+
+  .profile-critical-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile-row {
+    font-size: 11px;
+  }
+}
+
+/* ── LIG EVOLUTION CHART ── */
+.lig-evolution-panel {
+  background: #111111;
+  color: #fff;
+  border-radius: 18px;
+  padding: 22px 24px 26px;
+  margin-bottom: 12px;
+  min-height: 270px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.lig-evolution-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(200,166,0,0.16), transparent 36%);
+  pointer-events: none;
+}
+
+.lig-evolution-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.lig-evolution-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: .45px;
+  line-height: 1;
+}
+
+.lig-evolution-subtitle {
+  font-size: 12px;
+  color: rgba(255,255,255,0.68);
+  margin-top: 7px;
+  line-height: 1.2;
+}
+
+.lig-evolution-current {
+  border: 1px solid rgba(200,166,0,0.58);
+  background: rgba(200,166,0,0.08);
+  border-radius: 10px;
+  padding: 8px 12px;
+  text-align: right;
+  min-width: 88px;
+}
+
+.lig-evolution-current-value {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.lig-evolution-current-label {
+  font-size: 8px;
+  font-weight: 850;
+  color: rgba(255,255,255,0.72);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-top: 4px;
+}
+
+.lig-evolution-chart-area {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.lig-evolution-chart-wrap {
+  position: relative;
+  height: 188px;
+  width: calc(100% - 52px);
+  padding-top: 14px;
+  margin-left: 19px;
+}
+
+.lig-evolution-chart-wrap canvas {
+  display: block;
+}
+
+.lig-chart-y-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: 650;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: .55px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.lig-chart-x-label {
+  position: absolute;
+  right: 4px;
+  bottom: 5px;
+  z-index: 2;
+  font-size: 9px;
+  font-weight: 650;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  line-height: 1;
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+    .lig-evolution-panel {
+    border-radius: 14px;
+    padding: 16px 14px 18px;
+    min-height: 236px;
+  }
+
+  .lig-evolution-head {
+    margin-bottom: 8px;
+  }
+
+  .lig-evolution-title {
+    font-size: 12px;
+  }
+
+  .lig-evolution-subtitle {
+    font-size: 9px;
+    margin-top: 5px;
+  }
+
+  .lig-evolution-current {
+    min-width: 68px;
+    padding: 6px 8px;
+  }
+
+  .lig-evolution-current-value {
+    font-size: 16px;
+  }
+
+  .lig-evolution-current-label {
+    font-size: 6.4px;
+  }
+
+  .lig-evolution-chart-wrap {
+    height: 162px;
+    width: calc(100% - 18px);
+    padding-top: 12px;
+    margin-left: 6px;
+  }
+
+  .lig-chart-y-label {
+    font-size: 8px;
+    font-weight: 650;
+    letter-spacing: .4px;
+  }
+
+  .lig-chart-x-label {
+    right: 4px;
+    bottom: 7px;
+    font-size: 7.5px;
+    font-weight: 650;
+    letter-spacing: .35px;
+  }
+}
+
 /* Coming soon */
 .coming-soon { text-align: center; padding: 80px 0; color: var(--muted); font-size: 14px; }
 
@@ -1734,17 +2871,29 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 }
 
 .stats-section-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 850;
   color: var(--text);
   text-transform: uppercase;
   letter-spacing: .5px;
   margin-bottom: 10px;
 }
 
+.stats-section-title::before {
+  content: '';
+  width: 4px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
 .stats-summary-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -1770,7 +2919,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 .stats-kpi-value {
   font-size: 38px;
-  font-weight: 800;
+  font-weight: 850;
   color: var(--text);
   line-height: 0.9;
   letter-spacing: -1px;
@@ -1780,6 +2929,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   font-size: 10px;
   color: var(--muted);
   margin-top: 4px;
+  line-height: 1.2;
 }
 
 .stats-kpi-card.highlight {
@@ -1807,7 +2957,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 .stats-panel-title {
   font-size: 11px;
-  font-weight: 750;
+  font-weight: 800;
   color: var(--text);
   text-transform: uppercase;
   letter-spacing: .35px;
@@ -1816,18 +2966,31 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 .stats-bar-row {
   display: grid;
-  grid-template-columns: 58px 1fr 44px;
-  gap: 10px;
+  grid-template-columns: 92px 1fr 42px;
   align-items: center;
-  min-height: 34px;
-  margin-bottom: 0;
+  gap: 10px;
+  margin-bottom: 13px;
 }
 
 .stats-bar-label {
-  font-size: 11px;
-  font-weight: 650;
+  font-size: 12px;
+  font-weight: 850;
   color: var(--text);
+  line-height: 1.05;
   text-transform: uppercase;
+  letter-spacing: -0.2px;
+}
+
+.stats-bar-label span {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.05;
+  margin-top: 2px;
+  text-transform: none;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
 }
 
 .stats-bar-track {
@@ -1882,53 +3045,58 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
 
 .stats-set-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 42px 46px;
+  grid-template-columns: 118px clamp(220px, 58%, 460px) 42px;
+  gap: 12px;
   align-items: center;
-  gap: 10px;
   min-height: 34px;
-  padding: 0;
-  border-bottom: 1px solid #f0eee8;
-}
-
-.stats-set-row:last-child {
-  border-bottom: none;
 }
 
 .stats-set-label {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
+  white-space: nowrap;
 }
 
 .stats-set-name {
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 850;
   color: var(--text);
   text-transform: uppercase;
-  white-space: nowrap;
+  line-height: 1;
 }
 
 .stats-set-desc {
   font-size: 10px;
+  font-weight: 600;
   color: var(--muted);
-  white-space: nowrap;
+  line-height: 1;
 }
 
-.stats-set-value {
-  font-size: 14px;
-  font-weight: 750;
-  color: var(--text);
-  text-align: right;
+.stats-set-track {
+  width: 100%;
+  height: 7px;
+  background: #ebe6dc;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.stats-set-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 999px;
 }
 
 .stats-set-pct {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
   text-align: right;
+  line-height: 1;
 }
 
+/* Grids LIG Stats */
 .stats-rank-grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1941,6 +3109,276 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   gap: 10px;
 }
 
+/* Cards oficiales: palmarés + premios cerrados */
+.stats-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stats-section-title-accent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.stats-section-title-accent::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.stats-official-carousel {
+  background: transparent;
+}
+
+.stats-official-carousel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.stats-official-carousel-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  line-height: 1;
+}
+
+.stats-official-carousel-title::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.stats-official-carousel-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.stats-official-carousel-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid #ded6c8;
+  background: #fbfaf6;
+  color: var(--gold);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.045);
+  transition: background .16s ease, border-color .16s ease, transform .16s ease, opacity .16s ease;
+}
+
+.stats-official-carousel-btn:hover:not(:disabled) {
+  background: #fffdf6;
+  border-color: rgba(200,166,0,0.55);
+  transform: scale(1.04);
+}
+
+.stats-official-carousel-btn:disabled {
+  opacity: .28;
+  cursor: default;
+}
+
+.stats-official-carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stats-official-carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.stats-official-carousel-dot {
+  width: 5px;
+  height: 5px;
+  border: 0;
+  border-radius: 999px;
+  background: #d8d2c6;
+  cursor: pointer;
+  padding: 0;
+  transition: width .16s ease, background .16s ease;
+}
+
+.stats-official-carousel-dot.active {
+  width: 14px;
+  background: var(--gold);
+}
+
+/* Card oficial reutilizable */
+.stats-winner-card {
+  background: var(--white);
+  border: 1px solid #e8e3d8;
+  border-radius: 18px;
+  padding: 16px 18px 14px;
+  min-height: 174px;
+  display: grid;
+  grid-template-rows: 24px 1fr auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
+  overflow: hidden;
+}
+
+.stats-winner-title {
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .35px;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stats-winner-main {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) 86px;
+  gap: 14px;
+  align-items: center;
+  min-height: 82px;
+}
+
+.stats-winner-photo-wrap {
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats-winner-photo,
+.stats-winner-initials {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid rgba(200,166,0,0.92);
+  background: var(--bg);
+  object-fit: cover;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.07);
+}
+
+.stats-winner-initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.stats-winner-name {
+  min-width: 0;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stats-winner-award-wrap {
+  width: 86px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.stats-winner-award-img {
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.16));
+}
+
+.stats-winner-award-img.medal {
+  width: 66px;
+  height: 66px;
+}
+
+.stats-winner-award-img.achievement {
+  width: 84px;
+  height: 54px;
+}
+
+.stats-winner-award-img.special {
+  width: 62px;
+  height: 62px;
+}
+
+.stats-winner-award-fallback {
+  border: 1.4px dashed #d1c7b5;
+  background: linear-gradient(135deg, rgba(255,255,255,0.78), rgba(242,241,237,0.46));
+  opacity: .52;
+}
+
+.stats-winner-award-fallback.medal {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+}
+
+.stats-winner-award-fallback.achievement {
+  width: 78px;
+  height: 48px;
+  border-radius: 13px;
+}
+
+.stats-winner-award-fallback.special {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  clip-path: polygon(50% 0%, 90% 22%, 90% 72%, 50% 100%, 10% 72%, 10% 22%);
+}
+
+.stats-winner-note {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #efe9dc;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.25;
+}
+
+.stats-winner-note-kpi {
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 950;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+/* Cards ranking normales */
 .stats-rank-card {
   background: var(--white);
   border: 1px solid #e8e3d8;
@@ -1956,7 +3394,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   min-height: 24px;
   margin-bottom: 8px;
 }
@@ -1970,15 +3408,12 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   line-height: 1;
   margin: 0;
 }
+
 .stats-rank-badges {
   display: flex;
   align-items: center;
   gap: 4px;
   flex-shrink: 0;
-}
-.stats-rank-head {
-  justify-content: space-between;
-  gap: 8px;
 }
 
 .story-seq {
@@ -2016,8 +3451,8 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   gap: 8px;
   align-items: center;
   font-size: 11px;
-  padding: 3px 0;
-  min-height: 22px;
+  padding: 4px 0;
+  min-height: 24px;
 }
 
 .stats-rank-pos {
@@ -2031,6 +3466,35 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.stats-live-top3-row,
+.stats-live-top3-head {
+  --live-points-col: 74px;
+}
+
+.stats-live-top3-player {
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .stats-live-top3-row,
+  .stats-live-top3-head {
+    --live-points-col: 56px;
+  }
+
+  .stats-live-top3-player {
+    font-size: 12px;
+    letter-spacing: -0.25px;
+  }
+
+  .stats-live-top3-value {
+    font-size: 12px;
+  }
+
+  .stats-live-top3-diff {
+    font-size: 9px;
+  }
 }
 
 .stats-rank-value {
@@ -2057,7 +3521,8 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   }
 
   .stats-rank-grid-4,
-  .stats-awards-grid {
+  .stats-awards-grid,
+  .stats-feature-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -2085,7 +3550,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   }
 
   .stats-kpi-card {
-    min-height: 78px;
+    min-height: 66px;
     padding: 12px 12px;
     gap: 10px;
   }
@@ -2094,7 +3559,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
     font-size: 8.5px;
   }
 
-    .stats-kpi-value {
+  .stats-kpi-value {
     font-size: 26px;
     letter-spacing: -0.6px;
   }
@@ -2108,13 +3573,258 @@ body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color
   }
 
   .stats-bar-row {
-    grid-template-columns: 50px 1fr 38px;
+    grid-template-columns: 80px 1fr 38px;
+    gap: 8px;
+  }
+  .stats-set-row {
+  grid-template-columns: 92px 1fr 36px;
+  gap: 8px;
+  min-height: 31px;
+}
+
+.stats-set-label {
+  gap: 4px;
+}
+
+.stats-set-name {
+  font-size: 10px;
+}
+
+.stats-set-desc {
+  font-size: 8px;
+}
+
+.stats-set-track {
+  height: 6px;
+}
+
+.stats-set-pct {
+  font-size: 11px;
+}
+
+  .stats-rank-grid-4,
+  .stats-awards-grid,
+  .stats-feature-grid,
+  .stats-official-carousel-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
 
-  .stats-rank-grid-4,
-  .stats-awards-grid {
-    grid-template-columns: 1fr;
+  .stats-official-carousel-head {
+    margin-bottom: 8px;
+  }
+
+  .stats-official-carousel-title {
+    font-size: 9.5px;
+    letter-spacing: .35px;
+  }
+
+  .stats-official-carousel-title::before {
+    width: 3px;
+    height: 14px;
+  }
+
+  .stats-official-carousel-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+  }
+
+  .stats-winner-card {
+    border-radius: 15px;
+    padding: 7px 9px 2px;
+    min-height: 98px;
+    grid-template-rows: 15px 46px 18px;
+    row-gap: 3px;
+  }
+
+  .stats-winner-title {
+    font-size: 8.4px;
+    letter-spacing: .08px;
+    line-height: 1;
+  }
+
+  .stats-winner-main {
+    grid-template-columns: 34px minmax(0, 1fr) 44px;
+    gap: 6px;
+    align-items: center;
+    min-height: 46px;
+  }
+
+  .stats-winner-photo-wrap {
+    width: 34px;
+    height: 34px;
+  }
+
+  .stats-winner-photo,
+  .stats-winner-initials {
+    width: 33px;
+    height: 33px;
+    border-width: 1.4px;
+  }
+
+  .stats-winner-initials {
+    font-size: 9.5px;
+  }
+
+  .stats-winner-name {
+    font-size: 11.6px;
+    line-height: 1.05;
+    letter-spacing: -0.12px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    display: block;
+    max-height: 25px;
+  }
+
+  .stats-winner-award-wrap {
+    width: 44px;
+    height: 42px;
+  }
+
+  .stats-winner-award-img.medal {
+    width: 38px;
+    height: 38px;
+  }
+
+  .stats-winner-award-img.achievement {
+    width: 44px;
+    height: 29px;
+  }
+
+  .stats-winner-award-img.special {
+    width: 38px;
+    height: 38px;
+  }
+
+  .stats-winner-award-fallback.medal {
+    width: 36px;
+    height: 36px;
+  }
+
+  .stats-winner-award-fallback.achievement {
+    width: 42px;
+    height: 27px;
+  }
+
+  .stats-winner-award-fallback.special {
+    width: 36px;
+    height: 36px;
+  }
+
+    .stats-winner-note {
+    position: relative;
+    margin-top: 0;
+    padding: 4px 0 0;
+    height: 18px;
+    min-height: 18px;
+    box-sizing: border-box;
+    border-top: 0;
+    font-size: 7px;
+    line-height: 1;
+    color: var(--muted);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .stats-winner-note::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #efe9dc;
+  }
+
+  .stats-winner-note-kpi {
+    display: inline-flex;
+    align-items: center;
+    height: 11px;
+    font-size: 8.8px;
+    font-weight: 950;
+    line-height: 1;
+    color: var(--text);
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  .stats-feature-card {
+    border-radius: 16px;
+    padding: 12px 10px 10px;
+    min-height: 154px;
+  }
+
+  .stats-feature-card-title {
+    font-size: 9px;
+    min-height: 22px;
+    margin-bottom: 8px;
+    letter-spacing: .15px;
+  }
+
+  .stats-feature-card-main {
+    grid-template-columns: 50px minmax(0, 1fr);
+    gap: 8px;
+    align-items: center;
+  }
+
+  .stats-feature-award-media {
+    width: 50px;
+    height: 50px;
+  }
+
+  .stats-feature-award-img.medal {
+    width: 44px;
+    height: 44px;
+  }
+
+  .stats-feature-award-img.special {
+    width: 46px;
+    height: 46px;
+  }
+
+  .stats-feature-award-fallback.medal {
+    width: 42px;
+    height: 42px;
+  }
+
+  .stats-feature-award-fallback.special {
+    width: 44px;
+    height: 44px;
+  }
+
+  .stats-feature-player {
+    gap: 7px;
+  }
+
+  .stats-feature-player-avatar,
+  .stats-feature-player-initials {
+    width: 34px;
+    height: 34px;
+    border-width: 1.5px;
+  }
+
+  .stats-feature-player-initials {
+    font-size: 10px;
+  }
+
+  .stats-feature-player-name {
+    font-size: 15px;
+    letter-spacing: -0.25px;
+  }
+
+  .stats-feature-highlight {
+    grid-column: 1 / -1;
+    justify-self: flex-end;
+    font-size: 19px;
+  }
+
+  .stats-feature-card-note {
+    margin-top: 8px;
+    padding-top: 8px;
+    font-size: 8px;
   }
 
   .stats-rank-card {
@@ -2155,11 +3865,47 @@ const SHEET_ID = '1bTdib3kxhcTXVJlqGuySkcZPpb3NPu7ZFHhV45B_1EI';
 const API = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
 let allStandings = [], allFixtures = [], allMatches = [], players = [], h2hSummary = [], rankRows = [], leaguePlayers = [];
-let leagueStatsSummary = [], leagueStatsRankings = [];
+let leagueStatsSummary = [], leagueStatsRankings = [], playerProfiles = [], playerLigEvolution = [], playerRecognitions = [];
 let currentDiv = 'A', currentLiga = 'Cocar26A';
 let currentStatsLiga = 'Cocar26A';
 let currentStatsDiv = 'ALL';
 let activePage = 'liga';
+
+let statsCarouselPages = {
+  palmares: 0,
+  specials: 0,
+  'closed-stats': 0,
+  'live-stats': 0,
+  'live-division-top3': 0,
+  'live-awards': 0
+};
+
+let lastStatsContextKey = '';
+
+function resetStatsCarouselsForContext(selectedLeague, selectedDivision) {
+  const nextContextKey = `${selectedLeague || ''}|${selectedDivision || ''}`;
+
+  if (nextContextKey === lastStatsContextKey) return;
+
+  lastStatsContextKey = nextContextKey;
+
+  statsCarouselPages.palmares = 0;
+statsCarouselPages.specials = 0;
+statsCarouselPages['closed-stats'] = 0;
+statsCarouselPages['live-stats'] = 0;
+statsCarouselPages['live-division-top3'] = 0;
+statsCarouselPages['live-awards'] = 0;
+}
+
+function changeStatsCarouselPage(carouselKey, direction) {
+  statsCarouselPages[carouselKey] = Number(statsCarouselPages[carouselKey] || 0) + Number(direction || 0);
+  renderStats();
+}
+
+function setStatsCarouselPage(carouselKey, pageIndex) {
+  statsCarouselPages[carouselKey] = Number(pageIndex || 0);
+  renderStats();
+}
 
 async function fetchSheet(sheet) {
   const res = await fetch(`${API}&sheet=${encodeURIComponent(sheet)}&headers=1`);
@@ -2244,6 +3990,7 @@ function showPage(page) {
   if (page === 'h2h') renderH2H();
   if (page === 'stats') renderStats();
   if (page === 'rank') renderRank();
+  if (page === 'jugadores') renderJugadores();
 }
 
 // ── LIGA PAGE ──
@@ -2657,11 +4404,16 @@ function renderStats() {
   const selectedLeague = currentStatsLiga || 'Cocar26A';
   const selectedDivision = currentStatsDiv || 'ALL';
 
+  resetStatsCarouselsForContext(selectedLeague, selectedDivision);
+
   const row =
     leagueStatsSummary.find(r =>
       String(r.league_id || '') === selectedLeague &&
       String(r.division || '') === selectedDivision
     ) || {};
+
+  const isClosedLeague = selectedLeague !== 'Cocar26A' && selectedLeague !== 'ALL';
+  const tableLimit = 5;
 
   function n(v) {
     return Number(v || 0);
@@ -2680,7 +4432,20 @@ function renderStats() {
     return n(v).toFixed(2);
   }
 
-  function getRankRows(category) {
+  function normalizeLeagueKey(v) {
+    return String(v || '')
+      .trim()
+      .toUpperCase()
+      .replace(/\s+/g, '');
+  }
+
+  function pctOfSets(v) {
+    return n(row.sets_played) > 0
+      ? `${Math.round((n(v) / n(row.sets_played)) * 100)}%`
+      : '0%';
+  }
+
+  function getRankRows(category, limit = tableLimit) {
     return leagueStatsRankings
       .filter(r =>
         String(r.league_id || '') === selectedLeague &&
@@ -2688,57 +4453,118 @@ function renderStats() {
         String(r.category || '') === category
       )
       .sort((a, b) => n(a.rank) - n(b.rank))
-      .slice(0, 3);
+      .slice(0, limit);
   }
 
-  function rankCard(title, category, icon, note) {
+  function getOfficialTopRow(category) {
+    return leagueStatsRankings
+      .filter(r =>
+        String(r.league_id || '') === selectedLeague &&
+        String(r.division || '') === 'ALL' &&
+        String(r.category || '') === category
+      )
+      .sort((a, b) => n(a.rank) - n(b.rank))[0] || null;
+  }
+
+  function formatStatsRankValue(category, rankRow) {
+    if (!rankRow) return '—';
+
+    const percentCategories = [
+      'PERFORMANCE_RATE',
+      'TOP_WIN_RATE',
+      'SETS_WIN_RATE',
+      'GAMES_WIN_RATE'
+    ];
+
+    const wrCompositeCategories = [
+      'SOFT_SETS_WON',
+      'HARD_SETS_WON',
+      'THIRD_SET_WINS'
+    ];
+
+    function fmtPct0(value) {
+      const raw = String(value ?? '').trim();
+
+      if (raw.includes('%')) {
+        const parsed = Number(raw.replace('%', '').replace(',', '.'));
+        return isNaN(parsed) ? raw : `${Math.round(parsed)}%`;
+      }
+
+      const numeric = n(value);
+      const pct = numeric <= 1 ? numeric * 100 : numeric;
+
+      return `${Math.round(pct)}%`;
+    }
+
+    if (percentCategories.includes(category)) {
+      return fmtPct0(rankRow.value);
+    }
+
+    if (
+      category === 'MOST_WINS' ||
+      category === 'MR_COMEBACK' ||
+      category === 'MR_FARRA' ||
+      category === 'MR_HAMMER' ||
+      category === 'MR_TIE_BREAK'
+    ) {
+      return fmtInt(rankRow.value);
+    }
+
+    if (wrCompositeCategories.includes(category)) {
+      const rawLabel = String(rankRow.label || '').trim();
+
+      const parts = rawLabel.split('·').map(x => x.trim());
+      const mainValue = parts[0] || fmtInt(rankRow.value);
+      const wrRaw = parts[1] || '';
+
+      const wrClean = wrRaw
+        ? wrRaw.replace(/WR\s+([0-9]+(?:[.,][0-9]+)?%)/, (_, pct) => `WR ${fmtPct0(pct)}`)
+        : '';
+
+      return wrClean
+        ? `${mainValue} <span style="font-weight:500;color:var(--text);">${wrClean}</span>`
+        : mainValue;
+    }
+
+    return rankRow.label || rankRow.value || '—';
+  }
+
+  function rankCard(title, category, note) {
     const rows = getRankRows(category);
 
-    const storyHTML = category === 'MR_COMEBACK'
-  ? `<div class="story-seq">
-      <span class="story-chip l">L</span>
-      <span class="story-chip w">W</span>
-      <span class="story-chip w">W</span>
-    </div>`
-  : category === 'MR_FARRA'
-  ? `<div class="story-seq">
-      <span class="story-chip w">W</span>
-      <span class="story-chip l">L</span>
-      <span class="story-chip l">L</span>
-    </div>`
-  : '';
+    const cardHeadRightHTML = !isClosedLeague
+      ? `<span class="live-pill-mini">LIVE</span>`
+      : category === 'MR_COMEBACK'
+      ? `<div class="story-seq">
+          <span class="story-chip l">L</span>
+          <span class="story-chip w">W</span>
+          <span class="story-chip w">W</span>
+        </div>`
+      : category === 'MR_FARRA'
+      ? `<div class="story-seq">
+          <span class="story-chip w">W</span>
+          <span class="story-chip l">L</span>
+          <span class="story-chip l">L</span>
+        </div>`
+      : '';
 
-return `
-  <div class="stats-rank-card">
-    <div class="stats-rank-head">
-      <div class="stats-rank-title">${title}</div>
-      ${storyHTML}
-    </div>
+    return `
+      <div class="stats-rank-card">
+        <div class="stats-rank-head">
+          <div class="stats-rank-title">${title}</div>
+          ${cardHeadRightHTML}
+        </div>
 
         ${
           rows.length === 0
             ? `<div class="no-data" style="padding:18px 0;font-size:11px;">Sin datos</div>`
-            : rows.map(r => {
-  let displayValue = r.label || r.value || '—';
-
-  if (category === 'TOP_WIN_RATE') {
-    displayValue = `${Math.round(n(r.value) * 100)}%`;
-  }
-
-  if (category === 'MOST_WINS') {
-    displayValue = fmtInt(r.value);
-  }
-if (category === 'MR_COMEBACK' || category === 'MR_FARRA' || category === 'MR_HAMMER') {
-  displayValue = fmtInt(r.value);
-}
-  return `
-    <div class="stats-rank-row">
-      <div class="stats-rank-pos">${r.rank}</div>
-      <div class="stats-rank-player">${r.player || '—'}</div>
-      <div class="stats-rank-value">${displayValue}</div>
-    </div>
-  `;
-}).join('')
+            : rows.map(r => `
+              <div class="stats-rank-row">
+                <div class="stats-rank-pos">${r.rank}</div>
+                <div class="stats-rank-player">${r.player || '—'}</div>
+                <div class="stats-rank-value">${formatStatsRankValue(category, r)}</div>
+              </div>
+            `).join('')
         }
 
         ${note ? `<div class="stats-rank-note">${note}</div>` : ''}
@@ -2746,14 +4572,740 @@ if (category === 'MR_COMEBACK' || category === 'MR_FARRA' || category === 'MR_HA
     `;
   }
 
-  const closedSets = n(row.closed_sets);
-const score = n(row.competitive_score);
-const pct2 = n(row.pct_2s);
-const pct3 = n(row.pct_3s);
+  function findStatsPlayer(playerName) {
+    const target = String(playerName || '').trim();
 
-function pctOfSets(v) {
-  return n(row.sets_played) > 0 ? `${Math.round((n(v) / n(row.sets_played)) * 100)}%` : '0%';
-}
+    return players.find(p =>
+      String(p.player_name || p.player || '').trim() === target
+    ) || {};
+  }
+
+  function statsPlayerIdentityHTML(playerName) {
+    const safeName = String(playerName || '—').trim();
+    const p = findStatsPlayer(safeName);
+    const url = p.photo_url || '';
+    const initials = ini(safeName);
+
+    const avatarHTML = (url && String(url).startsWith('http'))
+      ? `
+        <img
+          class="stats-feature-player-avatar"
+          src="${url}"
+          alt="${safeName}"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"
+        >
+        <div class="stats-feature-player-initials" style="display:none">${initials}</div>
+      `
+      : `<div class="stats-feature-player-initials">${initials}</div>`;
+
+    return `
+      <div class="stats-feature-player">
+        ${avatarHTML}
+        <div class="stats-feature-player-copy">
+          <div class="stats-feature-player-name">${safeName}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function statsFeatureCardHTML(card) {
+    const assetPath = card.asset ? recognitionAssetPath(card.asset) : '';
+    const imageClass = card.imageClass || 'special';
+
+    const mediaHTML = assetPath
+      ? `
+        <img
+          class="stats-feature-award-img ${imageClass}"
+          src="${assetPath}"
+          alt="${card.title}"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+        >
+        <div class="stats-feature-award-fallback ${imageClass}" style="display:none"></div>
+      `
+      : `<div class="stats-feature-award-fallback ${imageClass}"></div>`;
+
+    return `
+      <div class="stats-feature-card">
+        <div class="stats-feature-card-title">${card.title || '—'}</div>
+
+        <div class="stats-feature-card-main">
+          <div class="stats-feature-award-media">
+            ${mediaHTML}
+          </div>
+
+          ${statsPlayerIdentityHTML(card.player)}
+
+          <div class="stats-feature-highlight">${card.highlight || '—'}</div>
+        </div>
+
+        <div class="stats-feature-card-note">${card.note || '&nbsp;'}</div>
+      </div>
+    `;
+  }
+
+  function seasonRecognitionRows() {
+    return playerRecognitions.filter(r => {
+      const season = normalizeLeagueKey(r.season);
+      const league = normalizeLeagueKey(selectedLeague);
+      const isActive = String(r.is_active || '').toLowerCase();
+
+      return (
+        season === league &&
+        isActive !== 'false' &&
+        isActive !== '0'
+      );
+    });
+  }
+
+  function statsWinnerSurname(playerName) {
+    const parts = String(playerName || '').trim().split(/\s+/).filter(Boolean);
+    return parts.length ? parts[parts.length - 1] : '—';
+  }
+
+  function statsWinnerPhotoHTML(playerName) {
+    const safeName = String(playerName || '—').trim();
+    const p = findStatsPlayer(safeName);
+    const url = p.photo_url || '';
+    const initials = ini(safeName);
+
+    if (url && String(url).startsWith('http')) {
+      return `
+        <img
+          class="stats-winner-photo"
+          src="${url}"
+          alt="${safeName}"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"
+        >
+        <div class="stats-winner-initials" style="display:none">${initials}</div>
+      `;
+    }
+
+    return `<div class="stats-winner-initials">${initials}</div>`;
+  }
+
+  function officialVisualType(recognitionType, recognitionCode) {
+    const type = String(recognitionType || '').trim().toLowerCase();
+    const code = String(recognitionCode || '').trim().toUpperCase();
+
+    if (type === 'achievement' || code.startsWith('PROMO_')) return 'achievement';
+    if (type === 'special' || code === 'BEST_STREAK' || code.startsWith('MR_')) return 'special';
+    return 'medal';
+  }
+
+  function statsWinnerAwardHTML(asset, title, visualType) {
+    const assetPath = asset ? recognitionAssetPath(asset) : '';
+    const cls = visualType || 'medal';
+
+    if (!assetPath) {
+      return `<div class="stats-winner-award-fallback ${cls}"></div>`;
+    }
+
+    return `
+      <img
+        class="stats-winner-award-img ${cls}"
+        src="${assetPath}"
+        alt="${title}"
+        loading="lazy"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+      >
+      <div class="stats-winner-award-fallback ${cls}" style="display:none"></div>
+    `;
+  }
+
+  function statsOfficialCardHTML(card) {
+    const playerName = card.player || '—';
+    const visualType = card.visualType || 'medal';
+    const kpiHTML = card.kpi
+      ? `<span class="stats-winner-note-kpi">${card.kpi}</span>`
+      : '';
+
+    return `
+      <div class="stats-winner-card ${visualType}">
+        <div class="stats-winner-title">${card.title || '—'}</div>
+
+        <div class="stats-winner-main">
+          <div class="stats-winner-photo-wrap">
+            ${statsWinnerPhotoHTML(playerName)}
+          </div>
+
+          <div class="stats-winner-name">${statsWinnerSurname(playerName)}</div>
+
+          <div class="stats-winner-award-wrap">
+            ${statsWinnerAwardHTML(card.asset, card.title, visualType)}
+          </div>
+        </div>
+
+        <div class="stats-winner-note">${kpiHTML}${card.note || '&nbsp;'}</div>
+      </div>
+    `;
+  }
+
+  function officialCarouselHTML(config) {
+    const items = config.items || [];
+    const carouselKey = config.key;
+
+    const isCompactCarousel = window.matchMedia('(max-width: 760px)').matches;
+    const perPage = isCompactCarousel ? 2 : 4;
+
+    const pages = [];
+
+    for (let i = 0; i < items.length; i += perPage) {
+      pages.push(items.slice(i, i + perPage));
+    }
+
+    const maxPage = Math.max(0, pages.length - 1);
+    const currentRaw = Number(statsCarouselPages[carouselKey] || 0);
+    const currentPage = Math.min(Math.max(currentRaw, 0), maxPage);
+    statsCarouselPages[carouselKey] = currentPage;
+
+    const visibleItems = pages[currentPage] || [];
+    const canPrev = currentPage > 0;
+    const canNext = currentPage < maxPage;
+
+    return `
+      <div class="stats-section stats-official-carousel">
+        <div class="stats-official-carousel-head">
+          <div class="stats-official-carousel-title">${config.title}</div>
+
+          <div class="stats-official-carousel-controls">
+            <button
+              type="button"
+              class="stats-official-carousel-btn"
+              onclick="changeStatsCarouselPage('${carouselKey}', -1)"
+              ${canPrev ? '' : 'disabled'}
+              aria-label="Anterior"
+            >‹</button>
+
+            <button
+              type="button"
+              class="stats-official-carousel-btn"
+              onclick="changeStatsCarouselPage('${carouselKey}', 1)"
+              ${canNext ? '' : 'disabled'}
+              aria-label="Siguiente"
+            >›</button>
+          </div>
+        </div>
+
+        <div class="stats-official-carousel-grid">
+          ${visibleItems.map(statsOfficialCardHTML).join('')}
+        </div>
+
+        ${
+          pages.length > 1
+            ? `<div class="stats-official-carousel-dots">
+                ${pages.map((_, idx) => `
+                  <button
+                    type="button"
+                    class="stats-official-carousel-dot ${idx === currentPage ? 'active' : ''}"
+                    onclick="setStatsCarouselPage('${carouselKey}', ${idx})"
+                    aria-label="Ir a página ${idx + 1}"
+                  ></button>
+                `).join('')}
+              </div>`
+            : ''
+        }
+      </div>
+    `;
+  }
+
+  function seasonRecognitionRows() {
+    return playerRecognitions.filter(r => {
+      const season = normalizeLeagueKey(r.season);
+      const league = normalizeLeagueKey(selectedLeague);
+      const isActive = String(r.is_active || '').toLowerCase();
+
+      return (
+        season === league &&
+        isActive !== 'false' &&
+        isActive !== '0'
+      );
+    });
+  }
+
+  function buildPalmaresItems() {
+    const recRows = seasonRecognitionRows();
+
+    function findRecognitionByCode(code) {
+      return recRows.find(r =>
+        String(r.recognition_code || '').toUpperCase() === code
+      ) || null;
+    }
+
+    const palmaresMeta = [
+      {
+        title: 'Campeón',
+        code: 'CHAMP_A',
+        note: 'Ganador oficial Div. A · Cocar 25.'
+      },
+      {
+        title: 'Ganador Div. B',
+        code: 'CHAMP_B',
+        note: 'Ganador oficial Div. B · Cocar 25.'
+      },
+      {
+        title: 'Ganador Div. C',
+        code: 'CHAMP_C',
+        note: 'Ganador oficial Div. C · Cocar 25.'
+      },
+      {
+        title: 'Ganador Div. D',
+        code: 'CHAMP_D',
+        note: 'Ganador oficial Div. D · Cocar 25.'
+      }
+    ];
+
+    return palmaresMeta.map(meta => {
+      const rec = findRecognitionByCode(meta.code);
+
+      return {
+        title: meta.title,
+        player: rec ? String(rec.player || '').trim() : '—',
+        asset: rec ? String(rec.recognition_asset || '').trim() : '',
+        type: String(rec?.recognition_type || 'medal').trim().toLowerCase(),
+        value: '',
+        note: meta.note
+      };
+    });
+  }
+
+  function buildSpecialAwardItems() {
+    const recRows = seasonRecognitionRows()
+      .filter(r => String(r.recognition_type || '').toLowerCase() === 'special')
+      .sort((a, b) =>
+        Number(a.display_order || 999) - Number(b.display_order || 999)
+      );
+
+    const noteByCode = {
+      BEST_STREAK: 'Mayor racha ganadora de la temporada.',
+      MR_COMEBACK: 'Gana tras perder el primer set.',
+      MR_TIE_BREAK: 'Tie breaks ganados.',
+      MR_HAMMER: 'Sets 6-0 / 6-1 ganados.'
+    };
+
+    return recRows.map(rec => {
+      const code = String(rec.recognition_code || '').toUpperCase();
+      const topRow = getOfficialTopRow(code);
+
+      return {
+        title: rec.recognition_label || code || 'Premio especial',
+        player: topRow?.player || rec.player || '—',
+        asset: rec.recognition_asset || '',
+        visualType: 'special',
+        kpi: formatStatsRankValue(code, topRow),
+        note: noteByCode[code] || 'Premio especial oficial · Cocar 25.'
+      };
+    });
+  }
+
+  function buildOfficialAwardsHTML() {
+    const recRows = seasonRecognitionRows();
+
+    const awardMeta = [
+      {
+        title: 'Best Racha',
+        code: 'BEST_STREAK',
+        category: 'BEST_STREAK',
+        note: 'Mayor racha ganadora de la temporada.'
+      },
+      {
+        title: 'Comeback Story',
+        code: 'MR_COMEBACK',
+        category: 'MR_COMEBACK',
+        note: 'Gana tras perder el primer set.'
+      },
+      {
+        title: 'Tie Break King',
+        code: 'MR_TIE_BREAK',
+        category: 'MR_TIE_BREAK',
+        note: 'Tie breaks ganados.'
+      },
+      {
+        title: 'Mr Hammer',
+        code: 'MR_HAMMER',
+        category: 'MR_HAMMER',
+        note: 'Sets 6-0 / 6-1 ganados.'
+      }
+    ];
+
+    return awardMeta.map(meta => {
+      const topRow = getOfficialTopRow(meta.category);
+
+      const rec =
+        recRows.find(r =>
+          String(r.recognition_type || '').toLowerCase() === 'special' &&
+          String(r.recognition_code || '').toUpperCase() === meta.code &&
+          String(r.player || '') === String(topRow?.player || '')
+        ) ||
+        recRows.find(r =>
+          String(r.recognition_type || '').toLowerCase() === 'special' &&
+          String(r.recognition_code || '').toUpperCase() === meta.code
+        ) ||
+        {};
+
+      return statsSpecialAwardCardHTML({
+        title: meta.title,
+        player: topRow?.player || rec.player || '—',
+        asset: rec.recognition_asset || '',
+        value: formatStatsRankValue(meta.category, topRow),
+        note: meta.note
+      });
+    }).join('');
+  }
+        function liveDivisionTop3SectionHTML() {
+    const divisions = ['A', 'B', 'C', 'D'];
+    const carouselKey = 'live-division-top3';
+
+    function diffText(value) {
+      const d = n(value);
+
+      if (d > 0) return `+${fmtInt(d)}`;
+      if (d < 0) return `${fmtInt(d)}`;
+
+      return '0';
+    }
+
+    function topRowsByDivision(div) {
+      return allStandings
+        .filter(r =>
+          normalizeLeagueKey(r.league_id) === normalizeLeagueKey(selectedLeague) &&
+          String(r.division || '').toUpperCase() === div &&
+          !isReplacementPlayer(r.player, selectedLeague)
+        )
+        .sort((a, b) =>
+          n(b.pts) - n(a.pts) ||
+          n(b.diff_games) - n(a.diff_games) ||
+          String(a.player || '').localeCompare(String(b.player || ''))
+        )
+        .slice(0, 3);
+    }
+
+    function liveDivisionCardHTML(div) {
+      const rows = topRowsByDivision(div);
+
+      return `
+        <div class="stats-rank-card">
+          <div class="stats-rank-head">
+            <div class="stats-rank-title">División ${div}</div>
+            <span class="live-pill-mini">LIVE</span>
+          </div>
+
+          ${
+            rows.length === 0
+              ? `<div class="no-data" style="padding:18px 0;font-size:11px;">Sin datos</div>`
+              : `
+                <div
+                  class="stats-rank-row"
+                  style="grid-template-columns:14px minmax(0,1fr) 72px; min-height:18px; padding:0 0 4px;"
+                >
+                  <div></div>
+                  <div></div>
+                  <div
+                    class="stats-rank-value"
+                    style="font-size:8.4px;font-weight:850;color:var(--muted);text-align:right;white-space:nowrap;letter-spacing:-0.25px;"
+                  >PTS (Dif G.)</div>
+                </div>
+
+                ${rows.map((r, idx) => `
+                  <div
+                    class="stats-rank-row"
+                    style="grid-template-columns:14px minmax(0,1fr) 72px; gap:6px;"
+                  >
+                    <div class="stats-rank-pos">${idx + 1}</div>
+
+                    <div
+                      class="stats-rank-player"
+                      style="font-size:11.4px;letter-spacing:-0.35px;"
+                    >${r.player || '—'}</div>
+
+                    <div
+                      class="stats-rank-value"
+                      style="display:flex;justify-content:flex-end;align-items:baseline;gap:2px;white-space:nowrap;"
+                    >
+                      <span>${fmtInt(r.pts)}</span>
+                      <span style="font-size:9px;font-weight:500;color:var(--muted);">(${diffText(r.diff_games)})</span>
+                    </div>
+                  </div>
+                `).join('')}
+              `
+          }
+        </div>
+      `;
+    }
+
+    const items = divisions;
+    const isCompactCarousel = window.matchMedia('(max-width: 900px)').matches;
+    const perPage = isCompactCarousel ? 2 : 4;
+    const pages = [];
+
+    for (let i = 0; i < items.length; i += perPage) {
+      pages.push(items.slice(i, i + perPage));
+    }
+
+    const maxPage = Math.max(0, pages.length - 1);
+    const currentRaw = Number(statsCarouselPages[carouselKey] || 0);
+    const currentPage = Math.min(Math.max(currentRaw, 0), maxPage);
+
+    statsCarouselPages[carouselKey] = currentPage;
+
+    const visibleItems = pages[currentPage] || [];
+    const canPrev = currentPage > 0;
+    const canNext = currentPage < maxPage;
+
+    return `
+      <div class="stats-section stats-official-carousel">
+        <div class="stats-official-carousel-head">
+          <div class="stats-official-carousel-title">Top 3 LIVE por división</div>
+
+          <div class="stats-official-carousel-controls">
+            <button
+              type="button"
+              class="stats-official-carousel-btn"
+              onclick="changeStatsCarouselPage('${carouselKey}', -1)"
+              ${canPrev ? '' : 'disabled'}
+              aria-label="Anterior"
+            >‹</button>
+
+            <button
+              type="button"
+              class="stats-official-carousel-btn"
+              onclick="changeStatsCarouselPage('${carouselKey}', 1)"
+              ${canNext ? '' : 'disabled'}
+              aria-label="Siguiente"
+            >›</button>
+          </div>
+        </div>
+
+        <div class="stats-rank-grid-4">
+          ${visibleItems.map(div => liveDivisionCardHTML(div)).join('')}
+        </div>
+
+        ${
+          pages.length > 1
+            ? `<div class="stats-official-carousel-dots">
+                ${pages.map((_, idx) => `
+                  <button
+                    type="button"
+                    class="stats-official-carousel-dot ${idx === currentPage ? 'active' : ''}"
+                    onclick="setStatsCarouselPage('${carouselKey}', ${idx})"
+                    aria-label="Ir a página ${idx + 1}"
+                  ></button>
+                `).join('')}
+              </div>`
+            : ''
+        }
+      </div>
+    `;
+  }
+
+  const closedLeaguePalmaresSection = isClosedLeague ? `
+    ${officialCarouselHTML({
+      key: 'palmares',
+      title: 'Campeón y ganadores división',
+      items: buildPalmaresItems()
+    })}
+  ` : '';
+    const liveDivisionTop3Section = !isClosedLeague ? liveDivisionTop3SectionHTML() : '';
+
+  const closedLeagueSpecialAwardsSection = isClosedLeague ? `
+    ${officialCarouselHTML({
+      key: 'specials',
+      title: 'Premios especiales oficiales',
+      items: buildSpecialAwardItems()
+    })}
+  ` : '';
+
+  const liveAwardsSection = !isClosedLeague ? (() => {
+    const liveAwardItems = [
+      {
+        title: 'Best Racha',
+        category: 'BEST_STREAK',
+        note: 'Mayor racha ganadora del torneo.'
+      },
+      {
+        title: 'Comeback Story',
+        category: 'MR_COMEBACK',
+        note: 'Gana tras perder el primer set.'
+      },
+      {
+        title: 'Tie Break King',
+        category: 'MR_TIE_BREAK',
+        note: 'Tie breaks ganados.'
+      },
+      {
+        title: 'Mr Hammer',
+        category: 'MR_HAMMER',
+        note: 'Sets 6-0 / 6-1 ganados.'
+      }
+    ];
+
+    const carouselKey = 'live-awards';
+    const isCompactCarousel = window.matchMedia('(max-width: 760px)').matches;
+    const perPage = isCompactCarousel ? 2 : 4;
+    const pages = [];
+
+    for (let i = 0; i < liveAwardItems.length; i += perPage) {
+      pages.push(liveAwardItems.slice(i, i + perPage));
+    }
+
+    const maxPage = Math.max(0, pages.length - 1);
+    const currentRaw = Number(statsCarouselPages[carouselKey] || 0);
+    const currentPage = Math.min(Math.max(currentRaw, 0), maxPage);
+
+    statsCarouselPages[carouselKey] = currentPage;
+
+    const visibleItems = pages[currentPage] || [];
+    const canPrev = currentPage > 0;
+    const canNext = currentPage < maxPage;
+
+    return `
+      <div class="stats-section stats-official-carousel">
+        <div class="stats-official-carousel-head">
+          <div class="stats-official-carousel-title">Premios especiales en curso · Top 5</div>
+
+          <div class="stats-official-carousel-controls">
+            <button
+              type="button"
+              class="stats-official-carousel-btn"
+              onclick="changeStatsCarouselPage('${carouselKey}', -1)"
+              ${canPrev ? '' : 'disabled'}
+              aria-label="Anterior"
+            >‹</button>
+
+            <button
+              type="button"
+              class="stats-official-carousel-btn"
+              onclick="changeStatsCarouselPage('${carouselKey}', 1)"
+              ${canNext ? '' : 'disabled'}
+              aria-label="Siguiente"
+            >›</button>
+          </div>
+        </div>
+
+        <div class="stats-rank-grid-4">
+          ${visibleItems.map(item =>
+            rankCard(item.title, item.category, item.note)
+          ).join('')}
+        </div>
+
+        ${
+          pages.length > 1
+            ? `<div class="stats-official-carousel-dots">
+                ${pages.map((_, idx) => `
+                  <button
+                    type="button"
+                    class="stats-official-carousel-dot ${idx === currentPage ? 'active' : ''}"
+                    onclick="setStatsCarouselPage('${carouselKey}', ${idx})"
+                    aria-label="Ir a página ${idx + 1}"
+                  ></button>
+                `).join('')}
+              </div>`
+            : ''
+        }
+      </div>
+    `;
+  })() : '';
+        function mainStatsRankingsSectionHTML() {
+    const mainStats = [
+      {
+        title: 'Rendimiento',
+        category: 'PERFORMANCE_RATE',
+        note: 'Puntos obtenidos sobre máximo posible.'
+      },
+      {
+        title: 'Win Rate Match',
+        category: 'TOP_WIN_RATE',
+        note: 'Partidos ganados sobre partidos jugados.'
+      },
+      {
+        title: 'Win Rate Sets',
+        category: 'SETS_WIN_RATE',
+        note: 'Sets ganados sobre sets jugados.'
+      },
+      {
+        title: 'Win Rate Games',
+        category: 'GAMES_WIN_RATE',
+        note: 'Games ganados sobre games jugados.'
+      }
+    ];
+
+    const carouselKey = isClosedLeague ? 'closed-stats' : 'live-stats';
+    const sectionTitle = isClosedLeague
+      ? 'Estadísticas de liga · Top 5'
+      : 'Rankings actuales · Top 5';
+
+    const isCompactCarousel = window.matchMedia('(max-width: 760px)').matches;
+    const perPage = isCompactCarousel ? 2 : 4;
+    const pages = [];
+
+    for (let i = 0; i < mainStats.length; i += perPage) {
+      pages.push(mainStats.slice(i, i + perPage));
+    }
+
+    const maxPage = Math.max(0, pages.length - 1);
+    const currentRaw = Number(statsCarouselPages[carouselKey] || 0);
+    const currentPage = Math.min(Math.max(currentRaw, 0), maxPage);
+
+    statsCarouselPages[carouselKey] = currentPage;
+
+    const visibleItems = pages[currentPage] || [];
+    const canPrev = currentPage > 0;
+    const canNext = currentPage < maxPage;
+
+    return `
+      <div class="stats-section stats-official-carousel">
+        <div class="stats-official-carousel-head">
+          <div class="stats-official-carousel-title">${sectionTitle}</div>
+
+          <div class="stats-official-carousel-controls">
+            <button
+              type="button"
+              class="stats-official-carousel-btn"
+              onclick="changeStatsCarouselPage('${carouselKey}', -1)"
+              ${canPrev ? '' : 'disabled'}
+              aria-label="Anterior"
+            >‹</button>
+
+            <button
+              type="button"
+              class="stats-official-carousel-btn"
+              onclick="changeStatsCarouselPage('${carouselKey}', 1)"
+              ${canNext ? '' : 'disabled'}
+              aria-label="Siguiente"
+            >›</button>
+          </div>
+        </div>
+
+        <div class="stats-rank-grid-4">
+          ${visibleItems.map(item =>
+            rankCard(item.title, item.category, item.note)
+          ).join('')}
+        </div>
+
+        ${
+          pages.length > 1
+            ? `<div class="stats-official-carousel-dots">
+                ${pages.map((_, idx) => `
+                  <button
+                    type="button"
+                    class="stats-official-carousel-dot ${idx === currentPage ? 'active' : ''}"
+                    onclick="setStatsCarouselPage('${carouselKey}', ${idx})"
+                    aria-label="Ir a página ${idx + 1}"
+                  ></button>
+                `).join('')}
+              </div>`
+            : ''
+        }
+      </div>
+    `;
+  }
+
+  const closedSets = n(row.closed_sets);
+  const score = n(row.competitive_score);
+  const pct2 = n(row.pct_2s);
+  const pct3 = n(row.pct_3s);
 
   document.getElementById('page-stats').innerHTML = `
     ${pageHeroHTML('LIG Stats', 'Radiografía competitiva de la liga')}
@@ -2792,77 +5344,68 @@ function pctOfSets(v) {
       <div class="stats-section-title">Resumen general</div>
 
       <div class="stats-summary-grid">
-  <div class="stats-kpi-card">
-    <div>
-      <div class="stats-kpi-label">Partidos</div>
-      <div class="stats-kpi-value">${fmtInt(row.matches_played)}</div>
-      <div class="stats-kpi-sub">${n(row.wo_matches) > 0 ? `+${fmtInt(row.wo_matches)} WO` : 'Jugados reales'}</div>
+        <div class="stats-kpi-card">
+          <div>
+            <div class="stats-kpi-label">Partidos</div>
+            <div class="stats-kpi-value">${fmtInt(row.matches_played)}</div>
+            <div class="stats-kpi-sub">${n(row.wo_matches) > 0 ? `+${fmtInt(row.wo_matches)} WO` : 'Jugados reales'}</div>
+          </div>
+        </div>
+
+        <div class="stats-kpi-card">
+          <div>
+            <div class="stats-kpi-label">Sets</div>
+            <div class="stats-kpi-value">${fmtInt(row.sets_played)}</div>
+            <div class="stats-kpi-sub">Sets disputados</div>
+          </div>
+        </div>
+
+        <div class="stats-kpi-card">
+          <div>
+            <div class="stats-kpi-label">Games</div>
+            <div class="stats-kpi-value">${fmtInt(row.games_played)}</div>
+            <div class="stats-kpi-sub">Games totales</div>
+          </div>
+        </div>
+
+        <div class="stats-kpi-card">
+          <div>
+            <div class="stats-kpi-label">3 Sets</div>
+            <div class="stats-kpi-value">${fmtInt(row.matches_3s)}</div>
+            <div class="stats-kpi-sub">${fmtPct(row.pct_3s)} de los partidos</div>
+          </div>
+        </div>
+
+        <div class="stats-kpi-card">
+          <div>
+            <div class="stats-kpi-label">Sets cerrados</div>
+            <div class="stats-kpi-value">${fmtInt(closedSets)}</div>
+            <div class="stats-kpi-sub">${fmtPct(row.closed_sets_pct)} · Tight + Tie break</div>
+          </div>
+        </div>
+
+        <div class="stats-kpi-card highlight">
+          <div>
+            <div class="stats-kpi-label">Índice LIG</div>
+            <div class="stats-kpi-value">${fmtInt(score)}</div>
+            <div class="stats-kpi-sub">${row.competitive_label || 'Sin datos'}</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="stats-kpi-card">
-    <div>
-      <div class="stats-kpi-label">Sets</div>
-      <div class="stats-kpi-value">${fmtInt(row.sets_played)}</div>
-      <div class="stats-kpi-sub">Sets disputados</div>
-    </div>
-  </div>
-
-  <div class="stats-kpi-card">
-    <div>
-      <div class="stats-kpi-label">Games</div>
-      <div class="stats-kpi-value">${fmtInt(row.games_played)}</div>
-      <div class="stats-kpi-sub">Games totales</div>
-    </div>
-  </div>
-
-  <div class="stats-kpi-card">
-  <div>
-    <div class="stats-kpi-label">3 Sets</div>
-    <div class="stats-kpi-value">${fmtInt(row.matches_3s)}</div>
-    <div class="stats-kpi-sub">${fmtPct(row.pct_3s)} de los partidos</div>
-  </div>
-</div>
-
-  <div class="stats-kpi-card">
-  <div>
-    <div class="stats-kpi-label">Sets cerrados</div>
-    <div class="stats-kpi-value">${fmtInt(closedSets)}</div>
-    <div class="stats-kpi-sub">${fmtPct(row.closed_sets_pct)} · Tight + Tie break</div>
-  </div>
-</div>
-
-  <div class="stats-kpi-card highlight">
-    <div>
-      <div class="stats-kpi-label">Índice LIG</div>
-      <div class="stats-kpi-value">${fmtInt(score)}</div>
-      <div class="stats-kpi-sub">${row.competitive_label || 'Sin datos'}</div>
-    </div>
-  </div>
-</div>
 
     <div class="stats-section">
       <div class="stats-section-title">Perfil competitivo</div>
 
       <div class="stats-profile-grid">
         <div class="stats-panel">
-          <div class="stats-panel-title">Perfil de partidos</div>
+  <div class="stats-panel-title">Perfil de sets</div>
 
-          <div class="stats-bar-row">
-            <div class="stats-bar-label">2 sets</div>
-            <div class="stats-bar-track">
-              <div class="stats-bar-fill" style="width:${Math.round(pct2 * 100)}%;"></div>
-            </div>
-            <div class="stats-bar-value">${fmtPct(row.pct_2s)}</div>
-          </div>
-
-          <div class="stats-bar-row">
-            <div class="stats-bar-label">3 sets</div>
-            <div class="stats-bar-track">
-              <div class="stats-bar-fill" style="width:${Math.round(pct3 * 100)}%;"></div>
-            </div>
-            <div class="stats-bar-value">${fmtPct(row.pct_3s)}</div>
-          </div>
+  ${profileSetRowHTML('Hammer', '6-0 / 6-1', row.hammer_sets, row.sets_played)}
+  ${profileSetRowHTML('Cold', '6-2 / 6-3', row.cold_sets, row.sets_played)}
+  ${profileSetRowHTML('Tight', '6-4 / 7-5', row.tight_sets, row.sets_played)}
+  ${profileSetRowHTML('Tie break', '7-6', row.tie_break_sets, row.sets_played)}
+</div>
 
           <div class="stats-mini-split">
             <div class="stats-mini">
@@ -2879,66 +5422,50 @@ function pctOfSets(v) {
         <div class="stats-panel">
           <div class="stats-panel-title">Perfil de sets</div>
 
-          <div class="stats-set-row">
-  <div class="stats-set-label">
-    <span class="stats-set-name">Hammer</span>
-    <span class="stats-set-desc">6-0 / 6-1</span>
-  </div>
-  <div class="stats-set-value">${fmtInt(row.hammer_sets)}</div>
-  <div class="stats-set-pct">${pctOfSets(row.hammer_sets)}</div>
-</div>
+          <div class="stats-bar-row">
+            <div class="stats-bar-label">Hammer <span style="font-weight:600;color:var(--muted);">6-0 / 6-1</span></div>
+            <div class="stats-bar-track">
+              <div class="stats-bar-fill" style="width:${n(row.sets_played) > 0 ? Math.round((n(row.hammer_sets) / n(row.sets_played)) * 100) : 0}%;"></div>
+            </div>
+            <div class="stats-bar-value">${pctOfSets(row.hammer_sets)}</div>
+          </div>
 
-<div class="stats-set-row">
-  <div class="stats-set-label">
-    <span class="stats-set-name">Cold</span>
-    <span class="stats-set-desc">6-2 / 6-3</span>
-  </div>
-  <div class="stats-set-value">${fmtInt(row.cold_sets)}</div>
-  <div class="stats-set-pct">${pctOfSets(row.cold_sets)}</div>
-</div>
+          <div class="stats-bar-row">
+            <div class="stats-bar-label">Cold <span style="font-weight:600;color:var(--muted);">6-2 / 6-3</span></div>
+            <div class="stats-bar-track">
+              <div class="stats-bar-fill" style="width:${n(row.sets_played) > 0 ? Math.round((n(row.cold_sets) / n(row.sets_played)) * 100) : 0}%;"></div>
+            </div>
+            <div class="stats-bar-value">${pctOfSets(row.cold_sets)}</div>
+          </div>
 
-<div class="stats-set-row">
-  <div class="stats-set-label">
-    <span class="stats-set-name">Tight</span>
-    <span class="stats-set-desc">6-4 / 7-5</span>
-  </div>
-  <div class="stats-set-value">${fmtInt(row.tight_sets)}</div>
-  <div class="stats-set-pct">${pctOfSets(row.tight_sets)}</div>
-</div>
+          <div class="stats-bar-row">
+            <div class="stats-bar-label">Tight <span style="font-weight:600;color:var(--muted);">6-4 / 7-5</span></div>
+            <div class="stats-bar-track">
+              <div class="stats-bar-fill" style="width:${n(row.sets_played) > 0 ? Math.round((n(row.tight_sets) / n(row.sets_played)) * 100) : 0}%;"></div>
+            </div>
+            <div class="stats-bar-value">${pctOfSets(row.tight_sets)}</div>
+          </div>
 
-<div class="stats-set-row">
-  <div class="stats-set-label">
-    <span class="stats-set-name">Tie break</span>
-    <span class="stats-set-desc">7-6</span>
-  </div>
-  <div class="stats-set-value">${fmtInt(row.tie_break_sets)}</div>
-  <div class="stats-set-pct">${pctOfSets(row.tie_break_sets)}</div>
-</div>
+          <div class="stats-bar-row">
+            <div class="stats-bar-label">Tie break <span style="font-weight:600;color:var(--muted);">7-6</span></div>
+            <div class="stats-bar-track">
+              <div class="stats-bar-fill" style="width:${n(row.sets_played) > 0 ? Math.round((n(row.tie_break_sets) / n(row.sets_played)) * 100) : 0}%;"></div>
+            </div>
+            <div class="stats-bar-value">${pctOfSets(row.tie_break_sets)}</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="stats-section">
-      <div class="stats-section-title">Top performers</div>
+    ${closedLeaguePalmaresSection}
 
-      <div class="stats-rank-grid-4">
-        ${rankCard('Top win rate', 'TOP_WIN_RATE', '%', 'Mínimo 3 partidos.')}
-        ${rankCard('Más victorias', 'MOST_WINS', 'W', '')}
-        ${rankCard('Mejor racha histórica', 'BEST_STREAK', '↗', 'Mayor secuencia lograda.')}
-        ${rankCard('Mejor racha actual', 'BEST_CURRENT_STREAK', '🔥', 'Victorias consecutivas activas.')}
-      </div>
-    </div>
+    ${liveDivisionTop3Section}
 
-    <div class="stats-section">
-      <div class="stats-section-title">Destacados de la liga</div>
+    ${mainStatsRankingsSectionHTML()}
 
-      <div class="stats-awards-grid">
-        ${rankCard('Comeback Story', 'MR_COMEBACK', '', 'Gana tras perder el primer set.')}
-${rankCard('Collapse Story', 'MR_FARRA', '', 'Pierde tras ganar el primer set.')}
-        ${rankCard('Tie Break King', 'MR_TIE_BREAK', '7', 'Tie breaks ganados (TB jugados).')}
-        ${rankCard('Mr Hammer Set', 'MR_HAMMER', '6', 'Sets 6-0 / 6-1 ganados.')}
-      </div>
-    </div>
+    ${closedLeagueSpecialAwardsSection}
+
+    ${liveAwardsSection}
 
     <div class="foot">© 2026 LIG · Powered by NonData&Co</div>
   `;
@@ -3111,45 +5638,1077 @@ const playerName = r.player || '';
     <div class="foot">© 2026 LIG · Powered by NonData&Co</div>
   `;
 }
+
+// ── LIG PLAYERS PAGE ──
+let currentPlayerProfile = '';
+let recognitionPageByPlayer = {};
+
+function renderJugadores() {
+  const page = document.getElementById('page-jugadores');
+
+  if (!playerProfiles || playerProfiles.length === 0) {
+    page.innerHTML = `
+      ${pageHeroHTML('LIG Players', 'Hoja de vida competitiva del jugador')}
+      <div class="rank-empty">No hay perfiles de jugador disponibles.</div>
+    `;
+    return;
+  }
+
+  const sortedPlayers = [...playerProfiles]
+    .filter(p => p.player)
+    .sort((a, b) => String(a.player).localeCompare(String(b.player)));
+
+  if (!currentPlayerProfile) {
+    currentPlayerProfile = sortedPlayers[0]?.player || '';
+  }
+
+  const p = sortedPlayers.find(x => x.player === currentPlayerProfile) || sortedPlayers[0];
+
+  const playerOptions = sortedPlayers.map(x => `
+    <option value="${x.player}" ${x.player === p.player ? 'selected' : ''}>${x.player}</option>
+  `).join('');
+
+  const avatar = playerProfileAvatarHTML(p);
+  const rachaClass = String(p.racha_actual || '').startsWith('W') ? 'rank-racha-w' : 'rank-racha-l';
+
+  page.innerHTML = `
+    ${pageHeroHTML('LIG Players', 'Hoja de vida competitiva del jugador')}
+
+    <div class="page-toolbar">
+      <div class="page-toolbar-left">
+        <div class="toolbar-group">
+          <div class="toolbar-label">Jugador</div>
+          <div class="toolbar-row">
+            <select onchange="currentPlayerProfile=this.value;renderJugadores()">
+              ${playerOptions}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="player-profile-hero">
+      <div class="player-profile-identity">
+        ${avatar}
+        <div class="player-profile-name">${p.player || 'Jugador'}</div>
+      </div>
+
+      <div class="player-profile-divider"></div>
+
+      <div class="player-profile-core">
+        ${playerRecognitionShelfHTML(p)}
+      </div>
+
+      <div class="player-profile-divider"></div>
+
+      <div class="player-profile-side">
+        <div class="profile-rank-metric top">
+          <div class="profile-rank-number">${ordinalPosition(p.rank_position)}</div>
+          <div class="profile-rank-label">LIG RNK</div>
+        </div>
+
+        <div class="profile-rank-metric bottom">
+          <div class="profile-rank-points">${formatNum(p.score_last14)}</div>
+          <div class="profile-rank-points-label">LIG PTS</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-block-title">Temporada actual</div>
+<div class="profile-kpi-grid profile-kpi-grid-6 current">
+  ${profileKpi('División', p.division_actual || '-', boldDivisionSeason(p.division_seasons_label || 'Temporada actual'))}
+  ${profileKpi(
+  'Posición tabla',
+  ordinalPosition(p.division_table_position),
+  p.division_position_zone || '-',
+  zoneClass(p.division_position_zone)
+)}
+  ${profileKpi('Puntos acumulados', p.division_table_points ?? '-', boldPointsMix(p.division_points_mix || '-'))}
+  ${profileKpi(
+  'Match G-P',
+  p.division_table_record || '-',
+  playedWR(sumValues(p.division_table_record?.split('-')?.[0], p.division_table_record?.split('-')?.[1]), p.division_table_match_wr || '-')
+)}
+  ${profileKpi(
+  'Sets G-P',
+  p.division_table_sets_record || '-',
+  playedWR(sumValues(p.division_table_sets_record?.split('-')?.[0], p.division_table_sets_record?.split('-')?.[1]), p.division_table_sets_wr || '-')
+)}
+  ${profileKpi(
+  'Games G-P',
+  p.division_table_games_record || '-',
+  playedWR(sumValues(p.division_table_games_record?.split('-')?.[0], p.division_table_games_record?.split('-')?.[1]), p.division_table_games_wr || '-')
+)}
+</div>
+
+<div class="profile-block-title">LIG Stats (Histórico)</div>
+<div class="profile-kpi-grid profile-kpi-grid-6 career">
+  ${profileKpi(
+  'Match G-P',
+  p.match_record || '-',
+  playedWR(sumValues(p.match_g, p.match_p), `WR ${pctText(p.match_wr)}`)
+)}
+${profileKpi(
+  'Sets G-P',
+  p.sets_record || '-',
+  playedWR(sumValues(p.sets_g, p.sets_p), `WR ${pctText(p.sets_wr)}`)
+)}
+${profileKpi(
+  'Games G-P',
+  p.games_record || '-',
+  playedWR(sumValues(p.games_g, p.games_p), `WR ${pctText(p.games_wr)}`)
+)}
+${profileKpi(
+  'Match 2S G-P',
+  p.record_2s || '-',
+  playedWR(sumValues(p.pg_2s, p.pp_2s), `WR ${pctText(p.wr_2s)}`)
+)}
+${profileKpi(
+  'Match 3S G-P',
+  p.record_3s || '-',
+  playedWR(sumValues(p.pg_3s, p.pp_3s), `WR ${pctText(p.wr_3s)}`)
+)}
+${profileKpi('Comeback / Collapse', `${p.cbs_total || 0}-${p.farra_total || 0}`, comebackCollapseStoryHTML())}
+</div>
+
+        <div class="lig-evolution-panel">
+      <div class="lig-evolution-head">
+        <div>
+          <div class="lig-evolution-title">Evolución LIG</div>
+          <div class="lig-evolution-subtitle">Construcción y defensa de puntos del jugador</div>
+        </div>
+        <div class="lig-evolution-current">
+          <div class="lig-evolution-current-value">${formatNum(p.score_last14)}</div>
+          <div class="lig-evolution-current-label">Total actual</div>
+        </div>
+      </div>
+
+            <div class="lig-evolution-chart-area">
+        <div class="lig-evolution-chart-wrap">
+          <div class="lig-chart-y-label">PUNTOS LIG</div>
+          <canvas id="ligEvolutionChart"></canvas>
+        </div>
+
+        <div class="lig-chart-x-label">PARTIDOS</div>
+      </div>
+    </div>
+
+    <div class="stats-profile-grid" style="margin-bottom:12px;">
+      <div class="stats-panel">
+        <div class="stats-panel-title">Perfil de partidos</div>
+        ${buildPlayerMatchProfileHTML(p)}
+      </div>
+
+      <div class="stats-panel">
+        <div class="stats-panel-title">Perfil de sets</div>
+        ${buildPlayerSetProfileHTML(p)}
+      </div>
+    </div>
+
+    <div class="profile-section-grid">
+      <div class="profile-panel">
+        <div class="profile-panel-title">Rendimiento por división</div>
+        ${divisionPerfRow('A', p.a_match_record, p.a_match_wr)}
+        ${divisionPerfRow('B', p.b_match_record, p.b_match_wr)}
+        ${divisionPerfRow('C', p.c_match_record, p.c_match_wr)}
+        ${divisionPerfRow('D', p.d_match_record, p.d_match_wr)}
+      </div>
+
+      <div class="profile-panel">
+        <div class="profile-panel-title">Rachas</div>
+        <div class="profile-row">
+          <span>Racha actual</span>
+          <strong>${p.racha_actual || '-'}</strong>
+        </div>
+        <div class="profile-row">
+          <span>Mejor racha ganadora</span>
+          <strong>${p.best_w_streak || '-'}</strong>
+        </div>
+        <div class="profile-row">
+          <span>Peor racha perdedora</span>
+          <strong>${p.best_l_streak || '-'}</strong>
+        </div>
+        <div class="profile-row">
+          <span>Últimos 5</span>
+          <strong>${p.last5_record || '-'}</strong>
+        </div>
+        <div class="profile-row">
+          <span>Últimos 10</span>
+          <strong>${p.last10_record || '-'}</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-panel muted-panel">
+      <div class="profile-panel-title">Evolución LIG Rank</div>
+      <div class="profile-summary">
+        Disponible al cierre de la temporada 26A. El primer snapshot oficial permitirá comparar el ranking actual contra la primera foto histórica.
+      </div>
+    </div>
+  `;
+
+  requestAnimationFrame(() => renderLigEvolutionChart(p));
+}
+
+let ligEvolutionChartInstance = null;
+
+function renderLigEvolutionChart(p) {
+  const canvas = document.getElementById('ligEvolutionChart');
+
+  if (!canvas || typeof Chart === 'undefined') return;
+
+  const series = buildLigEvolutionSeries(p);
+
+  if (ligEvolutionChartInstance) {
+    ligEvolutionChartInstance.destroy();
+    ligEvolutionChartInstance = null;
+  }
+
+  const ctx = canvas.getContext('2d');
+
+  ligEvolutionChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: series.labels,
+      datasets: [{
+        label: 'Puntos LIG',
+        data: series.values,
+        borderColor: '#C8A600',
+        backgroundColor: 'rgba(200,166,0,0.16)',
+        pointBackgroundColor: '#C8A600',
+        pointBorderColor: '#E9D26A',
+        pointHoverBackgroundColor: '#E9D26A',
+        pointHoverBorderColor: '#C8A600',
+        borderWidth: 2.5,
+        pointRadius: series.pointRadius,
+        pointHoverRadius: 5,
+        tension: 0.28,
+        fill: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: 650,
+        easing: 'easeOutQuart'
+      },
+      layout: {
+        padding: {
+          right: window.innerWidth <= 600 ? 42 : 52
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: 'rgba(17,17,17,0.96)',
+          titleColor: '#C8A600',
+          bodyColor: '#ffffff',
+          borderColor: 'rgba(200,166,0,0.55)',
+          borderWidth: 1,
+          displayColors: false,
+          padding: 10,
+          callbacks: {
+            title: function(items) {
+              const idx = items[0].dataIndex;
+              return `Partido ${series.labels[idx]}`;
+            },
+            label: function(item) {
+              const idx = item.dataIndex;
+              const total = formatNum(series.values[idx]);
+              const delta = series.deltas[idx];
+
+              if (idx < 14) {
+                return `Total LIG: ${total}`;
+              }
+
+              const sign = delta > 0 ? '+' : '';
+              return `Total LIG: ${total} (${sign}${formatNum(delta)})`;
+            },
+            afterLabel: function(item) {
+              const idx = item.dataIndex;
+
+              if (idx < 14) {
+                return 'Etapa: construcción';
+              }
+
+              return `Defensa: entra P${series.labels[idx]} / sale P${series.labels[idx] - 14}`;
+            }
+          }
+        }
+      },
+      scales: {
+                x: {
+          offset: true,
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: 'rgba(255,255,255,0.82)',
+            maxRotation: 0,
+            minRotation: 0,
+            autoSkip: window.innerWidth <= 600 ? true : false,
+            font: {
+              size: window.innerWidth <= 600 ? 8 : 10,
+              weight: '700'
+            }
+          },
+          title: {
+            display: false
+          },
+          border: {
+            color: 'rgba(255,255,255,0.24)'
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(255,255,255,0.10)',
+            borderDash: [4, 4]
+          },
+          ticks: {
+            color: 'rgba(255,255,255,0.82)',
+            font: {
+              size: window.innerWidth <= 600 ? 9 : 11,
+              weight: '700'
+            },
+            callback: function(value) {
+              return formatNum(value);
+            }
+          },
+          title: {
+            display: false
+          },
+          border: {
+            color: 'rgba(255,255,255,0.24)'
+          }
+        }
+      }
+    },
+    plugins: [ligEvolutionLabelsPlugin(series)]
+  });
+}
+
+function buildLigEvolutionSeries(p) {
+  const playerName = String(p.player || '').trim();
+
+  const realRows = playerLigEvolution
+    .filter(r => String(r.player || '').trim() === playerName)
+    .sort((a, b) => Number(a.match_number || 0) - Number(b.match_number || 0));
+
+  if (realRows.length > 0) {
+    const latestMatchNumber = Math.max(...realRows.map(r => Number(r.match_number || 0)));
+
+    const windowEnd = Math.max(14, latestMatchNumber);
+    const windowStart = windowEnd - 13;
+
+    const labels = Array.from({ length: 14 }, (_, i) => windowStart + i);
+
+    const rowByMatchNumber = {};
+    realRows.forEach(r => {
+      rowByMatchNumber[Number(r.match_number || 0)] = r;
+    });
+
+    const values = labels.map(matchNumber => {
+      const row = rowByMatchNumber[matchNumber];
+      if (!row) return null;
+      return Number(row.points_total || 0);
+    });
+
+    const deltas = labels.map(matchNumber => {
+      const row = rowByMatchNumber[matchNumber];
+
+      if (
+        !row ||
+        row.points_delta === null ||
+        row.points_delta === undefined ||
+        row.points_delta === ''
+      ) {
+        return 0;
+      }
+
+      return Number(row.points_delta || 0);
+    });
+
+    const rows = labels.map(matchNumber => rowByMatchNumber[matchNumber] || null);
+
+    const pointRadius = labels.map((matchNumber, i) => {
+      const hasValue = values[i] !== null && values[i] !== undefined;
+
+      if (!hasValue) return 0;
+      if (matchNumber === latestMatchNumber) return 6;
+      if (matchNumber === 14 || matchNumber === 15) return 5.5;
+
+      return 3.5;
+    });
+
+    return {
+      labels,
+      values,
+      deltas,
+      pointRadius,
+      rows,
+      isReal: true,
+      windowStart,
+      windowEnd
+    };
+  }
+
+  // Fallback visual si la hoja aún no trae data para el jugador
+  const total = Number(p.score_last14 || 0);
+  const played = Math.max(1, Number(p.matches_played || p.matches_counted || 14));
+  const visiblePlayed = Math.min(Math.max(played, 1), 14);
+
+  const labels = Array.from({ length: 14 }, (_, i) => i + 1);
+
+  const shape = [
+    0.09, 0.15, 0.23, 0.30, 0.36, 0.43, 0.50,
+    0.58, 0.65, 0.72, 0.80, 0.88, 0.94, 1.00
+  ];
+
+  const values = labels.map((_, i) => {
+    if (i + 1 > visiblePlayed) return null;
+
+    const factor = shape[i] || ((i + 1) / 14);
+    return Math.max(0, Math.round(total * factor));
+  });
+
+  const deltas = values.map((v, i) => {
+    if (v === null || v === undefined) return 0;
+    if (i === 0 || values[i - 1] === null || values[i - 1] === undefined) return 0;
+    return v - values[i - 1];
+  });
+
+  const pointRadius = labels.map((_, i) => {
+    if (values[i] === null || values[i] === undefined) return 0;
+    if (i === 0) return 4;
+    if (i === visiblePlayed - 1) return 6;
+    if ([3, 7, 11].includes(i)) return 5;
+    return 3.5;
+  });
+
+  return {
+    labels,
+    values,
+    deltas,
+    pointRadius,
+    rows: [],
+    isReal: false,
+    windowStart: 1,
+    windowEnd: 14
+  };
+}
+
+function ligEvolutionLabelsPlugin(series) {
+  return {
+    id: 'ligEvolutionLabelsPlugin',
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      const meta = chart.getDatasetMeta(0);
+
+      if (!meta || !meta.data || meta.data.length === 0) return;
+
+      const highlightIndexes = [0, 3, 7, 11, meta.data.length - 1]
+        .filter((v, i, arr) => v >= 0 && v < meta.data.length && arr.indexOf(v) === i);
+
+      ctx.save();
+
+      highlightIndexes.forEach(idx => {
+        const point = meta.data[idx];
+        const value = series.values[idx];
+
+        if (!point || value === undefined || value === null) return;
+
+        const x = point.x;
+        const y = point.y;
+        const isLast = idx === meta.data.length - 1;
+
+        const text = isLast ? `${formatNum(value)}` : formatNum(value);
+        const sub = isLast ? 'TOTAL ACTUAL' : '';
+
+        ctx.font = isLast ? '900 12px Inter' : '850 10px Inter';
+        const textWidth = ctx.measureText(text).width;
+        const boxW = Math.max(textWidth + 18, isLast ? 76 : 44);
+        const boxH = isLast ? 34 : 24;
+
+        const boxX = Math.min(Math.max(x - boxW / 2, 8), chart.width - boxW - 8);
+        const boxY = Math.max(y - boxH - 18, 8);
+
+        ctx.strokeStyle = 'rgba(200,166,0,0.72)';
+        ctx.fillStyle = 'rgba(17,17,17,0.86)';
+        ctx.lineWidth = 1;
+
+        roundRect(ctx, boxX, boxY, boxW, boxH, 6);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#C8A600';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = isLast ? '900 13px Inter' : '850 10px Inter';
+        ctx.fillText(text, boxX + boxW / 2, boxY + (isLast ? 12 : 12));
+
+        if (isLast) {
+          ctx.fillStyle = 'rgba(255,255,255,0.72)';
+          ctx.font = '850 7px Inter';
+          ctx.fillText(sub, boxX + boxW / 2, boxY + 25);
+        }
+
+        ctx.beginPath();
+        ctx.setLineDash([2, 3]);
+        ctx.moveTo(x, boxY + boxH);
+        ctx.lineTo(x, y - 6);
+        ctx.strokeStyle = 'rgba(200,166,0,0.45)';
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+
+      ctx.restore();
+    }
+  };
+}
+
+function roundRect(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}
+
+function playerProfileAvatarHTML(p) {
+  const url = p.photo_url;
+  const name = p.player || '';
+  const initials = p.initials || ini(name);
+
+  if (url && String(url).startsWith('http')) {
+    return `
+      <img class="player-profile-avatar" src="${url}" alt="${name}" 
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="player-profile-initials" style="display:none">${initials}</div>
+    `;
+  }
+
+  return `<div class="player-profile-initials">${initials}</div>`;
+}
+
+function profileTagHTML(text, variant) {
+  if (!text) return '';
+  const cls = variant === 'dark' ? 'profile-tag dark' : 'profile-tag';
+  return `<span class="${cls}">${text}</span>`;
+}
+function playerRecognitionShelfHTML(p) {
+  const playerName = String(p.player || '').trim();
+  const pageKey = encodeURIComponent(playerName || 'sin-jugador');
+
+  const realItems = playerRecognitionItems(p);
+  const galleryItems = buildRecognitionGalleryItems(realItems);
+  const pages = chunkRecognitionItems(galleryItems, 3);
+
+  const currentPageRaw = Number(recognitionPageByPlayer[pageKey] || 0);
+  const currentPage = Math.min(Math.max(currentPageRaw, 0), pages.length - 1);
+  recognitionPageByPlayer[pageKey] = currentPage;
+
+  const visibleItems = pages[currentPage] || [];
+
+  const canGoPrev = currentPage > 0;
+  const canGoNext = currentPage < pages.length - 1;
+
+  return `
+    <div class="player-recognition-shelf">
+      <div class="player-recognition-heading">
+        <span class="player-recognition-heading-mark">⌁</span>
+        <span>Palmarés</span>
+        <span class="player-recognition-heading-mark">⌁</span>
+      </div>
+
+      <div class="player-recognition-window">
+        <button
+          type="button"
+          class="player-recognition-nav prev ${canGoPrev ? '' : 'disabled'}"
+          onclick="changeRecognitionPage('${pageKey}', -1)"
+          ${canGoPrev ? '' : 'disabled'}
+          aria-label="Ver premios anteriores"
+        >‹</button>
+
+        <div class="player-recognition-grid">
+          ${visibleItems.map(item => playerRecognitionItemHTML(item)).join('')}
+        </div>
+
+        <button
+          type="button"
+          class="player-recognition-nav next ${canGoNext ? '' : 'disabled'}"
+          onclick="changeRecognitionPage('${pageKey}', 1)"
+          ${canGoNext ? '' : 'disabled'}
+          aria-label="Ver más premios"
+        >›</button>
+      </div>
+
+      <div class="player-recognition-dots">
+        ${pages.map((_, idx) => `
+          <button
+            type="button"
+            class="player-recognition-dot ${idx === currentPage ? 'active' : ''}"
+            onclick="setRecognitionPage('${pageKey}', ${idx})"
+            aria-label="Ir a página ${idx + 1} de palmarés"
+          ></button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function buildRecognitionGalleryItems(realItems) {
+  const structuralPlaceholders = [
+    {
+      kind: 'placeholder',
+      type: 'official',
+      label: 'Premio oficial',
+      season: 'Disponible',
+      visualType: 'placeholder-medal'
+    },
+    {
+      kind: 'placeholder',
+      type: 'promotion',
+      label: 'Ascenso',
+      season: 'Disponible',
+      visualType: 'placeholder-promotion'
+    },
+    {
+      kind: 'placeholder',
+      type: 'special',
+      label: 'Premio especial',
+      season: 'Disponible',
+      visualType: 'placeholder-special'
+    }
+  ];
+
+  const items = [...realItems, ...structuralPlaceholders];
+
+  while (items.length % 3 !== 0) {
+    items.push({
+      kind: 'placeholder',
+      type: 'neutral',
+      label: '',
+      season: '',
+      visualType: 'placeholder-neutral'
+    });
+  }
+
+  return items;
+}
+
+function chunkRecognitionItems(items, size) {
+  const chunks = [];
+
+  for (let i = 0; i < items.length; i += size) {
+    chunks.push(items.slice(i, i + size));
+  }
+
+  return chunks.length ? chunks : [[]];
+}
+
+function recognitionVisualType(item) {
+  const kind = String(item.kind || '').trim().toLowerCase();
+  const type = String(item.type || item.code || '').trim().toLowerCase();
+
+  if (kind === 'placeholder') return item.visualType || 'placeholder-neutral';
+  if (kind === 'medal') return 'medal';
+
+  if (
+    kind === 'promotion' ||
+    type.includes('ascenso') ||
+    type.includes('promotion') ||
+    type.includes('promo')
+  ) {
+    return 'promotion';
+  }
+
+  return 'special';
+}
+
+function changeRecognitionPage(pageKey, direction) {
+  const current = Number(recognitionPageByPlayer[pageKey] || 0);
+  recognitionPageByPlayer[pageKey] = current + Number(direction || 0);
+  renderJugadores();
+}
+
+function setRecognitionPage(pageKey, pageIndex) {
+  recognitionPageByPlayer[pageKey] = Number(pageIndex || 0);
+  renderJugadores();
+}
+
+function playerRecognitionItems(p) {
+  const playerName = String(p.player || '').trim();
+
+  if (!playerName || !Array.isArray(playerRecognitions)) return [];
+
+  return playerRecognitions
+    .filter(r => {
+      const rowPlayer = String(r.player || '').trim();
+      const isActive = String(r.is_active).toLowerCase();
+
+      return (
+        rowPlayer === playerName &&
+        r.recognition_label &&
+        r.recognition_asset &&
+        isActive !== 'false' &&
+        isActive !== '0'
+      );
+    })
+    .map(r => ({
+      kind: String(r.recognition_type || '').trim().toLowerCase(),
+      code: String(r.recognition_code || '').trim(),
+      label: String(r.recognition_label || '').trim(),
+      type: String(r.recognition_code || '').trim().toLowerCase(),
+      season: String(r.season || '').trim(),
+      asset: String(r.recognition_asset || '').trim(),
+      seasonOrder: Number(r.season_order || 0),
+      displayOrder: Number(r.display_order || 999)
+    }))
+    .sort((a, b) =>
+      b.seasonOrder - a.seasonOrder ||
+      a.displayOrder - b.displayOrder ||
+      a.label.localeCompare(b.label)
+    );
+}
+
+function playerRecognitionItemHTML(item) {
+  const seasonText = achievementSeasonLabel(item.season);
+  const visualType = recognitionVisualType(item);
+  const isPlaceholder = String(item.kind || '').toLowerCase() === 'placeholder';
+  const assetPath = recognitionAssetPath(item.asset);
+
+  if (isPlaceholder) {
+    return `
+      <div class="player-recognition-item placeholder ${visualType}">
+        <div class="player-recognition-media">
+          <div class="player-recognition-ghost ${visualType}"></div>
+        </div>
+        <div class="player-recognition-title">${item.label || '&nbsp;'}</div>
+        <div class="player-recognition-season">${item.season || '&nbsp;'}</div>
+      </div>
+    `;
+  }
+
+  return `
+    <div
+      class="player-recognition-item ${visualType} ${item.type}"
+      title="${item.label} · ${seasonText}"
+      data-asset="${assetPath}"
+    >
+      <div class="player-recognition-media">
+        <img
+          class="player-recognition-img ${visualType}"
+          src="${assetPath}"
+          alt="${item.label}"
+          loading="lazy"
+          onerror="this.style.display='none'; this.closest('.player-recognition-item').classList.add('asset-missing');"
+        />
+      </div>
+      <div class="player-recognition-title">${item.label}</div>
+      <div class="player-recognition-season">${seasonText}</div>
+    </div>
+  `;
+}
+
+function recognitionAssetPath(asset) {
+  return String(asset || '')
+    .trim()
+    .replace(/^\/+/, '')
+    .replace(/\\/g, '/');
+}
+
+function achievementSeasonLabel(season) {
+  const s = String(season || '').trim();
+
+  if (!s) return 'Cocar 25';
+
+  const normalized = s.toUpperCase().replace(/\s+/g, '');
+
+  if (normalized === 'COCAR25') return 'Cocar 25';
+  if (normalized === 'COCAR26A') return 'Cocar 26A';
+
+  return s;
+}
+
+function profileKpi(label, value, sub, subClass) {
+  const cls = subClass ? ` profile-kpi-sub-${subClass}` : '';
+
+  return `
+    <div class="profile-kpi-card">
+      <div class="profile-kpi-label">${label}</div>
+      <div class="profile-kpi-value">${value ?? '-'}</div>
+      <div class="profile-kpi-sub${cls}">${sub || '&nbsp;'}</div>
+    </div>
+  `;
+}
+
+function criticalMini(label, record, wr) {
+  return `
+    <div class="critical-mini">
+      <div class="critical-label">${label}</div>
+      <div class="critical-value">${record || '-'}</div>
+      <div class="critical-sub">${pctText(wr)}</div>
+    </div>
+  `;
+}
+
+function divisionPerfRow(div, record, wr) {
+  const hasData = record && record !== '0-0';
+  return `
+    <div class="profile-row ${hasData ? '' : 'muted'}">
+      <span>División ${div}</span>
+      <strong>${hasData ? `${record} · ${pctText(wr)}` : 'Sin partidos'}</strong>
+    </div>
+  `;
+}
+
+function profileNum(v) {
+  const n = Number(v || 0);
+  return isNaN(n) ? 0 : n;
+}
+
+function profileDec(v) {
+  const n = Number(v || 0);
+  return isNaN(n) ? '0.00' : n.toFixed(2);
+}
+
+function profilePctFromParts(part, total) {
+  const p = profileNum(part);
+  const t = profileNum(total);
+
+  if (t <= 0) return '0%';
+
+  return `${Math.round((p / t) * 100)}%`;
+}
+
+function profileMatchBarRow(label, value, total) {
+  const v = profileNum(value);
+  const t = profileNum(total);
+  const pct = t > 0 ? Math.round((v / t) * 100) : 0;
+
+  return `
+    <div class="stats-bar-row">
+      <div class="stats-bar-label">${label}</div>
+      <div class="stats-bar-track">
+        <div class="stats-bar-fill" style="width:${pct}%;"></div>
+      </div>
+      <div class="stats-bar-value">${pct}%</div>
+    </div>
+  `;
+}
+
+function buildPlayerMatchProfileHTML(p) {
+  const total2S = profileNum(p.tot_2s);
+  const total3S = profileNum(p.tot_3s);
+  const totalMatches = total2S + total3S;
+
+  const totalSets = profileNum(p.sets_g) + profileNum(p.sets_p);
+  const totalGames = profileNum(p.games_g) + profileNum(p.games_p);
+
+  const avgSets = totalMatches > 0 ? totalSets / totalMatches : 0;
+  const avgGames = totalMatches > 0 ? totalGames / totalMatches : 0;
+
+  return `
+    ${profileMatchBarRow('2 sets', total2S, totalMatches)}
+    ${profileMatchBarRow('3 sets', total3S, totalMatches)}
+
+    <div class="stats-mini-split">
+      <div class="stats-mini">
+        <div class="stats-mini-label">Avg sets / partido</div>
+        <div class="stats-mini-value">${profileDec(avgSets)}</div>
+      </div>
+      <div class="stats-mini">
+        <div class="stats-mini-label">Avg games / partido</div>
+        <div class="stats-mini-value">${profileDec(avgGames)}</div>
+      </div>
+    </div>
+  `;
+}
+
+function profileSetRowHTML(name, desc, value, total) {
+  const v = profileNum(value);
+  const t = profileNum(total);
+  const pct = t > 0 ? Math.round((v / t) * 100) : 0;
+
+  return `
+    <div class="stats-set-row">
+      <div class="stats-set-label">
+        <span class="stats-set-name">${name}</span>
+        <span class="stats-set-desc">${desc}</span>
+      </div>
+
+      <div class="stats-set-track">
+        <div class="stats-set-fill" style="width:${pct}%;"></div>
+      </div>
+
+      <div class="stats-set-pct">${pct}%</div>
+    </div>
+  `;
+}
+
+function buildPlayerSetProfileHTML(p) {
+  const hammer = profileNum(p.hard_sets_g) + profileNum(p.hard_sets_p);
+  const cold = profileNum(p.easy_sets_g) + profileNum(p.easy_sets_p);
+  const tight = profileNum(p.tight_total_g) + profileNum(p.tight_total_p);
+  const tieBreak = profileNum(p.tb_total_g) + profileNum(p.tb_total_p);
+
+  const totalSetsProfile = hammer + cold + tight + tieBreak;
+
+  return `
+    ${profileSetRowHTML('Hammer', '6-0 / 6-1', hammer, totalSetsProfile)}
+    ${profileSetRowHTML('Cold', '6-2 / 6-3', cold, totalSetsProfile)}
+    ${profileSetRowHTML('Tight', '6-4 / 7-5', tight, totalSetsProfile)}
+    ${profileSetRowHTML('Tie break', '7-6', tieBreak, totalSetsProfile)}
+  `;
+}
+
+function pctText(v) {
+  if (v === null || v === undefined || v === '') return '-';
+
+  const n = Number(v);
+
+  if (!isNaN(n)) {
+    const pct = n <= 1 ? n * 100 : n;
+    return `${Math.round(pct)}%`;
+  }
+
+  const s = String(v).trim();
+
+  if (s.includes('%')) {
+    const numeric = Number(s.replace('%', ''));
+    if (!isNaN(numeric)) return `${Math.round(numeric)}%`;
+  }
+
+  return s;
+}
+
+function formatNum(v) {
+  if (v === null || v === undefined || v === '') return '-';
+  const n = Number(v);
+  if (isNaN(n)) return v;
+  return Math.round(n).toLocaleString('es-CL');
+}
+
+function ordinalPosition(v) {
+  if (v === null || v === undefined || v === '') return '-';
+  const n = Number(v);
+  if (isNaN(n)) return String(v);
+  return `${n}°`;
+}
+
+function zoneClass(zone) {
+  const z = String(zone || '').toLowerCase();
+
+  if (z.includes('ascenso')) return 'green';
+  if (z.includes('descenso')) return 'red';
+
+  return '';
+}
+function boldDivisionSeason(label) {
+  const s = String(label || '');
+  return s.replace(/^(\d+)/, '<strong>$1</strong>');
+}
+
+function boldPointsMix(label) {
+  const s = String(label || '');
+
+  return s.replace(/(G2|G3|P3|WO):(\d+)/g, (match, code, value) => {
+    const n = Number(value);
+    if (n > 0) return `${code}:<strong>${value}</strong>`;
+    return `${code}:${value}`;
+  });
+}
+
+function boldWR(label) {
+  const s = String(label || '');
+  return s.replace(/WR\s+([0-9]+(?:\.[0-9]+)?%)/, 'WR <strong>$1</strong>');
+}
+function playedWR(played, wrText) {
+  const playedValue = played === null || played === undefined || played === '' ? '-' : played;
+  const wr = boldWR(wrText || '-');
+
+  return `Jugados <strong>${playedValue}</strong> · ${wr}`;
+}
+
+function sumValues(a, b) {
+  return Number(a || 0) + Number(b || 0);
+}
+
+function comebackCollapseStoryHTML() {
+  return `
+    <span class="profile-story-seq">
+      <span class="story-chip l">L</span>
+      <span class="story-chip w">W</span>
+      <span class="story-chip w">W</span>
+      <span class="story-separator">/</span>
+      <span class="story-chip w">W</span>
+      <span class="story-chip l">L</span>
+      <span class="story-chip l">L</span>
+    </span>
+  `;
+}
+
 // ── INIT ──
 async function init() {
   try {
     const [
-  standings,
-  fixtures,
-  matches,
-  playerRows,
-  summaryRows,
-  rankingRows,
-  leaguePlayerRows,
-  statsSummaryRows,
-  statsRankingRows
-] = await Promise.all([
-  fetchSheet('division_standings'),
-  fetchSheet('division_fixtures'),
-  fetchSheet('app_h2h_matches'),
-  fetchSheet('app_players'),
-  fetchSheet('app_h2h_summary'),
-  fetchSheet('ranking_last14'),
-  fetchSheet('league_players'),
-  fetchSheet('league_stats_summary'),
-  fetchSheet('league_stats_rankings')
-]);
-    allStandings = standings;
-allFixtures = fixtures;
-allMatches = matches;
-players = playerRows;
-h2hSummary = summaryRows;
-rankRows = rankingRows;
-leaguePlayers = leaguePlayerRows;
-leagueStatsSummary = statsSummaryRows;
-leagueStatsRankings = statsRankingRows;
+      standings,
+      fixtures,
+      matches,
+      playerRows,
+      summaryRows,
+      rankingRows,
+      leaguePlayerRows,
+      statsSummaryRows,
+      statsRankingRows,
+      playerProfileRows,
+      playerLigEvolutionRows,
+      playerRecognitionRows
+    ] = await Promise.all([
+      fetchSheet('division_standings'),
+      fetchSheet('division_fixtures'),
+      fetchSheet('app_h2h_matches'),
+      fetchSheet('app_players'),
+      fetchSheet('app_h2h_summary'),
+      fetchSheet('ranking_last14'),
+      fetchSheet('league_players'),
+      fetchSheet('league_stats_summary'),
+      fetchSheet('league_stats_rankings'),
+      fetchSheet('app_player_profiles'),
+      fetchSheet('app_player_lig_evolution'),
+      fetchSheet('app_player_recognitions')
+    ]);
 
-renderLiga();
+    allStandings = standings;
+    allFixtures = fixtures;
+    allMatches = matches;
+    players = playerRows;
+    h2hSummary = summaryRows;
+    rankRows = rankingRows;
+    leaguePlayers = leaguePlayerRows;
+    leagueStatsSummary = statsSummaryRows;
+    leagueStatsRankings = statsRankingRows;
+    playerProfiles = playerProfileRows;
+    playerLigEvolution = playerLigEvolutionRows;
+    playerRecognitions = playerRecognitionRows;
+
+    renderLiga();
   } catch(err) {
-    document.getElementById('page-liga').innerHTML = `<div class="loading">Error al cargar datos.<br><small>${err.message}</small></div>`;
+    document.getElementById('page-liga').innerHTML =
+      `<div class="loading">Error al cargar datos.<br><small>${err.message}</small></div>`;
   }
 }
+
 init();
 </script>
 </body>
