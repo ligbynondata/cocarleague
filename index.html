@@ -1642,7 +1642,7 @@ body {
 .rank-list {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 7px;
 }
 
 .rank-row {
@@ -1650,34 +1650,89 @@ body {
   display: grid;
   grid-template-columns: 72px 2.4fr 1fr 0.9fr 0.9fr 0.9fr;
   align-items: center;
-  background: var(--white);
-  border: 1px solid #e8e3d8;
-  border-radius: 14px;
-  min-height: 68px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(252,251,247,0.94));
+  border: 1px solid rgba(30,30,30,0.075);
+  border-radius: 18px;
+  min-height: 70px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.025);
-  transition: background .2s ease, box-shadow .2s ease, transform .15s ease;
+  box-shadow: var(--shadow-card);
+  transition:
+    background .2s ease,
+    box-shadow .2s ease,
+    transform .15s ease,
+    border-color .18s ease;
+}
+
+.rank-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.62), transparent 42%),
+    radial-gradient(circle at 0% 0%, rgba(200,166,0,0.035), transparent 36%);
+  pointer-events: none;
+}
+
+.rank-row > * {
+  position: relative;
+  z-index: 1;
 }
 .rank-mobile-stats {
   display: contents;
 }
 
 .rank-row:hover {
-  background: #fcfbf8;
-  box-shadow: 0 5px 16px rgba(0,0,0,0.05);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,1), rgba(250,248,241,0.96));
+  box-shadow: var(--shadow-hover);
   transform: translateY(-1px);
+  border-color: rgba(200,166,0,0.18);
 }
 
 .rank-row.top-1 {
-  border-left: 5px solid #d4af37;
+  border-color: rgba(200,166,0,0.45);
+  box-shadow:
+    var(--shadow-card),
+    inset 5px 0 0 #d4af37,
+    inset 0 0 0 1px rgba(200,166,0,0.08);
+}
+
+.rank-row.top-1::before {
+  background:
+    linear-gradient(110deg, rgba(255,247,214,0.72), transparent 34%),
+    radial-gradient(circle at 0% 50%, rgba(200,166,0,0.18), transparent 32%),
+    linear-gradient(135deg, rgba(255,255,255,0.62), transparent 42%);
 }
 
 .rank-row.top-2 {
-  border-left: 5px solid #c7c7c7;
+  border-color: rgba(150,156,164,0.32);
+  box-shadow:
+    var(--shadow-card),
+    inset 5px 0 0 #b9c0c8,
+    inset 0 0 0 1px rgba(160,168,180,0.08);
+}
+
+.rank-row.top-2::before {
+  background:
+    linear-gradient(110deg, rgba(232,236,240,0.72), transparent 34%),
+    radial-gradient(circle at 0% 50%, rgba(160,168,180,0.16), transparent 32%),
+    linear-gradient(135deg, rgba(255,255,255,0.62), transparent 42%);
 }
 
 .rank-row.top-3 {
-  border-left: 5px solid #c99152;
+  border-color: rgba(201,145,82,0.38);
+  box-shadow:
+    var(--shadow-card),
+    inset 5px 0 0 #c99152,
+    inset 0 0 0 1px rgba(201,145,82,0.08);
+}
+
+.rank-row.top-3::before {
+  background:
+    linear-gradient(110deg, rgba(255,233,210,0.68), transparent 34%),
+    radial-gradient(circle at 0% 50%, rgba(201,145,82,0.16), transparent 32%),
+    linear-gradient(135deg, rgba(255,255,255,0.62), transparent 42%);
 }
 
 .rank-cell {
@@ -1704,28 +1759,47 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  font-weight: 850;
-  background: #f1efe9;
+  font-weight: 900;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.95), rgba(242,240,235,0.92));
   color: var(--text);
-  border: 1px solid #e3ded4;
+  border: 1px solid rgba(30,30,30,0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.82),
+    0 3px 8px rgba(24,20,12,0.06);
 }
 
 .rank-pos.top1 {
-  background: #d4af37;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255,255,255,0.46), transparent 34%),
+    linear-gradient(180deg, #f2d65a 0%, #d4af37 52%, #b88910 100%);
   color: #fff;
-  border-color: #d4af37;
+  border-color: rgba(184,137,16,0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.42),
+    0 5px 13px rgba(200,166,0,0.26);
 }
 
 .rank-pos.top2 {
-  background: #dedede;
-  color: #222;
-  border-color: #d1d1d1;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255,255,255,0.62), transparent 34%),
+    linear-gradient(180deg, #f2f3f5 0%, #cdd2d8 54%, #aeb5be 100%);
+  color: #20242a;
+  border-color: rgba(150,156,164,0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.62),
+    0 5px 13px rgba(120,128,138,0.18);
 }
 
 .rank-pos.top3 {
-  background: #c99152;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255,255,255,0.46), transparent 34%),
+    linear-gradient(180deg, #e6b173 0%, #c99152 52%, #a86227 100%);
   color: #fff;
-  border-color: #c99152;
+  border-color: rgba(168,98,39,0.58);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.36),
+    0 5px 13px rgba(201,145,82,0.22);
 }
 
 .rank-player {
@@ -1734,9 +1808,13 @@ body {
   gap: 12px;
   width: 100%;
   padding: 7px 12px;
-  border: 1px solid #eee7d8;
-  background: #faf8f3;
-  border-radius: 12px;
+  border: 1px solid rgba(30,30,30,0.065);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.86), rgba(250,248,242,0.72));
+  border-radius: 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.78),
+    0 2px 7px rgba(24,20,12,0.025);
 }
 
 .rank-player-avatar {
@@ -5466,14 +5544,16 @@ body {
   }
 }
 
-/* ── FIX LIG STATS CAROUSEL · prevent 4 cards from wrapping 2x2 on landscape ── */
+/* ── FIX LIG STATS CAROUSEL · stable mobile carousel ── */
 @media (min-width: 761px) and (max-width: 900px) {
-  #page-stats .stats-official-carousel .stats-rank-grid-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  #page-stats .stats-official-carousel .stats-rank-grid-4,
+  #page-stats .stats-official-carousel .stats-official-carousel-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
   }
 
-  #page-stats .stats-official-carousel .stats-rank-card {
+  #page-stats .stats-official-carousel .stats-rank-card,
+  #page-stats .stats-official-carousel .stats-winner-card {
     min-width: 0;
   }
 }
@@ -5592,6 +5672,17 @@ let statsCarouselPages = {
 };
 
 let lastStatsContextKey = '';
+
+function statsCarouselItemsPerPage() {
+  const isTouchDevice =
+    window.matchMedia('(pointer: coarse)').matches ||
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints > 0;
+
+  const isSmallScreen = window.innerWidth <= 900;
+
+  return isTouchDevice && isSmallScreen ? 2 : 4;
+}
 
 function resetStatsCarouselsForContext(selectedLeague, selectedDivision) {
   const nextContextKey = `${selectedLeague || ''}|${selectedDivision || ''}`;
@@ -6560,8 +6651,7 @@ function renderStats() {
     const items = config.items || [];
     const carouselKey = config.key;
 
-    const isCompactCarousel = window.matchMedia('(max-width: 760px)').matches;
-    const perPage = isCompactCarousel ? 2 : 4;
+    const perPage = statsCarouselItemsPerPage();
 
     const pages = [];
 
@@ -6849,8 +6939,7 @@ function renderStats() {
     }
 
     const items = divisions;
-    const isCompactCarousel = window.matchMedia('(max-width: 900px)').matches;
-    const perPage = isCompactCarousel ? 2 : 4;
+    const perPage = statsCarouselItemsPerPage();
     const pages = [];
 
     for (let i = 0; i < items.length; i += perPage) {
@@ -6955,8 +7044,7 @@ function renderStats() {
     ];
 
     const carouselKey = 'live-awards';
-    const isCompactCarousel = window.matchMedia('(max-width: 760px)').matches;
-    const perPage = isCompactCarousel ? 2 : 4;
+    const perPage = statsCarouselItemsPerPage();
     const pages = [];
 
     for (let i = 0; i < liveAwardItems.length; i += perPage) {
@@ -7049,8 +7137,7 @@ function renderStats() {
       ? 'Estadísticas de liga · Top 5'
       : 'Rankings actuales · Top 5';
 
-    const isCompactCarousel = window.matchMedia('(max-width: 760px)').matches;
-    const perPage = isCompactCarousel ? 2 : 4;
+    const perPage = statsCarouselItemsPerPage();
     const pages = [];
 
     for (let i = 0; i < mainStats.length; i += perPage) {
