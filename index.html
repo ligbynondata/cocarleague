@@ -5624,18 +5624,10 @@ body {
 
 <nav class="nav">
   <button class="nav-btn active" onclick="showPage('liga')">Liga</button>
-  <button class="nav-btn" onclick="showPage('h2h')">H2H</button>
-  <button class="nav-btn" onclick="showPage('stats')">LIG Stats</button>
-  <button class="nav-btn" onclick="showPage('rank')">LIG Rank</button>
-  <button class="nav-btn" onclick="showPage('jugadores')">LIG Players</button>
 </nav>
 
 <div class="main">
   <div id="page-liga"><div class="loading">Cargando...</div></div>
-  <div id="page-h2h" style="display:none"><div class="loading">Cargando...</div></div>
-  <div id="page-stats" style="display:none"><div class="coming-soon">Próximamente</div></div>
-  <div id="page-rank" style="display:none"><div class="coming-soon">Próximamente</div></div>
-  <div id="page-jugadores" style="display:none"><div class="coming-soon">Próximamente</div></div>
 </div>
 
 <script>
@@ -5913,34 +5905,21 @@ function pageHeroHTML(title, subtitle) {
   `;
 }
 
-// ── SHOW PAGE ──
+// ── SHOW PAGE · PUBLIC LIGA ONLY ──
 function showPage(page) {
-  ['liga','h2h','stats','rank','jugadores'].forEach(p => {
-    document.getElementById('page-' + p).style.display = p === page ? '' : 'none';
-  });
+  activePage = 'liga';
 
-  document.querySelectorAll('.nav-btn').forEach((btn, i) => {
-    btn.classList.toggle('active', ['liga','h2h','stats','rank','jugadores'][i] === page);
-  });
+  const ligaPage = document.getElementById('page-liga');
 
-  activePage = page;
-
-  if (page === 'liga') renderLiga();
-  if (page === 'h2h') renderH2H();
-  if (page === 'stats') renderStats();
-  if (page === 'rank') renderRank();
-
-  if (page === 'jugadores') {
-    if (!ENABLE_LIG_PLAYERS) {
-      document.getElementById('page-jugadores').innerHTML = `
-        ${pageHeroHTML('LIG Players', 'Hoja de vida competitiva del jugador')}
-        <div class="coming-soon">Próximamente</div>
-      `;
-      return;
-    }
-
-    renderJugadores();
+  if (ligaPage) {
+    ligaPage.style.display = '';
   }
+
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.add('active');
+  });
+
+  renderLiga();
 }
 
 // ── LIGA PAGE ──
