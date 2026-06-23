@@ -156,6 +156,50 @@ body {
   right: 14px;
   background: var(--gold);
 }
+@media (max-width: 600px) {
+  .nav {
+    padding: 0 8px;
+    gap: 0;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .nav-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 9px 4px 10px;
+    font-size: 10.5px;
+    line-height: 1.05;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .nav-lig-prefix,
+  .nav-label {
+    display: block;
+    line-height: 1.05;
+  }
+
+  .nav-lig-prefix {
+    font-size: 10px;
+    font-weight: 800;
+  }
+
+  .nav-label {
+    font-size: 10.5px;
+    font-weight: 700;
+  }
+
+  .nav-btn::after {
+    left: 8px;
+    right: 8px;
+  }
+
+  .nav-btn.active::after {
+    left: 8px;
+    right: 8px;
+  }
+}
 
 /* MAIN */
 .main {
@@ -5624,10 +5668,26 @@ body {
 
 <nav class="nav">
   <button class="nav-btn active" onclick="showPage('liga')">Liga</button>
-  <button class="nav-btn" onclick="showPage('h2h')">H2H</button>
-  <button class="nav-btn" onclick="showPage('stats')">LIG Stats</button>
-  <button class="nav-btn" onclick="showPage('rank')">LIG Rank</button>
-  <button class="nav-btn" onclick="showPage('jugadores')">LIG Players</button>
+
+  <button class="nav-btn" onclick="showPage('h2h')">
+    <span class="nav-lig-prefix">LIG</span>
+    <span class="nav-label">H2H</span>
+  </button>
+
+  <button class="nav-btn" onclick="showPage('stats')">
+    <span class="nav-lig-prefix">LIG</span>
+    <span class="nav-label">Stats</span>
+  </button>
+
+  <button class="nav-btn" onclick="showPage('rank')">
+    <span class="nav-lig-prefix">LIG</span>
+    <span class="nav-label">Rank</span>
+  </button>
+
+  <button class="nav-btn" onclick="showPage('players')">
+    <span class="nav-lig-prefix">LIG</span>
+    <span class="nav-label">Players</span>
+  </button>
 </nav>
 
 <div class="main">
